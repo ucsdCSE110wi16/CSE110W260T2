@@ -1,7 +1,5 @@
 Names: Vincent Lim, Fuheng Deng, Kevin Tain
-for git purposes
 
-Tasks: Upload Userstories and upload project schedule
 Project: Financial Aid App (SmartBudgetter) - Tentative
 
 Things to keep in mind: always have a way to cancel selections.
@@ -58,5 +56,9 @@ UI:
   Priority: 8
 
   UserStory9: Logging
-  Description: past
+  Description: show past events
   Priority: 1
+
+  UserStory10: Push Notifications
+  Description: notify user that an expense is upcoming
+  Priority: ?

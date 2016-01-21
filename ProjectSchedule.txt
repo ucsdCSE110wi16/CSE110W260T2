@@ -1,0 +1,23 @@
+Names: Vincent Lim, Fuheng Deng, Kevin Tain
+
+ProjectSchedule
+
+Goal by week 5 (Feb 3rd)
+Homescreen UI - 14 days
+Homepage Pull Down Menu - 14 days
+
+Goal by week 6 (Feb 10th)
+Add Payments and Expenses - 7days
+Implement Calendar - 7days
+Clean-up UI - 7days
+
+Goal by week 7 (Feb 17th)
+See Payments and Expenses on HomePage (with show more option) - 7days
+see Payments and Expenses on the Calendar - 7days
+Delete and Modify options for Payments and Expenses - 7days
+
+Goal by week 9 (March 2nd)
+Get logging system working (to show past actions) - 14days
+
+Goal by week 10 (March 9nd)
+Get push notifications working - 7days
