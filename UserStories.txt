@@ -1,6 +1,6 @@
-Names: Vincent Lim, Fuheng Deng, Kevin Tai, Jimmy Hiott
+Names: Vincent Lim, Fuheng Deng, Kevin Tain, Jimmy Hiott
 
-Project: Financial Aid App (SmartBudgetter) - Tentative
+Project: SmartBudgeter - A Money Management App (tentative)
 
 Things to keep in mind: always have a way to cancel selections.
 
@@ -8,71 +8,58 @@ UserStories:
 
   UserStory1: Homepage
     As a user
-    I want there is a homepage
+    I want to see a homepage
     So that I can view my balance, the most recent upcoming event (payment) and Next day to get paid/Next Pay-Day
   Priority: 10
   
-  UserStory2: Show-more page
+  UserStory2: Show-more extension button
     As a user
-    I want if the show-more button (on the homescreen UI) is clicked
-    So that I can enter a subpage where all of the upcoming events (category, amount and date) can be seen
+    I want a show-more button (on the homescreen UI)
+    So that I can see more of the upcoming events (category, amount and date)
   Priority: 7
 
-  UserStory3: Function menu page
+  UserStory3: Drop down menu
     As a user
-    I want there is a button on the homepage
-    So that if I click on the button, it leads me to such a page where there are options to 
-	access calendar
-	edit my expense
-	edit my income
-	go back to homepage
+    I want a drop down menu on the homepage
+    So that when I click on the menu button, it gives a list of options to 
+	- access my calendar
+	- edit my expenses
+	- edit my income
   Priority: 10
 
-  UserStory4: Create Calendar
-  Description: has discription of everything, shows the month
-    can see previous and future months
+  UserStory4: View Calendar
     As a user
-    I want see a calendar of events (showing the current month)
-    So that I know every event that has happened or is about to happen (showing category, amount by the date)
+    I want a monthly calendar of events
+    So that I can see all of the events in the current month chronologically
   Priority: 5
 
-  UserStory5: Add Payments and Expenses
-  Description: Keep track of payments and expenses, add them to calendar
-    is it recurring?
-      if so, how often
-
+  UserStory5: Add Income and Expenses
     As a user
-    I want add payments and expenses
-    So that I can view those on calendar and the show-more page
+    I want to be able to add income and expenses
+    So that I can view them on the home page and on the calendar
   Priority: 9
 
-  UserStory6: Delete Payments and Expenses
-  Description: Choose payments and expensives you have
-    choose
-    check if you are sure
-    
+  UserStory6: Remove Income and Expenses
     As a user
-    I want delete payments and expenses
-    So that I can delete some events that will not happen again
+    I want to be able to remove existing income and expenses
+    So that future unintended events will not happen
   Priority: 8
 
   UserStory7: Modify Payments and Expenses
-  Description: Choose page similar to delete
     As a user
-    I want mofify the payments and expenses
-    So that I can modify the category, ammount, or date on my current payments and expenses (changes along with the calendar)
+    I want to be able to modify existing income and expenses
+    So that I can make adjustments to the category, amount, and dates
   Priority: 8
 
-  UserStory8: Logging
-  Description: show past events
+  UserStory8: History Log
     As a user
-    I want see the past events
-    So that I can have a general idea of how much I spent
+    I want to be able to view past events
+    So that I can have a general overview of my past activity
   Priority: 1
 
   UserStory9: Push Notifications
-  Description: notify user that an expense is upcoming
     As a user
-    I want receive notification pushed to me
-    So that I know the upcoming events that might cost a quite bit of money
+    I want receive notifications of upcoming events
+    So that I am reminded of any upcomig income or expenses, big or small
   Priority: 1
+
