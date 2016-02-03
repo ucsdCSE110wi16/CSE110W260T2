@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.kingd.hello_world.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:text="Show More"
+        android:id="@+id/change_text"
+        android:textSize="10dp"
+        android:background="@android:color/holo_blue_bright"
+        android:layout_below="@+id/textView5"
+        android:layout_alignRight="@+id/textView5"
+        android:layout_alignEnd="@+id/textView5"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Balance"
+        android:textSize="40dp"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="$856.45"
+        android:id="@+id/textView2"
+        android:textSize="40dp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Upcoming Event"
+        android:textSize="25dp"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Category:\nAmount:\nDate:"
+        android:id="@+id/upcoming_event_information"
+        android:gravity="center"
+        android:layout_below="@+id/textView3"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Fruits\n$15.00\n02/03/2016"
+        android:id="@+id/textView5"
+        android:gravity="center"
+        android:layout_alignTop="@+id/upcoming_event_information"
+        android:layout_toRightOf="@+id/upcoming_event_information"
+        android:layout_toEndOf="@+id/upcoming_event_information"
+        android:layout_alignBottom="@+id/upcoming_event_information" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Next Pay Day"
+        android:textSize="25dp"
+        android:id="@+id/textView4"
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/change_text"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Category:\nAmount:\nDate:"
+        android:id="@+id/textView6"
+        android:gravity="center"
+        android:layout_below="@+id/textView4"
+        android:layout_alignLeft="@+id/upcoming_event_information"
+        android:layout_alignStart="@+id/upcoming_event_information" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Salary\n$500.00\n02/12/2016"
+        android:id="@+id/textView7"
+        android:gravity="center"
+        android:layout_below="@+id/textView4"
+        android:layout_toRightOf="@+id/upcoming_event_information"
+        android:layout_toEndOf="@+id/upcoming_event_information" />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:text="Show More"
+        android:id="@+id/button"
+        android:textSize="10dp"
+        android:background="@android:color/holo_blue_bright"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/textView7"
+        android:layout_alignRight="@+id/textView7"
+        android:layout_alignEnd="@+id/textView7" />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:text="Menu"
+        android:id="@+id/button2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
