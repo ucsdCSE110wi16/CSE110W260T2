@@ -1,0 +1,12 @@
+Date: 02/03/2016
+Day: Wedesday, 5th Week
+
+Present: Vincent Lim, Kevin Tain, Jimmy Hiott, Fuheng Deng
+
+Content:
+1. What we've got: Home UI
+2. Task for the following week (week 6):
+	Vincent - Improve UI and the menu button
+	Kevin - Show More menu
+	Jimmy - Class and Parse thing
+	Fuheng - Calendar
