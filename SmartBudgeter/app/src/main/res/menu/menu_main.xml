@@ -7,4 +7,18 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/view_calendar"
+        android:title="Calendar"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/edit_expenses"
+        android:title="Edit My Expenses" />
+
+    <item
+        android:id="@+id/edit_income"
+        android:title="Edit My Income" />
+
 </menu>
