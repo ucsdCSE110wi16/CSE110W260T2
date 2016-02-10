@@ -81,3 +81,8 @@ UserStories:
     So that I am reminded of any upcomig income or expenses, big or small
   Priority: 1
 
+  UserStory10: Option to see paid and not paid
+    As a user
+    I want to see which payments have been paid for
+    So that I know whether or not I have to worry about the payment still
+  Priority: 7

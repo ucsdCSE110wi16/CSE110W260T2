@@ -1,0 +1,7 @@
+1) Given that a payment exists, when you click on it, then you can view it's information
+
+2) Given that you are on the calendar page, when you click a specific date, then all payments and expenses are listed for that date
+
+3) Given that I pay a payment early, when I click the paid checkbox on that payment, when I go to the homepage, then that payment won't show up on the upcoming payments
+
+
