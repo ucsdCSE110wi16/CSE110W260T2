@@ -1,0 +1,9 @@
+Team: King's Company (Team2)
+Members: Vincent Lim, Kevin Tain, James Hiott, Fuheng Deng
+
+Tasks for the following week:
+
+Vincent Lim - improve the UI and link the history classes.
+James Hiott - all the back-up database classes and corresponding tests.
+Kevin Tain - work on the onload and finish the show-on UI.
+Fuheng Deng - work on calendar and link it with the database.
