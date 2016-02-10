@@ -29,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void buttonOnClick(View v) {
+        Button button = (Button) v;
+        
 
     }
 

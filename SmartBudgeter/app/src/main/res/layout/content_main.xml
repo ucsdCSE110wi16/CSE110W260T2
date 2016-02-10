@@ -17,13 +17,14 @@
         android:layout_width="80dp"
         android:layout_height="20dp"
         android:text="Show More"
-        android:id="@+id/change_text"
+        android:id="@+id/moreEventsButton"
         android:textSize="10dp"
         android:background="@android:color/holo_blue_bright"
         android:layout_below="@+id/textView5"
         android:layout_alignRight="@+id/textView5"
         android:layout_alignEnd="@+id/textView5"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="15dp"
+        android:onClick="buttonOnClick" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -87,7 +88,7 @@
         android:textSize="25dp"
         android:id="@+id/textView4"
         android:layout_marginTop="22dp"
-        android:layout_below="@+id/change_text"
+        android:layout_below="@+id/moreEventsButton"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -116,7 +117,7 @@
         android:layout_width="80dp"
         android:layout_height="20dp"
         android:text="Show More"
-        android:id="@+id/button"
+        android:id="@+id/morePayDaysButton"
         android:textSize="10dp"
         android:background="@android:color/holo_blue_bright"
         android:layout_marginTop="15dp"

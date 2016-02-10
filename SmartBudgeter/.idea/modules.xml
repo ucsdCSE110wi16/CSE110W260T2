@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Hello_World.iml" filepath="$PROJECT_DIR$/Hello_World.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SmartBudgeter.iml" filepath="$PROJECT_DIR$/SmartBudgeter.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
