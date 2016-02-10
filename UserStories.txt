@@ -10,12 +10,21 @@ UserStories:
     As a user
     I want to see a homepage
     So that I can view my balance, the most recent upcoming event (payment) and Next day to get paid/Next Pay-Day
+
+    Tasks: Create Working Homepage UI
+      Drop Down Menu Button
+      Future Activities display
+      Show more button
+      Show budget amount
   Priority: 10
   
   UserStory2: Show-more extension button
     As a user
     I want a show-more button (on the homescreen UI)
     So that I can see more of the upcoming events (category, amount and date)
+
+    Tasks: Create list of options
+      When selected, do certain functionalities (listed in other User Stories)
   Priority: 7
 
   UserStory3: Drop down menu
@@ -25,6 +34,11 @@ UserStories:
 	- access my calendar
 	- edit my expenses
 	- edit my income
+
+    Tasks: Create classes for income and expenses
+      Create a calendar
+      Create a button to go to calendar
+      Create buttons to edit incomes and expenses
   Priority: 10
 
   UserStory4: View Calendar
@@ -37,12 +51,16 @@ UserStories:
     As a user
     I want to be able to add income and expenses
     So that I can view them on the home page and on the calendar
+
+      Tasks: Create classes for income and expenses
   Priority: 9
 
   UserStory6: Remove Income and Expenses
     As a user
     I want to be able to remove existing income and expenses
     So that future unintended events will not happen
+
+    Tasks: 
   Priority: 8
 
   UserStory7: Modify Payments and Expenses

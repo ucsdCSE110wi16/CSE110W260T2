@@ -1,6 +1,14 @@
 <resources>
-    <string name="app_name">Hello_World</string>
+    <string name="app_name">Smart Budgeter</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_more_events">moreEvents</string>
     <string name="title_activity_future_pay_days">futurePayDays</string>
+
+    <string-array name="menu_options">
+        <item>Option 1</item>
+        <item>Option 2</item>
+        <item>Option 3</item>
+        <item>Option 4</item>
+        <item>Option 5</item>
+    </string-array>
 </resources>

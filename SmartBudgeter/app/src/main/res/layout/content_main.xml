@@ -13,25 +13,21 @@
     tools:showIn="@layout/activity_main">
 
 
-    <Button
-        android:layout_width="80dp"
-        android:layout_height="20dp"
-        android:text="Show More"
-        android:id="@+id/moreEventsButton"
-        android:textSize="10dp"
-        android:background="@android:color/holo_blue_bright"
-        android:layout_below="@+id/textView5"
-        android:layout_alignRight="@+id/textView5"
-        android:layout_alignEnd="@+id/textView5"
-        android:layout_marginTop="15dp"
-        android:onClick="buttonOnClick" />
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spin"
+        android:entries="@array/menu_options"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/textView"
+        android:layout_toStartOf="@+id/textView"></Spinner>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Balance"
-        android:textSize="40dp"
+        android:textSize="40sp"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -53,9 +49,8 @@
         android:text="Upcoming Event"
         android:textSize="25dp"
         android:id="@+id/textView3"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:layout_above="@+id/upcoming_event_information"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -64,9 +59,10 @@
         android:text="Category:\nAmount:\nDate:"
         android:id="@+id/upcoming_event_information"
         android:gravity="center"
-        android:layout_below="@+id/textView3"
+        android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/textView3"
-        android:layout_alignStart="@+id/textView3" />
+        android:layout_alignStart="@+id/textView3"
+        android:layout_marginBottom="139dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -87,9 +83,9 @@
         android:text="Next Pay Day"
         android:textSize="25dp"
         android:id="@+id/textView4"
-        android:layout_marginTop="22dp"
-        android:layout_below="@+id/moreEventsButton"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/textView6"
+        android:layout_toRightOf="@+id/spin"
+        android:layout_toEndOf="@+id/spin" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -98,9 +94,9 @@
         android:text="Category:\nAmount:\nDate:"
         android:id="@+id/textView6"
         android:gravity="center"
-        android:layout_below="@+id/textView4"
-        android:layout_alignLeft="@+id/upcoming_event_information"
-        android:layout_alignStart="@+id/upcoming_event_information" />
+        android:layout_alignTop="@+id/textView7"
+        android:layout_toLeftOf="@+id/textView7"
+        android:layout_toStartOf="@+id/textView7" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -109,9 +105,10 @@
         android:text="Salary\n$500.00\n02/12/2016"
         android:id="@+id/textView7"
         android:gravity="center"
-        android:layout_below="@+id/textView4"
-        android:layout_toRightOf="@+id/upcoming_event_information"
-        android:layout_toEndOf="@+id/upcoming_event_information" />
+        android:layout_below="@+id/textView2"
+        android:layout_alignLeft="@+id/textView5"
+        android:layout_alignStart="@+id/textView5"
+        android:layout_marginTop="45dp" />
 
     <Button
         android:layout_width="80dp"
@@ -120,18 +117,8 @@
         android:id="@+id/morePayDaysButton"
         android:textSize="10dp"
         android:background="@android:color/holo_blue_bright"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/textView7"
         android:layout_alignRight="@+id/textView7"
-        android:layout_alignEnd="@+id/textView7" />
-
-    <Button
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:text="Menu"
-        android:id="@+id/button2"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignEnd="@+id/textView7"
+        android:layout_below="@+id/textView5" />
 
 </RelativeLayout>

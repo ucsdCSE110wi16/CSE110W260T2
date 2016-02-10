@@ -3,13 +3,15 @@ Names: Vincent Lim, Fuheng Deng, Kevin Tain, James Hiott
 ProjectSchedule
 
 Goal by week 5 (Feb 3rd)
-Homescreen UI - 14 days
-Homepage Pull Down Menu - 14 days
+Homescreen UI - 14 days - done
+Homepage Pull Down Menu - 14 days - done
 
 Goal by week 6 (Feb 10th)
-Add Payments and Expenses - 7days
-Implement Calendar - 7days
-Clean-up UI - 7days
+Add Payments and Expenses - 7days - work in progress
+Implement Calendar - 7days - done
+Clean-up UI - 7days - work in progress
+
+------------------Current Progress-------------------------
 
 Goal by week 7 (Feb 17th)
 See Payments and Expenses on HomePage (with show more option) - 7days
