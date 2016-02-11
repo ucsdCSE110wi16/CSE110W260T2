@@ -6,21 +6,37 @@ Things to keep in mind: always have a way to cancel selections.
 
 UserStories: 
 
-  UserStory1: Homepage
+  UserStory1.1: Balance
     As a user
-    I want to see a homepage
-    So that I can view my balance, the most recent upcoming event (payment) and Next day to get paid/Next Pay-Day
+    I want to see my updated balance on the homepage
+    So that I can stay up to date with my current standing
+    
+    Tasks:
+    Parse balance from database
+    Show balance amount
 
-    Tasks: Create Working Homepage UI
-      Drop Down Menu Button
-      Future Activities display
-      Show more button
-      Show budget amount
+  UserStory1.2: Upcoming Event
+    As a user
+    I want to see my upcoming event on the homepage
+    So that I know what payment I must pay next
+
+    Tasks:
+    Parse upcoming event info from database
+    Show event info
+
+  UserStory1.3: Next Pay Day
+    As a user
+    I want to see my next pay day on the homepage
+    So that I know when and how much I will get payed
+    
+    Tasks:
+    Parse next pay day info from database
+    Show next pay day info
   Priority: 10
   
-  UserStory2: Show-more extension button
+  UserStory2: Show-more button for upcoming event
     As a user
-    I want a show-more button (on the homescreen UI)
+    I want a show-more button underneath the event details
     So that I can see more of the upcoming events (category, amount and date)
 
     Tasks: Create list of options
@@ -78,7 +94,7 @@ UserStories:
   UserStory9: Push Notifications
     As a user
     I want receive notifications of upcoming events
-    So that I am reminded of any upcomig income or expenses, big or small
+    So that I am reminded of any upcoming income or expenses
   Priority: 1
 
   UserStory10: Option to see paid and not paid
