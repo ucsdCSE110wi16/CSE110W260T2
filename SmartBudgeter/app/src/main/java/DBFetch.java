@@ -23,36 +23,38 @@ public class DBFetch extends Activity {
     private static final String FILENAME = "config.txt";
     private static String name, stored;
     private static double balance;
-    private static History past;
-    private static Unpaid future;
+    public static Payments past, future;
 
     private GoogleApiClient client;
 
     public DBFetch() {
         balance = 0.0;
+        name = "";
+        past = new History();
+        future = new Unpaid();
     }
 
-    public void setBalance(double bal) {
+    public static void setBalance(double bal) {
         balance = bal;
     }
 
-    public double getBalance() {
+    public static double getBalance() {
         return balance;
     }
 
-    public void addFunds(double add) {
+    public static void addFunds(double add) {
         balance += add;
     }
 
-    public void subFunds(double sub) {
+    public static void subFunds(double sub) {
         balance -= sub;
     }
 
-    public void setName(String n) {
+    public static void setName(String n) {
         name = n;
     }
 
-    public String getName() {
+    public static String getName() {
         return name;
     }
 
@@ -117,10 +119,18 @@ public class DBFetch extends Activity {
                 else
                     future.rePopulateFromString(stored.substring(currentIndex, pipeAt));
 
-                currentIndex = pipeAt;
+                currentIndex = pipeAt + 1; // +1?
                 counter++;
             }
         }
+    }
+    public void printAccount() {
+        System.out.println("Account Owner: " + name);
+        System.out.println("Balance: " + balance);
+        for (int i = 0; i < past.getNumOfTransactions(); i++)
+            past.printOneLine(i);
+        for (int i = 0; i < future.getNumOfTransactions(); i++)
+            future.printOneLine(i);
     }
 
     @Override
