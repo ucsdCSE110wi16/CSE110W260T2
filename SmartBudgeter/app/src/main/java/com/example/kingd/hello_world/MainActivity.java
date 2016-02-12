@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.kingd.hello_world.R;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

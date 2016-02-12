@@ -1,0 +1,14 @@
+Notes 02/12/2016
+
+Run-down of class codes:
+
+The tester temporarily doesn't work
+payments includes paid/future
+anything belongs to either (paid/future) goes to override
+
+In the UI, if we want to get some values to display, just follow the steps:
+
+readfromfile()
+repopulatefromread()
+
+then call get... function to attain the value you want 

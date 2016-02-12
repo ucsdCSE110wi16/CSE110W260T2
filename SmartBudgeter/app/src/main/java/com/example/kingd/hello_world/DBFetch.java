@@ -7,9 +7,10 @@ import android.util.Log;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
+//import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.*;
+import java.lang.String;
 import java.util.Properties;
 
 /**
@@ -22,38 +23,41 @@ import java.util.Properties;
 public class DBFetch extends Activity {
 
     private static final String FILENAME = "config.txt";
-    private static String name, stored;
+    private static String name, stored, read;
     private static double balance;
-    private static History past;
-    private static Unpaid future;
 
-    private GoogleApiClient client;
+    public static Payments past, future;
+
+    //private GoogleApiClient client;
 
     public DBFetch() {
         balance = 0.0;
+        name = "";
+        past = new History();
+        future = new Unpaid();
     }
 
-    public void setBalance(double bal) {
+    public static void setBalance(double bal) {
         balance = bal;
     }
 
-    public double getBalance() {
+    public static double getBalance() {
         return balance;
     }
 
-    public void addFunds(double add) {
+    public static void addFunds(double add) {
         balance += add;
     }
 
-    public void subFunds(double sub) {
+    public static void subFunds(double sub) {
         balance -= sub;
     }
 
-    public void setName(String n) {
+    public static void setName(String n) {
         name = n;
     }
 
-    public String getName() {
+    public static String getName() {
         return name;
     }
 
@@ -73,7 +77,7 @@ public class DBFetch extends Activity {
         return stored;
     }
 
-    private String readFromFile() {
+    private void readFromFile() {
 
         String ret = "";
 
@@ -100,30 +104,38 @@ public class DBFetch extends Activity {
             System.err.println("Can not read file: " + e.toString());
         }
 
-        return ret;
+        read = ret;
     }
 
     private void rePopulateFromRead(){
         int currentIndex = 0, counter = 0;
         int pipeAt;
         while (true) {
-            pipeAt = stored.indexOf("|", currentIndex);
+            pipeAt = read.indexOf("|", currentIndex);
             if (pipeAt > -1) {
                 if (counter == 0)
-                    setBalance(Double.parseDouble(stored.substring(currentIndex, pipeAt)));
+                    setBalance(Double.parseDouble(read.substring(currentIndex, pipeAt)));
                 else if (counter == 1)
-                    setName(stored.substring(currentIndex, pipeAt));
+                    setName(read.substring(currentIndex, pipeAt));
                 else if (counter == 2)
-                    past.rePopulateFromString(stored.substring(currentIndex, pipeAt));
+                    past.rePopulateFromString(read.substring(currentIndex, pipeAt));
                 else
-                    future.rePopulateFromString(stored.substring(currentIndex, pipeAt));
+                    future.rePopulateFromString(read.substring(currentIndex, pipeAt));
 
-                currentIndex = pipeAt;
+                currentIndex = pipeAt + 1; // +1?
                 counter++;
             }
         }
     }
-
+    public void printAccount() {
+        System.out.println("Account Owner: " + name);
+        System.out.println("Balance: " + balance);
+        for (int i = 0; i < past.getNumOfTransactions(); i++)
+            past.printOneLine(i);
+        for (int i = 0; i < future.getNumOfTransactions(); i++)
+            future.printOneLine(i);
+    }
+/*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -171,6 +183,6 @@ public class DBFetch extends Activity {
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
-    }
+    }*/
 }
 

@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.example.kingd.hello_world.R;
+
 public class moreEvents extends AppCompatActivity {
 
     @Override
