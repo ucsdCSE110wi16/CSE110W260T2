@@ -9,6 +9,7 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.*;
+import java.lang.String;
 import java.util.Properties;
 
 /**
@@ -21,8 +22,9 @@ import java.util.Properties;
 public class DBFetch extends Activity {
 
     private static final String FILENAME = "config.txt";
-    private static String name, stored;
+    private static String name, stored, read;
     private static double balance;
+
     public static Payments past, future;
 
     private GoogleApiClient client;
@@ -74,7 +76,7 @@ public class DBFetch extends Activity {
         return stored;
     }
 
-    private String readFromFile() {
+    private void readFromFile() {
 
         String ret = "";
 
@@ -101,23 +103,23 @@ public class DBFetch extends Activity {
             System.err.println("Can not read file: " + e.toString());
         }
 
-        return ret;
+        read = ret;
     }
 
     private void rePopulateFromRead(){
         int currentIndex = 0, counter = 0;
         int pipeAt;
         while (true) {
-            pipeAt = stored.indexOf("|", currentIndex);
+            pipeAt = read.indexOf("|", currentIndex);
             if (pipeAt > -1) {
                 if (counter == 0)
-                    setBalance(Double.parseDouble(stored.substring(currentIndex, pipeAt)));
+                    setBalance(Double.parseDouble(read.substring(currentIndex, pipeAt)));
                 else if (counter == 1)
-                    setName(stored.substring(currentIndex, pipeAt));
+                    setName(read.substring(currentIndex, pipeAt));
                 else if (counter == 2)
-                    past.rePopulateFromString(stored.substring(currentIndex, pipeAt));
+                    past.rePopulateFromString(read.substring(currentIndex, pipeAt));
                 else
-                    future.rePopulateFromString(stored.substring(currentIndex, pipeAt));
+                    future.rePopulateFromString(read.substring(currentIndex, pipeAt));
 
                 currentIndex = pipeAt + 1; // +1?
                 counter++;
