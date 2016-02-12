@@ -19,7 +19,7 @@ import java.util.Properties;
 /*
  DBFetch class contains all getter and setter methods used on the DB
  */
-public class DBFetch extends Activity {
+public class DBFetch { //extends Activity {
 
     private static final String FILENAME = "config.txt";
     private static String name, stored, read;
@@ -134,7 +134,7 @@ public class DBFetch extends Activity {
         for (int i = 0; i < future.getNumOfTransactions(); i++)
             future.printOneLine(i);
     }
-
+/*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -182,6 +182,6 @@ public class DBFetch extends Activity {
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
-    }
+    }*/
 }
 
