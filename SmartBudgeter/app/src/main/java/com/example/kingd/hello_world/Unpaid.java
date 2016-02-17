@@ -5,29 +5,28 @@ import java.util.ArrayList;
  * Created by James on 2/4/2016.
  */
 public class Unpaid extends Payments{
-    private ArrayList<Double> transactionAmount;
-    private ArrayList<Boolean> payed;
-    private ArrayList<String> paymentNotes, dates, categories;
-    //private double balance;
+    private double transactionAmount;
+    private boolean payed;
+    private String paymentNotes, dates, categories;
 
     public Unpaid() {
-        transactionAmount = new ArrayList<Double>();
-        payed = new ArrayList<Boolean>();
-        paymentNotes = new ArrayList<String>();
-        dates = new ArrayList<String>();
-        //balance = 0;
+        transactionAmount = 0;;
+        payed = false;
+        paymentNotes = "";
+        dates = "";
+        categories = "";
     }
 
     @Override
-    public void printOneLine(int index) {
-        System.out.println("Date of Transaction: " + getPaymentDate(index));
-        System.out.println("Category of Transaction: " + getCategories(index));
-        System.out.println("Amount of Transaction: " + getTransactionAmt(index));
-        System.out.println("Notes: " + getNotes(index));
+    public void printOneLine() {
+        System.out.println("Date of Transaction: " + getPaymentDate());
+        System.out.println("Category of Transaction: " + getCategories());
+        System.out.println("Amount of Transaction: " + getTransactionAmt());
+        System.out.println("Notes: " + getNotes());
     }
 
-    @Override
-    public void rePopulateFromString(String st) {
+    @Override // Need to rework
+    public Unpaid rePopulateFromString(String st) {
         int currentIndex = 0, counter = 0;
         int percentAt;
         while (true) {
@@ -60,13 +59,14 @@ public class Unpaid extends Payments{
                 break;
             }
         }
+        return this;
     }
-    @Override
+    @Override  // Need to rework
     public String toString() {
         String formattedString = "";
         int indexCounter = 0;
         while (indexCounter < dates.size()) {
-            formattedString += dates.get(indexCounter) + "%" + categories.get(indexCounter) + "%"
+            formattedString += dates.get(indexCounter) + "%" + catagories.get(indexCounter) + "%"
                     + transactionAmount.get(indexCounter) + "%" + paymentNotes.get(indexCounter)
                     + "%" + payed.get(indexCounter);
             ++indexCounter;
