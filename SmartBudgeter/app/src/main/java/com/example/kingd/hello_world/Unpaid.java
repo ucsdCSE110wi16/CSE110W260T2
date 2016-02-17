@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Unpaid extends Payments{
     private ArrayList<Double> transactionAmount;
     private ArrayList<Boolean> payed;
-    private ArrayList<String> paymentNotes, dates, catagories;
+    private ArrayList<String> paymentNotes, dates, categories;
     //private double balance;
 
     public Unpaid() {
@@ -21,7 +21,7 @@ public class Unpaid extends Payments{
     @Override
     public void printOneLine(int index) {
         System.out.println("Date of Transaction: " + getPaymentDate(index));
-        System.out.println("Category of Transaction: " + getCatagories(index));
+        System.out.println("Category of Transaction: " + getCategories(index));
         System.out.println("Amount of Transaction: " + getTransactionAmt(index));
         System.out.println("Notes: " + getNotes(index));
     }
@@ -36,7 +36,7 @@ public class Unpaid extends Payments{
                 if (counter == 0)
                     addDate(st.substring(currentIndex, percentAt));
                 else if (counter == 1)
-                    addCatagories(st.substring(currentIndex, percentAt));
+                    addCategories(st.substring(currentIndex, percentAt));
                 else if (counter == 2)
                     addTransaction(Double.parseDouble(st.substring(currentIndex, percentAt)));
                 else if (counter == 3)
@@ -66,7 +66,7 @@ public class Unpaid extends Payments{
         String formattedString = "";
         int indexCounter = 0;
         while (indexCounter < dates.size()) {
-            formattedString += dates.get(indexCounter) + "%" + catagories.get(indexCounter) + "%"
+            formattedString += dates.get(indexCounter) + "%" + categories.get(indexCounter) + "%"
                     + transactionAmount.get(indexCounter) + "%" + paymentNotes.get(indexCounter)
                     + "%" + payed.get(indexCounter);
             ++indexCounter;

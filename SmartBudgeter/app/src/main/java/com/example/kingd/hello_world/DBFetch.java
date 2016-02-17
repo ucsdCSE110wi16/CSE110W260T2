@@ -77,7 +77,7 @@ public class DBFetch extends Activity {
         return stored;
     }
 
-    private void readFromFile() {
+    public void readFromFile() {
 
         String ret = "";
 
@@ -107,7 +107,7 @@ public class DBFetch extends Activity {
         read = ret;
     }
 
-    private void rePopulateFromRead(){
+    public void rePopulateFromRead(){
         int currentIndex = 0, counter = 0;
         int pipeAt;
         while (true) {

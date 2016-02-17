@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class History extends Payments {
     private ArrayList<Double> transactionAmount;
     //private ArrayList<Boolean> payed;
-    private ArrayList<String> paymentNotes, dates, catagories;
+    private ArrayList<String> paymentNotes, dates, categories;
     //private double balance;
 
     public History() {
@@ -15,13 +15,13 @@ public class History extends Payments {
         //payed = new ArrayList<Boolean>();
         paymentNotes = new ArrayList<String>();
         dates = new ArrayList<String>();
-        catagories = new ArrayList<String>();
+        categories = new ArrayList<String>();
         //balance = DBFetch.getBalance();
     }
     @Override
     public void printOneLine(int index) {
         System.out.println("Date of Transaction: " + getPaymentDate(index));
-        System.out.println("Category of Transaction: " + getCatagories(index));
+        System.out.println("Category of Transaction: " + getCategories(index));
         System.out.println("Amount of Transaction: " + getTransactionAmt(index));
         System.out.println("Notes: " + getNotes(index));
         System.out.println("Payed or not?" + isPayedOrNot(index));
@@ -37,7 +37,7 @@ public class History extends Payments {
                 if (counter == 0)
                     addDate(stored.substring(currentIndex, percentAt));
                 else if (counter == 1)
-                    addCatagories(stored.substring(currentIndex, percentAt));
+                    addCategories(stored.substring(currentIndex, percentAt));
                 else if (counter == 2)
                     addTransaction(Double.parseDouble(stored.substring(currentIndex, percentAt)));
                 else
@@ -57,7 +57,7 @@ public class History extends Payments {
         String formattedString = "";
         int indexCounter = 0;
         while (indexCounter < dates.size()) {
-            formattedString += dates.get(indexCounter) + "%" + catagories.get(indexCounter) + "%"
+            formattedString += dates.get(indexCounter) + "%" + categories.get(indexCounter) + "%"
                     + transactionAmount.get(indexCounter) + "%" + paymentNotes.get(indexCounter);
             ++indexCounter;
         }

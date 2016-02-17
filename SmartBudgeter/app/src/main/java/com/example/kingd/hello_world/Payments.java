@@ -11,7 +11,7 @@ public class Payments {
     //private static ArrayList<Date> dates;
     private ArrayList<Double> transactionAmount;
     private ArrayList<Boolean> payed; //addOrSubtract;
-    private ArrayList<String> paymentNotes, dates, catagories; // TODO: implement cata
+    private ArrayList<String> paymentNotes, dates, categories; // TODO: implement cata
 
     public void addDate(String d) {
         dates.add(d);
@@ -34,8 +34,8 @@ public class Payments {
     public void addPayed() {
         payed.add(true);
     }
-    public void addCatagories(String cata) {
-        catagories.add(cata);
+    public void addCategories(String cata) {
+        categories.add(cata);
     }
 
     public void addNotes(String note) {
@@ -58,12 +58,12 @@ public class Payments {
         return this.payed;
     }
 
-    public String getCatagories(int index) {
-        return this.catagories.get(index);
+    public String getCategories(int index) {
+        return this.categories.get(index);
     }
 
-    public ArrayList<String> getAllCatagories() {
-        return this.catagories;
+    public ArrayList<String> getAllCategories() {
+        return this.categories;
     }
 
     public String getNotes(int index) {
