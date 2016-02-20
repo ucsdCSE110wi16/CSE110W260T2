@@ -41,24 +41,24 @@ public class MainActivity extends AppCompatActivity {
         DBFetch dbFetch = new DBFetch();
 
         //The code for calendar
-        Payments payment = new Payments();
+        //Payments payment = new Payments();
         //initialize the date info selected on the calendar
 
         CalendarView calendar = (CalendarView)findViewById(R.id.calendarView);
         TextView calendarCategory = (TextView)findViewById(R.id.CategoryShow);
         TextView calendarAmount = (TextView)findViewById(R.id.AmountShow);
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener(){
-                                             @Override
-                                             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                                                 yy = year;
-                                                 mm = month;
-                                                 dd = dayOfMonth;
-                                             }
-                                         }
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+                yy = year;
+                mm = month;
+                dd = dayOfMonth;
+            }
+        }
         );
-        dbFetch.readFromFile();
-        dbFetch.rePopulateFromRead();
-
+        //dbFetch.readFromFile();
+        //dbFetch.rePopulateFromRead();
+        //dbFetch.addToUnpaid(calendar.getDate(), );
         //calendarCategory.setText(payment.getCategories());
         //calendarAmount.setText(payment.getTransactionAmt());
 

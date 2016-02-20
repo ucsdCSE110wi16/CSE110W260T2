@@ -56,12 +56,11 @@ public class History extends Payments {
     @Override    // Need to rework
     public String toString() {
         String formattedString = "";
-        int indexCounter = 0;
-        while (indexCounter < dates.length()) {
-            formattedString += dates.get(indexCounter) + "%" + categories.get(indexCounter) + "%"
-                    + transactionAmount.get(indexCounter) + "%" + paymentNotes.get(indexCounter);
-            ++indexCounter;
-        }
+        //int indexCounter = 0;
+        //while (indexCounter < dates.length()) {
+            formattedString += dates + "%" + categories + "%" + transactionAmount + "%" + paymentNotes;
+            //、++indexCounter;
+        //}
 
         return formattedString;
     }
