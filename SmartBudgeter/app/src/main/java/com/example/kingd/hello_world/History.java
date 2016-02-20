@@ -5,30 +5,29 @@ import java.util.ArrayList;
  * Created by James on 2/4/2016.
  */
 public class History extends Payments {
-    private ArrayList<Double> transactionAmount;
-    //private ArrayList<Boolean> payed;
-    private ArrayList<String> paymentNotes, dates, catagories;
-    //private double balance;
+    private double transactionAmount;
+    //private boolean payed;
+    private String categories, paymentNotes, dates;
+
 
     public History() {
-        transactionAmount = new ArrayList<Double>();
-        //payed = new ArrayList<Boolean>();
-        paymentNotes = new ArrayList<String>();
-        dates = new ArrayList<String>();
-        catagories = new ArrayList<String>();
-        //balance = DBFetch.getBalance();
+        transactionAmount = 0;
+        //payed = true;
+        paymentNotes = "";
+        categories = "";
+        dates = "";
     }
     @Override
-    public void printOneLine(int index) {
-        System.out.println("Date of Transaction: " + getPaymentDate(index));
-        System.out.println("Category of Transaction: " + getCatagories(index));
-        System.out.println("Amount of Transaction: " + getTransactionAmt(index));
-        System.out.println("Notes: " + getNotes(index));
-        System.out.println("Payed or not?" + isPayedOrNot(index));
+    public void printOneLine() {
+        System.out.println("Date of Transaction: " + getPaymentDate());
+        System.out.println("Category of Transaction: " + getCategories());
+        System.out.println("Amount of Transaction: " + getTransactionAmt());
+        System.out.println("Notes: " + getNotes());
+        //System.out.println("Payed or not?" + isPayedOrNot());
     }
 
-    @Override
-    public void rePopulateFromString(String stored) {
+    @Override // Need to rework
+    public History rePopulateFromString(String stored) {
         int currentIndex = 0, counter = 0;
         int percentAt;
         while (true) {
@@ -37,7 +36,7 @@ public class History extends Payments {
                 if (counter == 0)
                     addDate(stored.substring(currentIndex, percentAt));
                 else if (counter == 1)
-                    addCatagories(stored.substring(currentIndex, percentAt));
+                    addCategories(stored.substring(currentIndex, percentAt));
                 else if (counter == 2)
                     addTransaction(Double.parseDouble(stored.substring(currentIndex, percentAt)));
                 else
@@ -51,13 +50,15 @@ public class History extends Payments {
                 break;
             }
         }
+        return this;
     }
-    @Override
+
+    @Override    // Need to rework
     public String toString() {
         String formattedString = "";
         int indexCounter = 0;
-        while (indexCounter < dates.size()) {
-            formattedString += dates.get(indexCounter) + "%" + catagories.get(indexCounter) + "%"
+        while (indexCounter < dates.length()) {
+            formattedString += dates.get(indexCounter) + "%" + categories.get(indexCounter) + "%"
                     + transactionAmount.get(indexCounter) + "%" + paymentNotes.get(indexCounter);
             ++indexCounter;
         }

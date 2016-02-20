@@ -9,11 +9,18 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.TextView;
 
 import com.example.kingd.hello_world.R;
 
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
+
+    private int yy = 0;
+    private int mm = 0;
+    private int dd = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +38,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        DBFetch dbFetch = new DBFetch();
+
+        //The code for calendar
+        Payments payment = new Payments();
+        //initialize the date info selected on the calendar
+
+        CalendarView calendar = (CalendarView)findViewById(R.id.calendarView);
+        TextView calendarCategory = (TextView)findViewById(R.id.CategoryShow);
+        TextView calendarAmount = (TextView)findViewById(R.id.AmountShow);
+        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener(){
+                                             @Override
+                                             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+                                                 yy = year;
+                                                 mm = month;
+                                                 dd = dayOfMonth;
+                                             }
+                                         }
+        );
+        dbFetch.readFromFile();
+        dbFetch.rePopulateFromRead();
+
+        //calendarCategory.setText(payment.getCategories());
+        //calendarAmount.setText(payment.getTransactionAmt());
+
+
     }
 
-    public void buttonOnClick(View v) {
-        Button button = (Button) v;
-        
 
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -5,29 +5,28 @@ import java.util.ArrayList;
  * Created by James on 2/4/2016.
  */
 public class Unpaid extends Payments{
-    private ArrayList<Double> transactionAmount;
-    private ArrayList<Boolean> payed;
-    private ArrayList<String> paymentNotes, dates, catagories;
-    //private double balance;
+    private double transactionAmount;
+    private boolean payed;
+    private String paymentNotes, dates, categories;
 
     public Unpaid() {
-        transactionAmount = new ArrayList<Double>();
-        payed = new ArrayList<Boolean>();
-        paymentNotes = new ArrayList<String>();
-        dates = new ArrayList<String>();
-        //balance = 0;
+        transactionAmount = 0;;
+        payed = false;
+        paymentNotes = "";
+        dates = "";
+        categories = "";
     }
 
     @Override
-    public void printOneLine(int index) {
-        System.out.println("Date of Transaction: " + getPaymentDate(index));
-        System.out.println("Category of Transaction: " + getCatagories(index));
-        System.out.println("Amount of Transaction: " + getTransactionAmt(index));
-        System.out.println("Notes: " + getNotes(index));
+    public void printOneLine() {
+        System.out.println("Date of Transaction: " + getPaymentDate());
+        System.out.println("Category of Transaction: " + getCategories());
+        System.out.println("Amount of Transaction: " + getTransactionAmt());
+        System.out.println("Notes: " + getNotes());
     }
 
-    @Override
-    public void rePopulateFromString(String st) {
+    @Override // Need to rework
+    public Unpaid rePopulateFromString(String st) {
         int currentIndex = 0, counter = 0;
         int percentAt;
         while (true) {
@@ -36,16 +35,16 @@ public class Unpaid extends Payments{
                 if (counter == 0)
                     addDate(st.substring(currentIndex, percentAt));
                 else if (counter == 1)
-                    addCatagories(st.substring(currentIndex, percentAt));
+                    addCategories(st.substring(currentIndex, percentAt));
                 else if (counter == 2)
                     addTransaction(Double.parseDouble(st.substring(currentIndex, percentAt)));
                 else if (counter == 3)
                     addNotes(st.substring(currentIndex, percentAt));
                 else {
                     if (Boolean.parseBoolean(st.substring(currentIndex, percentAt)))
-                        addPayed();
+                        setPayed();
                     else
-                        addUnPayed();
+                        setUnPayed();
                 }
 
                 currentIndex = percentAt + 1; // +1?
@@ -53,21 +52,22 @@ public class Unpaid extends Payments{
             }
             else {
                 if (Boolean.parseBoolean(st.substring(currentIndex, st.length() - 1)))
-                    addPayed();
+                    setPayed();
                 else
-                    addUnPayed();
+                    setUnPayed();
 
                 break;
             }
         }
+        return this;
     }
-    @Override
+    @Override  // Need to rework
     public String toString() {
         String formattedString = "";
         int indexCounter = 0;
-        while (indexCounter < dates.size()) {
-            formattedString += dates.get(indexCounter) + "%" + catagories.get(indexCounter) + "%"
-                    + transactionAmount.get(indexCounter) + "%" + paymentNotes.get(indexCounter)
+        while (indexCounter < dates.length()) {
+            formattedString += dates.charAt(indexCounter) + "%" + categories.charAt(indexCounter) + "%"
+                    + transactionAmount.get(indexCounter) + "%" + paymentNotes.charAt(indexCounter)
                     + "%" + payed.get(indexCounter);
             ++indexCounter;
         }

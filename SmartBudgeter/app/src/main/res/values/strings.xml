@@ -5,10 +5,10 @@
     <string name="title_activity_future_pay_days">futurePayDays</string>
 
     <string-array name="menu_options">
-        <item>Option 1</item>
-        <item>Option 2</item>
-        <item>Option 3</item>
-        <item>Option 4</item>
-        <item>Option 5</item>
+        <item>Calendar</item>
+        <item>Add Payment/Expense</item>
+        <item>Edit Payment/Expense</item>
+        <item>Delete Payment/Expense</item>
+        <item>Main Page</item>
     </string-array>
 </resources>

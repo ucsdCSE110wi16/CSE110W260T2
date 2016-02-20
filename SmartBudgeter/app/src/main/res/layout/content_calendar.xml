@@ -21,21 +21,47 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:layout_width="300dp"
+        android:layout_width="150dp"
         android:layout_height="40dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Category: rent"
-        android:id="@+id/textView8"
+        android:text="Category："
+        android:id="@+id/CategoryBox"
+        android:gravity="right"
         android:layout_below="@+id/calendarView"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp" />
 
     <TextView
-        android:layout_width="300dp"
+        android:layout_width="150dp"
         android:layout_height="40dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Amount: $500"
-        android:id="@+id/textView9"
-        android:layout_below="@+id/textView8"
-        android:layout_centerHorizontal="true" />
+        android:text="Amount: "
+        android:gravity="right"
+        android:id="@+id/AmountBox"
+        android:layout_below="@+id/CategoryBox"
+        android:layout_alignLeft="@+id/CategoryBox"
+        android:layout_alignStart="@+id/CategoryBox" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/CategoryShow"
+        android:layout_below="@+id/calendarView"
+        android:layout_toRightOf="@+id/CategoryBox"
+        android:layout_toEndOf="@+id/CategoryBox" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/AmountShow"
+        android:layout_below="@+id/CategoryBox"
+        android:layout_toRightOf="@+id/CategoryBox"
+        android:layout_toEndOf="@+id/CategoryBox" />
 
 </RelativeLayout>
