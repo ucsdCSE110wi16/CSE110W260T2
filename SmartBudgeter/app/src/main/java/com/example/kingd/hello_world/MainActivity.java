@@ -14,13 +14,11 @@ import android.widget.TextView;
 
 import com.example.kingd.hello_world.R;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-
-    private int yy = 0;
-    private int mm = 0;
-    private int dd = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,25 +38,28 @@ public class MainActivity extends AppCompatActivity {
 
         DBFetch dbFetch = new DBFetch();
 
+        //Button calendarButton = (Button)findViewById(R.id.calendarButton);
+        //calendarButton.setOnClickListener(new View.OnClickListener(){
+
+        //});
+
         //The code for calendar
-        Payments payment = new Payments();
+        //Payments payment = new Payments();
         //initialize the date info selected on the calendar
 
         CalendarView calendar = (CalendarView)findViewById(R.id.calendarView);
         TextView calendarCategory = (TextView)findViewById(R.id.CategoryShow);
         TextView calendarAmount = (TextView)findViewById(R.id.AmountShow);
-        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener(){
-                                             @Override
-                                             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                                                 yy = year;
-                                                 mm = month;
-                                                 dd = dayOfMonth;
-                                             }
-                                         }
-        );
         dbFetch.readFromFile();
         dbFetch.rePopulateFromRead();
+        dbFetch.sortHistoryByDate();
+        dbFetch.sortUnpaidByDate();
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        String selectedDate = sdf.format(new Date(calendar.getDate()));
+        //calendar.
+
+        //dbFetch.sortByDate();
         //calendarCategory.setText(payment.getCategories());
         //calendarAmount.setText(payment.getTransactionAmt());
 

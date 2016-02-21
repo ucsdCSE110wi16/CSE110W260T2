@@ -64,13 +64,13 @@ public class Unpaid extends Payments{
     @Override  // Need to rework
     public String toString() {
         String formattedString = "";
-        int indexCounter = 0;
-        while (indexCounter < dates.length()) {
-            formattedString += dates.charAt(indexCounter) + "%" + categories.charAt(indexCounter) + "%"
-                    + transactionAmount.get(indexCounter) + "%" + paymentNotes.charAt(indexCounter)
-                    + "%" + payed.get(indexCounter);
-            ++indexCounter;
-        }
+        //int indexCounter = 0;
+        //while (indexCounter < dates.length()) {
+            formattedString += dates + "%" + categories + "%"
+                    + transactionAmount + "%" + paymentNotes
+                    + "%" + payed;
+            //++indexCounter;
+        //}
 
         return formattedString;
     }
