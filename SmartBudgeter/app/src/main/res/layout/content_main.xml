@@ -27,8 +27,8 @@
                 android:id="@+id/spin"
                 android:entries="@array/menu_options"
                 android:layout_alignParentTop="true"
-                android:layout_toLeftOf="@+id/Balance"
-                android:layout_toStartOf="@+id/Balance"
+                android:layout_toLeftOf="@+id/balanceText"
+                android:layout_toStartOf="@+id/balanceText"
                 android:spinnerMode="dropdown"
                 android:background="#c7c7c7"
                 android:contextClickable="false"
@@ -46,10 +46,21 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Balance"
                 android:textSize="40sp"
-                android:id="@+id/Balance"
+                android:id="@+id/balanceText"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="$0.00"
+                android:textSize="40sp"
+                android:id="@+id/balanceField"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/balanceText"
+                android:layout_centerHorizontal="true" />
 
         </RelativeLayout>
 
@@ -59,28 +70,31 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight=".2">
+        android:layout_weight=".2"
+        android:weightSum="1">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="155dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Upcoming Events:"
-            android:id="@+id/UpcomingEvents" />
+            android:text="Next Payment:"
+            android:id="@+id/NextPayment"
+            android:layout_gravity="center_horizontal" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#bfffbf"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_marginRight="20dp"
+            android:layout_weight="0.11">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Categories:"
-                android:id="@+id/CategoriesText"
+                android:id="@+id/categoriesText"
                 android:layout_margin="3dp" />
 
             <TextView
@@ -88,8 +102,8 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Amount:"
-                android:id="@+id/AmountText"
-                android:layout_below="@+id/CategoriesText"
+                android:id="@+id/amountText"
+                android:layout_below="@+id/categoriesText"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_margin="3dp" />
@@ -99,11 +113,74 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Date:"
-                android:id="@+id/DateText"
-                android:layout_below="@+id/AmountText"
+                android:id="@+id/dateText"
+                android:layout_below="@+id/amountText"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_margin="3dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="yyyy/mm/dd"
+                android:id="@+id/dateField"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBottom="@+id/dateText"
+                android:layout_below="@+id/amountText"
+                android:layout_toRightOf="@+id/categoriesText"
+                android:layout_toEndOf="@+id/categoriesText"
+                android:password="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="$0.00"
+                android:id="@+id/amountField"
+                android:password="false"
+                android:layout_alignTop="@+id/amountText"
+                android:layout_alignRight="@+id/dateField"
+                android:layout_alignEnd="@+id/dateField"
+                android:layout_above="@+id/dateField"
+                android:layout_alignLeft="@+id/dateField"
+                android:layout_alignStart="@+id/dateField" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/categoryField"
+                android:password="false"
+                android:layout_alignRight="@+id/amountField"
+                android:layout_alignEnd="@+id/amountField"
+                android:layout_alignTop="@+id/categoriesText"
+                android:layout_above="@+id/amountField"
+                android:layout_alignLeft="@+id/amountField"
+                android:layout_alignStart="@+id/amountField" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Notes:"
+                android:id="@+id/notesText"
+                android:layout_alignLeft="@+id/dateText"
+                android:layout_alignStart="@+id/dateText"
+                android:layout_alignRight="@+id/amountText"
+                android:layout_alignEnd="@+id/amountText"
+                android:layout_below="@+id/dateText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/notesField"
+                android:password="false"
+                android:layout_alignTop="@+id/notesText"
+                android:layout_toRightOf="@+id/categoriesText"
+                android:layout_toEndOf="@+id/categoriesText" />
 
         </RelativeLayout>
 
@@ -111,21 +188,144 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Show More"
-            android:id="@+id/morePayDaysButton"
+            android:id="@+id/showMorePayments"
             android:textSize="10dp"
             android:background="@android:color/holo_blue_bright"
-            android:layout_alignParentTop="true"
+            android:layout_gravity="center_horizontal"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_gravity="right"
-            android:layout_marginRight="20dp" />
+            android:layout_alignParentBottom="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Next Income:"
+            android:id="@+id/nextIncome"
+            android:layout_below="@+id/showMoreIncome"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight=".7"
+            android:layout_height="172dp"
             android:layout_margin="20dp">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#bfffbf"
+                android:layout_weight="0.11"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/relativeLayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Categories:"
+                    android:id="@+id/categoriesText2"
+                    android:layout_margin="3dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Amount:"
+                    android:id="@+id/amountText2"
+                    android:layout_below="@+id/categoriesText2"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="3dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Date:"
+                    android:id="@+id/dateText2"
+                    android:layout_below="@+id/amountText2"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="3dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="yyyy/mm/dd"
+                    android:id="@+id/dateField2"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignBottom="@+id/dateText2"
+                    android:layout_below="@+id/amountText2"
+                    android:layout_toRightOf="@+id/categoriesText2"
+                    android:layout_toEndOf="@+id/categoriesText2"
+                    android:password="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="$0.00"
+                    android:id="@+id/amountField2"
+                    android:password="false"
+                    android:layout_alignTop="@+id/amountText2"
+                    android:layout_alignRight="@+id/dateField2"
+                    android:layout_alignEnd="@+id/dateField2"
+                    android:layout_above="@+id/dateField2"
+                    android:layout_alignLeft="@+id/dateField2"
+                    android:layout_alignStart="@+id/dateField2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/categoriesField2"
+                    android:password="false"
+                    android:layout_alignRight="@+id/amountField2"
+                    android:layout_alignEnd="@+id/amountField2"
+                    android:layout_alignTop="@+id/categoriesText2"
+                    android:layout_above="@+id/amountField2"
+                    android:layout_alignLeft="@+id/amountField2"
+                    android:layout_alignStart="@+id/amountField2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Notes:"
+                    android:id="@+id/notesText2"
+                    android:layout_alignLeft="@+id/dateText2"
+                    android:layout_alignStart="@+id/dateText2"
+                    android:layout_alignRight="@+id/amountText2"
+                    android:layout_alignEnd="@+id/amountText2"
+                    android:layout_below="@+id/dateText2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/notesField2"
+                    android:password="false"
+                    android:layout_toEndOf="@+id/categoriesText2"
+                    android:layout_alignTop="@+id/notesText2"
+                    android:layout_alignLeft="@+id/dateField2"
+                    android:layout_alignStart="@+id/dateField2" />
+            </RelativeLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show More"
+                android:id="@+id/showMoreIncome"
+                android:textSize="10dp"
+                android:background="@android:color/holo_blue_bright"
+                android:layout_gravity="right"
+                android:layout_below="@+id/relativeLayout"
+                android:layout_centerHorizontal="true" />
         </RelativeLayout>
     </LinearLayout>
 

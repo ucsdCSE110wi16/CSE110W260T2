@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         DBFetch dbFetch = new DBFetch();
 
+        (TextView)
+
         //Button calendarButton = (Button)findViewById(R.id.calendarButton);
         //calendarButton.setOnClickListener(new View.OnClickListener(){
 
