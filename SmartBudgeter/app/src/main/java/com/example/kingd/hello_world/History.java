@@ -1,5 +1,6 @@
 package com.example.kingd.hello_world;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by James on 2/4/2016.
@@ -17,6 +18,7 @@ public class History extends Payments {
         categories = "";
         dates = "";
     }
+
     @Override
     public void printOneLine() {
         System.out.println("Date of Transaction: " + getPaymentDate());
@@ -30,7 +32,7 @@ public class History extends Payments {
     public History rePopulateFromString(String stored) {
         int currentIndex = 0, counter = 0;
         int percentAt;
-        while (true) {
+        while (counter <= 3) {
             percentAt = stored.indexOf("%", currentIndex);
             if (percentAt > -1) {
                 if (counter == 0)
@@ -65,5 +67,7 @@ public class History extends Payments {
         return formattedString;
     }
     //TODO:: set up all parsing methods and converting to string methods. Getters and setters too.
+
+
 
 }

@@ -10,6 +10,7 @@ package com.example.kingd.hello_world;
 //import com.google.android.gms.common.api.GoogleApiClient;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import com.google.android.gms.appindexing.AppIndex;
@@ -18,6 +19,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import java.io.*;
 import java.lang.String;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Properties;
 
 /**
@@ -95,7 +97,7 @@ public class DBFetch extends Activity {
         toPay.addNotes(notes);
         future.add((Unpaid) toPay);
     }
-/*
+
     public void writeStoreUser() throws IOException {
         FileOutputStream outputStream;
         try {
@@ -106,15 +108,15 @@ public class DBFetch extends Activity {
             e.printStackTrace();
         }
     }
-*/
+
     public String StoreToString() {
         stored = name + "|" + balance + "|";
         for(int i = 0; i < future.size(); i++){
-            stored += future.get(i).toString();
+            stored += future.get(i).toString() + "^";
         }
         stored += "|";
         for(int j = 0; j < past.size(); j++){
-            stored += past.get(j).toString();
+            stored += past.get(j).toString() + "^";
         }
         return stored;
     }
@@ -150,11 +152,13 @@ public class DBFetch extends Activity {
     }
 
     public void rePopulateFromRead(){
-        History hist = new History();
-        Unpaid unpaid = new Unpaid();
-        int currentIndex = 0, counter = 0;
+        future = new ArrayList<Unpaid>();
+        past = new ArrayList<History>();
+        int currentIndex = 0, counter = 0, index = 0, carrotAt;
         int pipeAt, percentAt;
         while (true) {
+            History hist;
+            Unpaid unpaid;
             pipeAt = read.indexOf("|", currentIndex);
             if (pipeAt > -1) {
                 if (counter == 0)
@@ -164,18 +168,25 @@ public class DBFetch extends Activity {
                 else if (counter == 2) {
                     
                     do { // Need to rework
+                        carrotAt = read.indexOf("^", currentIndex);
+                        hist = new History();
                         percentAt = read.indexOf("%", currentIndex);
                         if (pipeAt > percentAt) {
-                            past.add(hist.rePopulateFromString(read.substring(currentIndex, pipeAt)));
-                            currentIndex = percentAt + 1;
+                            hist = hist.rePopulateFromString(read.substring(currentIndex, carrotAt));
+                            past.add(hist);
+                            currentIndex = carrotAt + 1;
                         }
+
                     } while(percentAt < pipeAt);
                 }
                 else {
                     do {
+                        carrotAt = read.indexOf("^", currentIndex);
+                        unpaid = new Unpaid();
                         percentAt = read.indexOf("%", currentIndex);
                         if (pipeAt > percentAt) {
-                            future.add(unpaid.rePopulateFromString(read.substring(currentIndex, pipeAt)));
+                            unpaid = unpaid.rePopulateFromString(read.substring(currentIndex, pipeAt));
+                            future.add(unpaid);
                             currentIndex = percentAt + 1;
                         }
                     } while(percentAt < pipeAt);
@@ -192,6 +203,54 @@ public class DBFetch extends Activity {
             past.get(i).printOneLine();
         for (int j = 0; j < future.size(); j++)
             future.get(j).printOneLine();
+    }
+
+    public void sortHistoryByDate() {
+        String temp = "";
+        int i = 0;
+        while (i < past.size()) {
+            for (int j = i + 1; j < past.size() - 1; j++) {
+                temp = past.get(i).getPaymentDate();
+                if (temp.substring(0, 3).equalsIgnoreCase(past.get(j).getPaymentDate().substring(0, 3))) {
+                    if (temp.substring(5, 7).equalsIgnoreCase(past.get(j).getPaymentDate().substring(5, 7))) {
+                        if (temp.substring(9, 11).equalsIgnoreCase(past.get(j).getPaymentDate().substring(9, 11)))
+                            continue;
+                    } else if (Integer.getInteger(temp.substring(5, 7)) < Integer.getInteger(past.get(j).getPaymentDate().substring(5, 7)))
+                        continue;
+                    else {
+                        Collections.swap(past, i, j);
+                    }
+                } else if (Integer.getInteger(temp.substring(5, 7)) < Integer.getInteger(past.get(j).getPaymentDate().substring(5, 7)))
+                    continue;
+                else
+                    Collections.swap(past, i, j);
+
+            }
+        }
+    }
+
+    public void sortUnpaidByDate() {
+        String temp = "";
+        int i = 0;
+        while (i < future.size()) {
+            for (int j = i + 1; j < future.size() - 1; j++) {
+                temp = past.get(i).getPaymentDate();
+                if (temp.substring(0, 3).equalsIgnoreCase(future.get(j).getPaymentDate().substring(0, 3))) {
+                    if (temp.substring(5, 7).equalsIgnoreCase(future.get(j).getPaymentDate().substring(5, 7))) {
+                        if (temp.substring(9, 11).equalsIgnoreCase(future.get(j).getPaymentDate().substring(9, 11)))
+                            continue;
+                    } else if (Integer.getInteger(temp.substring(5, 7)) > Integer.getInteger((future.get(j).getPaymentDate().substring(5, 7))))
+                        continue;
+                    else {
+                        Collections.swap(past, i, j);
+                    }
+                } else if (Integer.getInteger(temp.substring(5, 7)) > Integer.getInteger((future.get(j).getPaymentDate().substring(5, 7))))
+                    continue;
+                else
+                    Collections.swap(past, i, j);
+
+            }
+        }
     }
 
     @Override
