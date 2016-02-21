@@ -93,8 +93,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Categories:"
-                android:id="@+id/categoriesText"
+                android:text="Category:"
+                android:id="@+id/categoryText"
                 android:layout_margin="3dp" />
 
             <TextView
@@ -103,7 +103,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Amount:"
                 android:id="@+id/amountText"
-                android:layout_below="@+id/categoriesText"
+                android:layout_below="@+id/categoryText"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_margin="3dp" />
@@ -129,8 +129,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignBottom="@+id/dateText"
                 android:layout_below="@+id/amountText"
-                android:layout_toRightOf="@+id/categoriesText"
-                android:layout_toEndOf="@+id/categoriesText"
+                android:layout_toRightOf="@+id/categoryText"
+                android:layout_toEndOf="@+id/categoryText"
                 android:password="false" />
 
             <TextView
@@ -155,7 +155,7 @@
                 android:password="false"
                 android:layout_alignRight="@+id/amountField"
                 android:layout_alignEnd="@+id/amountField"
-                android:layout_alignTop="@+id/categoriesText"
+                android:layout_alignTop="@+id/categoryText"
                 android:layout_above="@+id/amountField"
                 android:layout_alignLeft="@+id/amountField"
                 android:layout_alignStart="@+id/amountField" />
@@ -179,8 +179,8 @@
                 android:id="@+id/notesField"
                 android:password="false"
                 android:layout_alignTop="@+id/notesText"
-                android:layout_toRightOf="@+id/categoriesText"
-                android:layout_toEndOf="@+id/categoriesText" />
+                android:layout_toRightOf="@+id/categoryText"
+                android:layout_toEndOf="@+id/categoryText" />
 
         </RelativeLayout>
 
@@ -225,8 +225,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Categories:"
-                    android:id="@+id/categoriesText2"
+                    android:text="Category:"
+                    android:id="@+id/categoryText2"
                     android:layout_margin="3dp" />
 
                 <TextView
@@ -235,7 +235,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Amount:"
                     android:id="@+id/amountText2"
-                    android:layout_below="@+id/categoriesText2"
+                    android:layout_below="@+id/categoryText2"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_margin="3dp" />
@@ -261,8 +261,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignBottom="@+id/dateText2"
                     android:layout_below="@+id/amountText2"
-                    android:layout_toRightOf="@+id/categoriesText2"
-                    android:layout_toEndOf="@+id/categoriesText2"
+                    android:layout_toRightOf="@+id/categoryText2"
+                    android:layout_toEndOf="@+id/categoryText2"
                     android:password="false" />
 
                 <TextView
@@ -283,11 +283,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/categoriesField2"
+                    android:id="@+id/categoryField2"
                     android:password="false"
                     android:layout_alignRight="@+id/amountField2"
                     android:layout_alignEnd="@+id/amountField2"
-                    android:layout_alignTop="@+id/categoriesText2"
+                    android:layout_alignTop="@+id/categoryText2"
                     android:layout_above="@+id/amountField2"
                     android:layout_alignLeft="@+id/amountField2"
                     android:layout_alignStart="@+id/amountField2" />
@@ -310,10 +310,12 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:id="@+id/notesField2"
                     android:password="false"
-                    android:layout_toEndOf="@+id/categoriesText2"
                     android:layout_alignTop="@+id/notesText2"
                     android:layout_alignLeft="@+id/dateField2"
-                    android:layout_alignStart="@+id/dateField2" />
+                    android:layout_alignStart="@+id/dateField2"
+                    android:layout_toLeftOf="@+id/dateField2"
+                    android:layout_toStartOf="@+id/dateField2" />
+
             </RelativeLayout>
 
             <Button

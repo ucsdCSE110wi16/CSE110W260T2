@@ -38,7 +38,28 @@ public class MainActivity extends AppCompatActivity {
 
         DBFetch dbFetch = new DBFetch();
 
-        (TextView)
+
+        // Update Next Payment fields
+        TextView dateField = (TextView) findViewById(R.id.dateField);
+        TextView categoryField = (TextView) findViewById(R.id.categoryField);
+        TextView amountField = (TextView) findViewById(R.id.amountField);
+        TextView notesField = (TextView) findViewById(R.id.notesField);
+        dateField.setText(""); // Replace with getters
+        categoryField.setText("");
+        amountField.setText("");
+        notesField.setText("");
+
+
+        // Update Next Income fields
+        TextView dateField2 = (TextView) findViewById(R.id.dateField2);
+        TextView categoryField2 = (TextView) findViewById(R.id.categoryField2);
+        TextView amountField2 = (TextView) findViewById(R.id.amountField2);
+        TextView notesField2 = (TextView) findViewById(R.id.notesField2);
+        dateField2.setText(""); // Replace with getters
+        categoryField2.setText("");
+        amountField2.setText("");
+        notesField2.setText("");
+
 
         //Button calendarButton = (Button)findViewById(R.id.calendarButton);
         //calendarButton.setOnClickListener(new View.OnClickListener(){
@@ -48,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         //The code for calendar
         //Payments payment = new Payments();
         //initialize the date info selected on the calendar
-
+/*
         CalendarView calendar = (CalendarView)findViewById(R.id.calendarView);
         TextView calendarCategory = (TextView)findViewById(R.id.CategoryShow);
         TextView calendarAmount = (TextView)findViewById(R.id.AmountShow);
@@ -60,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         String selectedDate = sdf.format(new Date(calendar.getDate()));
         //calendar.
-
+*/
         //dbFetch.sortByDate();
         //calendarCategory.setText(payment.getCategories());
         //calendarAmount.setText(payment.getTransactionAmt());
