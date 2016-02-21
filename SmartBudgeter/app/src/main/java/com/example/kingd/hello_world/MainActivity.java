@@ -8,15 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.TextView;
-
-import com.example.kingd.hello_world.R;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Update Next Payment fields
-        TextView dateField = (TextView) findViewById(R.id.dateField);
+        TextView dateField = (TextView) findViewById(R.id.amountField);
         TextView categoryField = (TextView) findViewById(R.id.categoryField);
-        TextView amountField = (TextView) findViewById(R.id.amountField);
+        TextView amountField = (TextView) findViewById(R.id.categoryField);
         TextView notesField = (TextView) findViewById(R.id.notesField);
         dateField.setText(""); // Replace with getters
         categoryField.setText("");
@@ -51,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Update Next Income fields
-        TextView dateField2 = (TextView) findViewById(R.id.dateField2);
+        TextView dateField2 = (TextView) findViewById(R.id.amountField2);
         TextView categoryField2 = (TextView) findViewById(R.id.categoryField2);
-        TextView amountField2 = (TextView) findViewById(R.id.amountField2);
+        TextView amountField2 = (TextView) findViewById(R.id.categoryField2);
         TextView notesField2 = (TextView) findViewById(R.id.notesField2);
         dateField2.setText(""); // Replace with getters
         categoryField2.setText("");
