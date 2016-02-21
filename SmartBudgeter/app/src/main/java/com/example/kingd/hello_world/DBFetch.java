@@ -35,8 +35,8 @@ public class DBFetch extends Activity {
     private static String name, stored, read;
     private static double balance;
 
-    private static ArrayList<Unpaid> future;
-    private static ArrayList<History> past;
+    public static ArrayList<Unpaid> future;
+    public static ArrayList<History> past;
 
     private GoogleApiClient client;
 
@@ -124,31 +124,54 @@ public class DBFetch extends Activity {
     public void readFromFile() {
 
         String ret = "";
+        File varTmpDir = new File(FILENAME);
+        if (varTmpDir.exists()) {
+            try {
+                InputStream inputStream = openFileInput(FILENAME);
 
-        try {
-            InputStream inputStream = openFileInput(FILENAME);
+                if (inputStream != null) {
+                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                    String receiveString = "";
+                    StringBuilder stringBuilder = new StringBuilder();
 
-            if ( inputStream != null ) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
-                StringBuilder stringBuilder = new StringBuilder();
+                    while ((receiveString = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(receiveString);
+                    }
 
-                while ( (receiveString = bufferedReader.readLine()) != null ) {
-                    stringBuilder.append(receiveString);
+                    inputStream.close();
+                    ret = stringBuilder.toString();
                 }
-
-                inputStream.close();
-                ret = stringBuilder.toString();
+            } catch (FileNotFoundException e) {
+                System.err.println("File not found: " + e.toString());
+            } catch (IOException e) {
+                System.err.println("Can not read file: " + e.toString());
+            }
+            read = ret;
+        }
+        else {
+            try {
+                PrintWriter writer = new PrintWriter(FILENAME, "UTF-8");
+                writer.close();
+            } catch (FileNotFoundException e) {
+                System.err.println("File not found: " + e.toString());
+            } catch (IOException e) {
+                System.err.println("Can not read file: " + e.toString());
             }
         }
-        catch (FileNotFoundException e) {
-            System.err.println("File not found: " + e.toString());
-        } catch (IOException e) {
-            System.err.println("Can not read file: " + e.toString());
-        }
 
-        read = ret;
+    }
+
+    public ArrayList<Unpaid> getFuture(){
+        return future;
+    }
+
+    public ArrayList<History> getPast(){
+        return past;
+    }
+
+    public boolean isReadEmpty(){
+        return read.equals("");
     }
 
     public void rePopulateFromRead(){
