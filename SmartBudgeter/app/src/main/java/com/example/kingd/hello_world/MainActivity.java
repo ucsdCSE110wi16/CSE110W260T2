@@ -1,5 +1,6 @@
 package com.example.kingd.hello_world;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -216,4 +217,21 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+/*    @Override
+    public void onNavigationDrawerItemSelected(int position) {
+        // depending on the position in your drawer list change this
+        switch (position) {
+            case 0: {
+                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case 1:{
+                Intent intent = new Intent(MainActivity.this, AddThings.class);
+                startActivity(intent);
+                break;
+            }
+
+        } */
 }
