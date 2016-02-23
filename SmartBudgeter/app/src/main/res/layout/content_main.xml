@@ -17,24 +17,6 @@
         android:layout_weight=".8"
         android:background="#c6fdfd">
 
-        <FrameLayout
-            android:layout_width="88dp"
-            android:layout_height="wrap_content">
-
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/spin"
-                android:entries="@array/menu_options"
-                android:layout_alignParentTop="true"
-                android:layout_toLeftOf="@+id/balanceText"
-                android:layout_toStartOf="@+id/balanceText"
-                android:spinnerMode="dropdown"
-                android:background="#c7c7c7"
-                android:contextClickable="false"
-                android:layout_margin="5dp"></Spinner>
-        </FrameLayout>
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
