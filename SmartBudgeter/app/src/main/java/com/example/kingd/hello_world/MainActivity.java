@@ -170,8 +170,8 @@ public class MainActivity extends AppCompatActivity {
         mDrawerList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, "Time for an upgrade!",
-                        Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, Calendar.class);
+                startActivity(intent);
             }
 
             @Override
@@ -235,21 +235,4 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-/*    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        // depending on the position in your drawer list change this
-        switch (position) {
-            case 0: {
-                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
-                startActivity(intent);
-                break;
-            }
-            case 1:{
-                Intent intent = new Intent(MainActivity.this, AddThings.class);
-                startActivity(intent);
-                break;
-            }
-
-        } */
 }
