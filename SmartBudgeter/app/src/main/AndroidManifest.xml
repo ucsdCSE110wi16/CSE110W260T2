@@ -19,8 +19,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".moreEvents"
-            android:label="@string/title_activity_more_events"
+            android:name=".showMorePayments"
+            android:label="@string/title_activity_show_more_payments"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -28,8 +28,8 @@
                 android:value="com.example.kingd.hello_world.MainActivity" />
         </activity>
         <activity
-            android:name=".futurePayDays"
-            android:label="@string/title_activity_future_pay_days"
+            android:name=".showMoreIncome"
+            android:label="@string/title_activity_show_more_income"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

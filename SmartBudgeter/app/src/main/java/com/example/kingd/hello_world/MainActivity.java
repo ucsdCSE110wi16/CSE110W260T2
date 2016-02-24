@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -95,6 +96,25 @@ public class MainActivity extends AppCompatActivity {
         categoryField2.setText("");
         amountField2.setText("");
         notesField2.setText("");
+
+        // Show more payments button listener
+        Button showMorePaymentsBtn = (Button)findViewById(R.id.showMorePayments);
+
+        showMorePaymentsBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, showMorePayments.class));
+            }
+        });
+
+        // Show more income button listener
+        Button showMoreIncomeBtn = (Button)findViewById(R.id.showMoreIncome);
+
+        showMoreIncomeBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, showMoreIncome.class));
+            }
+        });
+
 
         //Calendar Part
 /*        CalendarView calendar = (CalendarView) findViewById(R.id.calendarView);
