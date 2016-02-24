@@ -14,35 +14,38 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight=".8"
-        android:background="#c6fdfd">
+        android:layout_weight=".9"
+        android:background="#135029">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight=".1">
+            android:layout_weight=".1"
+            android:id="@+id/o">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Balance"
-                android:textSize="40sp"
+                android:textSize="30sp"
                 android:id="@+id/balanceText"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="$0.00"
-                android:textSize="40sp"
+                android:textSize="30sp"
                 android:id="@+id/balanceField"
                 android:layout_gravity="center_horizontal"
                 android:layout_below="@+id/balanceText"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:textColor="#ffffff" />
 
         </RelativeLayout>
 
@@ -52,24 +55,28 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight=".2"
-        android:weightSum="1">
+        android:layout_weight=".15"
+        android:weightSum="1"
+        android:background="#135029">
 
         <TextView
-            android:layout_width="155dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Next Payment:"
             android:id="@+id/NextPayment"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:textSize="15dp"
+            android:layout_marginTop="10dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#bfffbf"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="0.11">
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.11"
+            android:layout_marginLeft="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -167,16 +174,20 @@
         </RelativeLayout>
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Show More"
             android:id="@+id/showMorePayments"
             android:textSize="10dp"
-            android:background="@android:color/holo_blue_bright"
+            android:background="#002b64"
             android:layout_gravity="center_horizontal"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true" />
+            android:layout_alignParentBottom="true"
+            android:textColor="#ffffff"
+            android:textStyle="italic"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -186,12 +197,14 @@
             android:id="@+id/nextIncome"
             android:layout_below="@+id/showMoreIncome"
             android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:textColor="#ffffff"
+            android:textSize="15dp"
+            android:layout_marginTop="10dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="172dp"
-            android:layout_margin="20dp">
+            android:layout_height="172dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -201,7 +214,9 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/relativeLayout">
+                android:id="@+id/relativeLayout"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -302,16 +317,22 @@
             </RelativeLayout>
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Show More"
                 android:id="@+id/showMoreIncome"
                 android:textSize="10dp"
-                android:background="@android:color/holo_blue_bright"
+                android:background="#002b64"
                 android:layout_gravity="right"
                 android:layout_below="@+id/relativeLayout"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:textColor="#ffffff"
+                android:textStyle="italic"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
         </RelativeLayout>
+
     </LinearLayout>
 
 </LinearLayout>
