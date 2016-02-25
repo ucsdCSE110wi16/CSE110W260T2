@@ -194,7 +194,7 @@ public class DBFetch extends Activity {
                 else if (counter == 1)
                     setBalance(Double.parseDouble(read.substring(currentIndex, pipeAt)));
                 else if (counter == 2) {
-                    do { // Need to rework
+                    do {
                         hist = new History();
                         carrotAt = read.indexOf("^", currentIndex);
                         percentAt = read.indexOf("%", currentIndex);
