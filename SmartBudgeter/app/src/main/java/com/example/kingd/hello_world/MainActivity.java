@@ -13,18 +13,12 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    DBFetch dbFetch;
+    public static DBFetch dbFetch = new DBFetch();
 
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
@@ -38,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //initialize the dbFetch project
+        dbFetch.readFromFile();
+        dbFetch.rePopulateFromRead();
+        dbFetch.sortHistoryByDate();
+        dbFetch.sortUnpaidByDate();
 
         // Code for Navigation Bar
         mDrawerList = (ListView)findViewById(R.id.navList);mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
@@ -61,18 +61,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-
-        dbFetch = new DBFetch();
-        dbFetch.readFromFile();
-/*        if(!dbFetch.isReadEmpty()){
-            dbFetch.rePopulateFromRead();
-            dbFetch.sortHistoryByDate();
-            dbFetch.sortUnpaidByDate();
-        }
-        else {
-            dbFetch.setBalance(0.00);
-        }
-*/
 
         // Update Next Payment fields
         TextView dateField = (TextView) findViewById(R.id.amountField);
@@ -113,12 +101,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
     }
 
 
@@ -132,8 +114,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void addDrawerItems() {
-        String[] osArray = { "Calendar", "Add Payment/Expenses", "Edit Payment/Expenses",
-                "Delete Payment/Expenses", "Home Page" };
+        String[] osArray = { "Calendar", "Add Payment/Income", "Edit Payment/Income",
+                "Delete Payment/Income", "Home Page" };
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
 

@@ -29,7 +29,7 @@ public class Unpaid extends Payments{
     public Unpaid rePopulateFromString(String st) {
         int currentIndex = 0, counter = 0;
         int percentAt;
-        while (true) {
+        while (counter <= 4) {
             percentAt = st.indexOf("%", currentIndex);
             if (percentAt > -1) {
                 if (counter == 0)
@@ -47,7 +47,7 @@ public class Unpaid extends Payments{
                         setUnPayed();
                 }
 
-                currentIndex = percentAt + 1; // +1?
+                currentIndex = percentAt + 1;
                 counter++;
             }
             else {
@@ -64,14 +64,9 @@ public class Unpaid extends Payments{
     @Override  // Need to rework
     public String toString() {
         String formattedString = "";
-        //int indexCounter = 0;
-        //while (indexCounter < dates.length()) {
-            formattedString += dates + "%" + categories + "%"
+        formattedString += dates + "%" + categories + "%"
                     + transactionAmount + "%" + paymentNotes
                     + "%" + payed;
-            //++indexCounter;
-        //}
-
         return formattedString;
     }
 

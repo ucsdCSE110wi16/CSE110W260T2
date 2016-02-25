@@ -41,10 +41,11 @@ public class DBFetch extends Activity {
     private GoogleApiClient client;
 
     public DBFetch() {
-        balance = 0.0;
-        name = "";
+        balance = 0.00;
+        name = "Fuheng Deng";
         past = new ArrayList<History>();
         future = new ArrayList<Unpaid>();
+        read = "";
     }
 
     public static void setBalance(double bal) {
@@ -82,7 +83,7 @@ public class DBFetch extends Activity {
 
     public void addToHistoryWithCurrentDate(String cate, double amt, String notes ) {
         Payments hist = new History();
-        hist.addCurrentDate();
+        //hist.addCurrentDate();
         hist.addCategories(cate);
         hist.addTransaction(amt);
         hist.addNotes(notes);
@@ -98,7 +99,7 @@ public class DBFetch extends Activity {
         future.add((Unpaid) toPay);
     }
 
-    public void writeStoreUser() throws IOException {
+    public void writeStoreUser(){//} throws IOException {
         FileOutputStream outputStream;
         try {
             outputStream = openFileOutput(FILENAME, Context.MODE_PRIVATE);
@@ -111,13 +112,15 @@ public class DBFetch extends Activity {
 
     public String StoreToString() {
         stored = name + "|" + balance + "|";
-        for(int i = 0; i < future.size(); i++){
-            stored += future.get(i).toString() + "^";
+        for(int i = 0; i < past.size(); i++){
+            stored += past.get(i).toString() + "^";
         }
         stored += "|";
-        for(int j = 0; j < past.size(); j++){
-            stored += past.get(j).toString() + "^";
+        for(int j = 0; j < future.size(); j++){
+            stored += future.get(j).toString() + "^";
         }
+        stored += "|";
+        System.out.println(past.size() + " " + future.size());
         return stored;
     }
 
@@ -149,6 +152,7 @@ public class DBFetch extends Activity {
             }
             read = ret;
         }
+
         else {
             try {
                 PrintWriter writer = new PrintWriter(FILENAME, "UTF-8");
@@ -158,6 +162,7 @@ public class DBFetch extends Activity {
             } catch (IOException e) {
                 System.err.println("Can not read file: " + e.toString());
             }
+            System.out.println("wow we got some errors");
         }
 
     }
@@ -179,46 +184,50 @@ public class DBFetch extends Activity {
         past = new ArrayList<History>();
         int currentIndex = 0, counter = 0, index = 0, carrotAt;
         int pipeAt, percentAt;
+        History hist;
+        Unpaid unpaid;
         while (true) {
-            History hist;
-            Unpaid unpaid;
             pipeAt = read.indexOf("|", currentIndex);
             if (pipeAt > -1) {
                 if (counter == 0)
-                    setBalance(Double.parseDouble(read.substring(currentIndex, pipeAt)));
-                else if (counter == 1)
                     setName(read.substring(currentIndex, pipeAt));
+                else if (counter == 1)
+                    setBalance(Double.parseDouble(read.substring(currentIndex, pipeAt)));
                 else if (counter == 2) {
-                    
                     do { // Need to rework
-                        carrotAt = read.indexOf("^", currentIndex);
                         hist = new History();
+                        carrotAt = read.indexOf("^", currentIndex);
                         percentAt = read.indexOf("%", currentIndex);
-                        if (pipeAt > percentAt) {
+                        if (carrotAt > percentAt) {
                             hist = hist.rePopulateFromString(read.substring(currentIndex, carrotAt));
                             past.add(hist);
                             currentIndex = carrotAt + 1;
                         }
 
-                    } while(percentAt < pipeAt);
+                    } while(carrotAt < pipeAt - 1);
                 }
                 else {
                     do {
-                        carrotAt = read.indexOf("^", currentIndex);
                         unpaid = new Unpaid();
+                        carrotAt = read.indexOf("^", currentIndex);
                         percentAt = read.indexOf("%", currentIndex);
-                        if (pipeAt > percentAt) {
-                            unpaid = unpaid.rePopulateFromString(read.substring(currentIndex, pipeAt));
+                        if (carrotAt > percentAt) {
+                            unpaid = unpaid.rePopulateFromString(read.substring(currentIndex, carrotAt));
                             future.add(unpaid);
                             currentIndex = percentAt + 1;
                         }
-                    } while(percentAt < pipeAt);
+                    } while(carrotAt < pipeAt - 1);
                 }
-                currentIndex = pipeAt + 1; // +1?
+                currentIndex = pipeAt + 1;
                 counter++;
+            }
+            else {
+                System.out.println("Oops read file is empty!");
+                break;
             }
         }
     }
+
     public void printAccount() {
         System.out.println("Account Owner: " + name);
         System.out.println("Balance: " + balance);

@@ -36,19 +36,19 @@ public class History extends Payments {
             percentAt = stored.indexOf("%", currentIndex);
             if (percentAt > -1) {
                 if (counter == 0)
-                    addDate(stored.substring(currentIndex, percentAt));
+                    this.addDate(stored.substring(currentIndex, percentAt));
                 else if (counter == 1)
-                    addCategories(stored.substring(currentIndex, percentAt));
+                    this.addCategories(stored.substring(currentIndex, percentAt));
                 else if (counter == 2)
-                    addTransaction(Double.parseDouble(stored.substring(currentIndex, percentAt)));
+                    this.addTransaction(Double.parseDouble(stored.substring(currentIndex, percentAt)));
                 else
-                    addNotes(stored.substring(currentIndex, percentAt));
+                    this.addNotes(stored.substring(currentIndex, percentAt));
 
-                currentIndex = percentAt + 1; // +1?
+                currentIndex = percentAt + 1;
                 counter++;
             }
             else {
-                addNotes(stored.substring(currentIndex, stored.length() - 1));
+                //addNotes(stored.substring(currentIndex, stored.length() - 1));
                 break;
             }
         }
@@ -58,12 +58,7 @@ public class History extends Payments {
     @Override    // Need to rework
     public String toString() {
         String formattedString = "";
-        //int indexCounter = 0;
-        //while (indexCounter < dates.length()) {
-            formattedString += dates + "%" + categories + "%" + transactionAmount + "%" + paymentNotes;
-            //、++indexCounter;
-        //}
-
+        formattedString += dates + "%" + categories + "%" + transactionAmount + "%" + paymentNotes;
         return formattedString;
     }
     //TODO:: set up all parsing methods and converting to string methods. Getters and setters too.

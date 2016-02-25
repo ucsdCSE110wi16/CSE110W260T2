@@ -3,9 +3,16 @@ package com.example.kingd.hello_world;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.CalendarView;
+import android.widget.TextView;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Calendar extends AppCompatActivity {
 
+    //public static DBFetch dbFetch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,7 +22,7 @@ public class Calendar extends AppCompatActivity {
 
 
         //Calendar Part
-/*        CalendarView calendar = (CalendarView) findViewById(R.id.calendarView);
+        /*CalendarView calendar = (CalendarView) findViewById(R.id.calendarView);
 
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
                                              @Override
@@ -44,7 +51,7 @@ public class Calendar extends AppCompatActivity {
                                              }
                                          }
 
-        ); */
+        );*/
     }
 
 
