@@ -34,11 +34,10 @@ public class DBFetch extends Activity {
     private static final String FILENAME = "config.txt";
     private static String name, stored, read;
     private static double balance;
+    private static ArrayList<Unpaid> future;
+    private static ArrayList<History> past;
 
-    public static ArrayList<Unpaid> future;
-    public static ArrayList<History> past;
-
-    private GoogleApiClient client;
+    //private GoogleApiClient client;
 
     public DBFetch() {
         balance = 0.00;
@@ -81,14 +80,14 @@ public class DBFetch extends Activity {
         past.add((History) hist);
     }
 
-    public void addToHistoryWithCurrentDate(String cate, double amt, String notes ) {
+    /*public void addToHistoryWithCurrentDate(String cate, double amt, String notes ) {
         Payments hist = new History();
-        //hist.addCurrentDate();
+        hist.addCurrentDate();
         hist.addCategories(cate);
         hist.addTransaction(amt);
         hist.addNotes(notes);
         past.add((History) hist);
-    }
+    }*/
 
     public void addToUnpaid(String date, String cate, double amt, String notes ) {
         Payments toPay = new Unpaid();
@@ -99,7 +98,7 @@ public class DBFetch extends Activity {
         future.add((Unpaid) toPay);
     }
 
-    public void writeStoreUser(){//} throws IOException {
+    public void writeStoreUser() throws IOException {
         FileOutputStream outputStream;
         try {
             outputStream = openFileOutput(FILENAME, Context.MODE_PRIVATE);
@@ -110,6 +109,7 @@ public class DBFetch extends Activity {
         }
     }
 
+    //the stored format: name|balance|past1^past2^...|future1^future2^..|
     public String StoreToString() {
         stored = name + "|" + balance + "|";
         for(int i = 0; i < past.size(); i++){
@@ -162,7 +162,6 @@ public class DBFetch extends Activity {
             } catch (IOException e) {
                 System.err.println("Can not read file: " + e.toString());
             }
-            System.out.println("wow we got some errors");
         }
 
     }
@@ -238,54 +237,52 @@ public class DBFetch extends Activity {
     }
 
     public void sortHistoryByDate() {
-        String temp = "";
-        int i = 0;
-        while (i < past.size()) {
-            for (int j = i + 1; j < past.size() - 1; j++) {
-                temp = past.get(i).getPaymentDate();
-                if (temp.substring(0, 3).equalsIgnoreCase(past.get(j).getPaymentDate().substring(0, 3))) {
-                    if (temp.substring(5, 7).equalsIgnoreCase(past.get(j).getPaymentDate().substring(5, 7))) {
-                        if (temp.substring(9, 11).equalsIgnoreCase(past.get(j).getPaymentDate().substring(9, 11)))
-                            continue;
-                    } else if (Integer.getInteger(temp.substring(5, 7)) < Integer.getInteger(past.get(j).getPaymentDate().substring(5, 7)))
-                        continue;
-                    else {
+        //String temp = "";
+        for(int i = 0; i < past.size() ; i++) {
+            for (int j = i + 1; j < past.size(); j++) {
+                //temp = past.get(i).getPaymentDate();
+                String dateI = past.get(i).getPaymentDate();
+                String dateJ = past.get(j).getPaymentDate();
+                if (dateI.substring(0, 4).compareTo(dateJ.substring(0, 4)) < 0) {
+                    Collections.swap(past, i, j);
+                }
+                else if(dateI.substring(0, 4).compareTo(dateJ.substring(0, 4)) == 0){
+                    if(dateI.substring(5, 7).compareTo(dateJ.substring(5, 7)) < 0) {
                         Collections.swap(past, i, j);
                     }
-                } else if (Integer.getInteger(temp.substring(5, 7)) < Integer.getInteger(past.get(j).getPaymentDate().substring(5, 7)))
-                    continue;
-                else
-                    Collections.swap(past, i, j);
-
+                    else if(dateI.substring(5, 7).compareTo(dateJ.substring(5, 7)) == 0){
+                        if(dateI.substring(8, 10).compareTo(dateJ.substring(8, 10)) < 0) {
+                            Collections.swap(past, i, j);
+                        }
+                    }
+                }
             }
         }
     }
 
     public void sortUnpaidByDate() {
-        String temp = "";
-        int i = 0;
-        while (i < future.size()) {
-            for (int j = i + 1; j < future.size() - 1; j++) {
-                temp = past.get(i).getPaymentDate();
-                if (temp.substring(0, 3).equalsIgnoreCase(future.get(j).getPaymentDate().substring(0, 3))) {
-                    if (temp.substring(5, 7).equalsIgnoreCase(future.get(j).getPaymentDate().substring(5, 7))) {
-                        if (temp.substring(9, 11).equalsIgnoreCase(future.get(j).getPaymentDate().substring(9, 11)))
-                            continue;
-                    } else if (Integer.getInteger(temp.substring(5, 7)) > Integer.getInteger((future.get(j).getPaymentDate().substring(5, 7))))
-                        continue;
-                    else {
-                        Collections.swap(past, i, j);
+        for(int i = 0; i < future.size() ; i++) {
+            for (int j = i + 1; j < future.size(); j++) {
+                String dateI = future.get(i).getPaymentDate();
+                String dateJ = future.get(j).getPaymentDate();
+                if (dateI.substring(0, 4).compareTo(dateJ.substring(0, 4)) < 0) {
+                    Collections.swap(future, i, j);
+                }
+                else if(dateI.substring(0, 4).compareTo(dateJ.substring(0, 4)) == 0){
+                    if(dateI.substring(5, 7).compareTo(dateJ.substring(5, 7)) < 0) {
+                        Collections.swap(future, i, j);
                     }
-                } else if (Integer.getInteger(temp.substring(5, 7)) > Integer.getInteger((future.get(j).getPaymentDate().substring(5, 7))))
-                    continue;
-                else
-                    Collections.swap(past, i, j);
-
+                    else if(dateI.substring(5, 7).compareTo(dateJ.substring(5, 7)) == 0){
+                        if(dateI.substring(8, 10).compareTo(dateJ.substring(8, 10)) < 0) {
+                            Collections.swap(future, i, j);
+                        }
+                    }
+                }
             }
         }
     }
 
-    @Override
+    /*@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
