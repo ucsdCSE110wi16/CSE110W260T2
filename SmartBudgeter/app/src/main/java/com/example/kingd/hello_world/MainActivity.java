@@ -1,8 +1,10 @@
 package com.example.kingd.hello_world;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,19 +14,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static DBFetch dbFetch = new DBFetch();
+/*    public static DBFetch dbFetch = new DBFetch(); */
 
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
     private ArrayAdapter<String> mAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +34,22 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        if (savedInstanceState == null) {
+            homePage hPage = new homePage();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, hPage)
+                    .addToBackStack(null)
+                    .commit();
+        }
+        else {
+
+        }
+
         //initialize the dbFetch project
-        dbFetch.readFromFile();
+ /*       dbFetch.readFromFile();
         dbFetch.rePopulateFromRead();
         dbFetch.sortHistoryByDate();
-        dbFetch.sortUnpaidByDate();
+        dbFetch.sortUnpaidByDate(); */
 
         // Code for Navigation Bar
         mDrawerList = (ListView)findViewById(R.id.navList);mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
@@ -61,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-
+/*
         // Update Next Payment fields
         TextView dateField = (TextView) findViewById(R.id.amountField);
         TextView categoryField = (TextView) findViewById(R.id.categoryField);
@@ -99,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, showMoreIncome.class));
             }
-        });
+        }); */
 
     }
 
