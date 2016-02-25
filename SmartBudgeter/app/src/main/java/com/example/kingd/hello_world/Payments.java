@@ -12,11 +12,11 @@ public class Payments {
     private boolean payed;
     private String paymentNotes, dates, categories; // TODO: implement cata
 
-    /*public void addCurrentDate() {
+    public void addCurrentDate() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd"); // HH:mm:ss");
         Date d = new Date();
         addDate(dateFormat.format(d));
-    }*/
+    }
 
     public void addDate(String d) {
         dates = d;

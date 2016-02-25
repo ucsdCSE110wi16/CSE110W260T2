@@ -1,6 +1,8 @@
 package com.example.kingd.hello_world;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 /**
  * Created by James on 2/4/2016.
@@ -8,15 +10,15 @@ import java.util.Collections;
 public class History extends Payments {
     private double transactionAmount;
     //private boolean payed;
-    private String categories, paymentNotes, dates;
+    private String categories, dates, paymentNotes;
 
 
     public History() {
         transactionAmount = 0;
         //payed = true;
         paymentNotes = "";
-        categories = "";
-        dates = "";
+        categories = "";;
+
     }
 
     @Override
