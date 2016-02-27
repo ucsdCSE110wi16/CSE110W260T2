@@ -19,7 +19,7 @@ import android.widget.TextView;
  * Activities that contain this fragment must implement the
  * {@link homePage.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link homePage#newInstance} factory method to
+ * Use the {@link homePage#//newInstance} factory method to
  * create an instance of this fragment.
  *
  */
@@ -84,10 +84,10 @@ public class homePage extends Fragment {
         TextView categoryField = (TextView) llayout.findViewById(R.id.categoryField);
         TextView amountField = (TextView) llayout.findViewById(R.id.categoryField);
         TextView notesField = (TextView) llayout.findViewById(R.id.notesField);
-        dateField.setText(""); // Replace with getters
-        categoryField.setText("");
-        amountField.setText("");
-        notesField.setText("");
+        dateField.setText(dbFetch.getFuture().get(0).getPaymentDate()); // Replace with getters
+        categoryField.setText(dbFetch.getFuture().get(0).getCategories());
+        amountField.setText(Double.toString(dbFetch.getFuture().get(0).getTransactionAmt()));
+        notesField.setText(dbFetch.getFuture().get(0).getNotes());
 
 
         // Update Next Income fields

@@ -18,7 +18,7 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
-/*    public static DBFetch dbFetch = new DBFetch(); */
+    public static DBFetch dbFetch = new DBFetch();
 
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
@@ -46,10 +46,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //initialize the dbFetch project
- /*       dbFetch.readFromFile();
+        //dbFetch.readFromFile();
         dbFetch.rePopulateFromRead();
+        /*dbFetch.addToHistory("2016/02/21", "fruits", 10, "I bought it for mom");
+        dbFetch.addToHistory("2016/02/23", "clothes", 200, "I bought it for sister");
+        dbFetch.addToHistory("2016/02/22", "computer",100,"I bought it for brother");
+        dbFetch.addToUnpaid("2016/02/28", "ahah", 200, "hi");
+        dbFetch.addToUnpaid("2016/03/31", "yeah", 300, "hi");
+        dbFetch.addToUnpaid("2016/03/12", "wow", 700, "hi");*/
         dbFetch.sortHistoryByDate();
-        dbFetch.sortUnpaidByDate(); */
+        dbFetch.sortUnpaidByDate();
+        dbFetch.printAccount();
 
         // Code for Navigation Bar
         mDrawerList = (ListView)findViewById(R.id.navList);mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
