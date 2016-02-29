@@ -79,15 +79,20 @@ public class homePage extends Fragment {
         LinearLayout llayout = (LinearLayout) inflater.inflate(R.layout.content_main, container,
                 false);
 
+
         // Update Next Payment fields
         TextView dateField = (TextView) llayout.findViewById(R.id.amountField);
         TextView categoryField = (TextView) llayout.findViewById(R.id.categoryField);
         TextView amountField = (TextView) llayout.findViewById(R.id.categoryField);
         TextView notesField = (TextView) llayout.findViewById(R.id.notesField);
+        System.out.println(dbFetch.getFuture().get(0).getPaymentDate());
+        System.out.println(dbFetch.getFuture().get(0).getCategories());
+        System.out.println(dbFetch.getFuture().get(0).getTransactionAmt());
+        System.out.println(dbFetch.getFuture().get(0).getNotes());
         dateField.setText(dbFetch.getFuture().get(0).getPaymentDate()); // Replace with getters
-        categoryField.setText(dbFetch.getFuture().get(0).getCategories());
-        amountField.setText(Double.toString(dbFetch.getFuture().get(0).getTransactionAmt()));
-        notesField.setText(dbFetch.getFuture().get(0).getNotes());
+        categoryField.setText("Hello");
+        amountField.setText("hi");
+        notesField.setText("");
 
 
         // Update Next Income fields
