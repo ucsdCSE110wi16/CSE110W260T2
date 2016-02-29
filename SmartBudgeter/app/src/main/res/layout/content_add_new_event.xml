@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ShowMoreIncome"
-    tools:showIn="@layout/activity_show_more_income">
+    tools:context="com.example.kingd.hello_world.AddNewEvent"
+    tools:showIn="@layout/activity_add_new_event">
 
 </RelativeLayout>

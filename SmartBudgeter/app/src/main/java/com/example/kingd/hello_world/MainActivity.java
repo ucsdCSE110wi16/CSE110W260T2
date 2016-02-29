@@ -1,10 +1,8 @@
 package com.example.kingd.hello_world;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +12,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /*
         if (savedInstanceState == null) {
             homePage hPage = new homePage();
             getSupportFragmentManager().beginTransaction()
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         else {
 
         }
+        */
 
         //initialize the dbFetch project
         //dbFetch.readFromFile();
@@ -59,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
         dbFetch.printAccount();
 
         // Code for Navigation Bar
-        mDrawerList = (ListView)findViewById(R.id.navList);mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView)findViewById(R.id.navList);
+        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
 
         addDrawerItems();
@@ -67,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.string.drawer_open, R.string.drawer_close) {
@@ -77,10 +82,11 @@ public class MainActivity extends AppCompatActivity {
 
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
+
             }
         };
 
-/*
+
         // Update Next Payment fields
         TextView dateField = (TextView) findViewById(R.id.amountField);
         TextView categoryField = (TextView) findViewById(R.id.categoryField);
@@ -90,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
         categoryField.setText("");
         amountField.setText("");
         notesField.setText("");
-
 
         // Update Next Income fields
         TextView dateField2 = (TextView) findViewById(R.id.amountField2);
@@ -107,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
         showMorePaymentsBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, showMorePayments.class));
+                startActivity(new Intent(MainActivity.this, ShowMorePayments.class));
             }
         });
 
@@ -116,9 +121,9 @@ public class MainActivity extends AppCompatActivity {
 
         showMoreIncomeBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, showMoreIncome.class));
+                startActivity(new Intent(MainActivity.this, ShowMoreIncome.class));
             }
-        }); */
+        });
 
     }
 
@@ -133,21 +138,26 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void addDrawerItems() {
-        String[] osArray = { "Calendar", "Add Payment/Income", "Edit Payment/Income",
-                "Delete Payment/Income", "Home Page" };
+        String[] osArray = { "View Calendar", "Add Payment/Income", "Modify Payment/Income" };
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
 
-        mDrawerList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Bundle args = new Bundle();
-                Intent intent = new Intent(MainActivity.this, Calendar.class);
-                startActivity(intent);
-            }
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                switch (position) {
+                    case 0:
+                        startActivity(new Intent(MainActivity.this, Calendar.class));
+                        break;
+                    case 1:
+                        startActivity(new Intent(MainActivity.this, AddNewEvent.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(MainActivity.this, ModifyExistingEvent.class));
+                        break;
+                }
+
 
             }
         });
