@@ -76,8 +76,8 @@ public class homePage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         FragmentActivity faActivity = (FragmentActivity) super.getActivity();
-        LinearLayout llayout = (LinearLayout) inflater.inflate(R.layout.content_main, container,
-                false);
+        LinearLayout llayout = (LinearLayout) inflater.inflate(R.layout.content_main
+                , container, false);
 
         // Update Next Payment fields
         TextView dateField = (TextView) llayout.findViewById(R.id.amountField);

@@ -87,7 +87,8 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Date:"
                     android:id="@+id/dateText"
-                    android:layout_margin="3dp" />
+                    android:layout_margin="3dp"
+                    android:textColor="#000000" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -98,7 +99,8 @@
                     android:layout_below="@+id/dateText"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_margin="3dp" />
+                    android:layout_margin="3dp"
+                    android:textColor="#000000" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -109,7 +111,8 @@
                     android:layout_below="@+id/categoryText"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_margin="3dp" />
+                    android:layout_margin="3dp"
+                    android:textColor="#000000" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -123,7 +126,8 @@
                     android:layout_toEndOf="@+id/amountText"
                     android:password="false"
                     android:layout_alignTop="@+id/amountText"
-                    android:layout_toRightOf="@+id/amountText" />
+                    android:layout_toRightOf="@+id/amountText"
+                    android:textColor="#000000" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -136,7 +140,8 @@
                     android:layout_above="@+id/amountField"
                     android:layout_alignTop="@+id/categoryText"
                     android:layout_toRightOf="@+id/categoryText"
-                    android:layout_toEndOf="@+id/categoryText" />
+                    android:layout_toEndOf="@+id/categoryText"
+                    android:textColor="#000000" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -150,7 +155,8 @@
                     android:text="yyyy/mm/dd"
                     android:layout_above="@+id/categoryField"
                     android:layout_toRightOf="@+id/notesField"
-                    android:layout_toEndOf="@+id/notesField" />
+                    android:layout_toEndOf="@+id/notesField"
+                    android:textColor="#000000" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -162,7 +168,8 @@
                     android:layout_alignStart="@+id/amountText"
                     android:layout_alignRight="@+id/categoryText"
                     android:layout_alignEnd="@+id/categoryText"
-                    android:layout_below="@+id/amountText" />
+                    android:layout_below="@+id/amountText"
+                    android:textColor="#000000" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -227,7 +234,8 @@
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Date:"
                         android:id="@+id/dateText2"
-                        android:layout_margin="3dp" />
+                        android:layout_margin="3dp"
+                        android:textColor="#000000" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -238,7 +246,8 @@
                         android:layout_below="@+id/dateText2"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
-                        android:layout_margin="3dp" />
+                        android:layout_margin="3dp"
+                        android:textColor="#000000" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -249,7 +258,8 @@
                         android:layout_below="@+id/categoryText2"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
-                        android:layout_margin="3dp" />
+                        android:layout_margin="3dp"
+                        android:textColor="#000000" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -263,7 +273,8 @@
                         android:layout_toEndOf="@+id/categoryText2"
                         android:password="false"
                         android:layout_above="@+id/notesText2"
-                        android:layout_toRightOf="@+id/categoryText2" />
+                        android:layout_toRightOf="@+id/categoryText2"
+                        android:textColor="#000000" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -276,7 +287,8 @@
                         android:layout_alignEnd="@+id/amountField2"
                         android:layout_above="@+id/amountField2"
                         android:layout_toRightOf="@+id/categoryText2"
-                        android:layout_toEndOf="@+id/categoryText2" />
+                        android:layout_toEndOf="@+id/categoryText2"
+                        android:textColor="#000000" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -291,7 +303,8 @@
                         android:layout_toRightOf="@+id/dateText2"
                         android:layout_toEndOf="@+id/dateText2"
                         android:textIsSelectable="false"
-                        android:text="yyyy/mm/dd" />
+                        android:text="yyyy/mm/dd"
+                        android:textColor="#000000" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -303,7 +316,8 @@
                         android:layout_alignStart="@+id/amountText2"
                         android:layout_alignRight="@+id/categoryText2"
                         android:layout_alignEnd="@+id/categoryText2"
-                        android:layout_below="@+id/amountText2" />
+                        android:layout_below="@+id/amountText2"
+                        android:textColor="#000000" />
 
                     <TextView
                         android:layout_width="wrap_content"
