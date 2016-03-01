@@ -5,6 +5,9 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,11 +17,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-/*    public static DBFetch dbFetch = new DBFetch(); */
+    public static DBFetch dbFetch = new DBFetch();
 
     private DrawerLayout mDrawer;
     private NavigationView nvDrawer;
@@ -49,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
 
+
         if (savedInstanceState == null) {
             homePage mainPage = new homePage();
             fragmentManager.beginTransaction().add(R.id.fragment_container, mainPage)
@@ -58,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         else {
 
         }
-
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
@@ -76,9 +81,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
-
 
 
  @Override

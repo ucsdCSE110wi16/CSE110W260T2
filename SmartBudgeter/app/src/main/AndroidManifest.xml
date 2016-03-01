@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".showMorePayments"
+            android:name=".ShowMorePayments"
             android:label="@string/title_activity_show_more_payments"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -28,8 +28,26 @@
                 android:value="com.example.kingd.hello_world.MainActivity" />
         </activity>
         <activity
-            android:name=".showMoreIncome"
+            android:name=".ShowMoreIncome"
             android:label="@string/title_activity_show_more_income"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.kingd.hello_world.MainActivity" />
+        </activity>
+        <activity
+            android:name=".AddNewEvent"
+            android:label="@string/title_activity_add_new_event"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.kingd.hello_world.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ModifyExistingEvent"
+            android:label="@string/title_activity_modify_existing_event"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

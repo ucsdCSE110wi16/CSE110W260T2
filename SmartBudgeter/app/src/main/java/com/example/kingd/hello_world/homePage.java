@@ -1,16 +1,18 @@
 package com.example.kingd.hello_world;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 
@@ -19,7 +21,7 @@ import android.widget.TextView;
  * Activities that contain this fragment must implement the
  * {@link homePage.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link homePage#newInstance} factory method to
+ * Use the {@link homePage#//newInstance} factory method to
  * create an instance of this fragment.
  *
  */
@@ -79,34 +81,47 @@ public class homePage extends Fragment {
         LinearLayout llayout = (LinearLayout) inflater.inflate(R.layout.content_main
                 , container, false);
 
-        // Update Next Payment fields
-        TextView dateField = (TextView) llayout.findViewById(R.id.amountField);
+
+        //initialize the dbFetch project
+        //dbFetch.readFromFile();
+        dbFetch.rePopulateFromRead();
+        dbFetch.sortHistoryByDate();
+        dbFetch.sortUnpaidByDate();
+        dbFetch.printAccount();
+
+        // Update Next Payment and Next Income fields
+        TextView dateField = (TextView) llayout.findViewById(R.id.dateField);
         TextView categoryField = (TextView) llayout.findViewById(R.id.categoryField);
-        TextView amountField = (TextView) llayout.findViewById(R.id.categoryField);
-        TextView notesField = (TextView) llayout.findViewById(R.id.notesField);
-        dateField.setText(""); // Replace with getters
-        categoryField.setText("");
-        amountField.setText("");
-        notesField.setText("");
-
-
-        // Update Next Income fields
-        TextView dateField2 = (TextView) llayout.findViewById(R.id.amountField2);
+        TextView amountField = (TextView) llayout.findViewById(R.id.amountField);
+        TextView dateField2 = (TextView) llayout.findViewById(R.id.dateField2);
         TextView categoryField2 = (TextView) llayout.findViewById(R.id.categoryField2);
-        TextView amountField2 = (TextView) llayout.findViewById(R.id.categoryField2);
+        TextView amountField2 = (TextView) llayout.findViewById(R.id.amountField2);
         TextView notesField2 = (TextView) llayout.findViewById(R.id.notesField2);
-        dateField2.setText(""); // Replace with getters
-        categoryField2.setText("");
-        amountField2.setText("");
-        notesField2.setText("");
+        boolean paymentSet = false, incomeSet = false;
+        for(int i = 0; i < dbFetch.getFuture().size(); i++) {
+            if(dbFetch.getFuture().get(i).getTransactionAmt() > 0 && incomeSet == false){
+                dateField2.setText(dbFetch.getFuture().get(i).getPaymentDate()); // Replace with getters
+                categoryField2.setText(dbFetch.getFuture().get(i).getCategories());
+                amountField2.setText(Double.toString(Math.abs(dbFetch.getFuture().get(i).getTransactionAmt())));
+                notesField2.setText(dbFetch.getFuture().get(i).getNotes());
+                incomeSet = true;
+            }
+            else if(dbFetch.getFuture().get(i).getTransactionAmt() <= 0 && paymentSet == false){
+                dateField.setText(dbFetch.getFuture().get(i).getPaymentDate()); // Replace with getters
+                categoryField.setText(dbFetch.getFuture().get(i).getCategories());
+                amountField.setText(Double.toString(Math.abs(dbFetch.getFuture().get(i).getTransactionAmt())));
+                notesField.setText(dbFetch.getFuture().get(i).getNotes());
+                paymentSet = true;
+            }
+        }
+
 
         // Show more payments button listener
-        Button showMorePaymentsBtn = (Button)llayout.findViewById(R.id.showMorePayments);
+        Button showMorePaymentsBtn = (Button) llayout.findViewById(R.id.showMorePayments);
 
         showMorePaymentsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
-                    startActivity(new Intent(getActivity(), showMorePayments.class));
+                startActivity(new Intent(MainActivity.this, ShowMorePayments.class));
             }
         });
 
@@ -114,11 +129,11 @@ public class homePage extends Fragment {
         Button showMoreIncomeBtn = (Button)llayout.findViewById(R.id.showMoreIncome);
 
         showMoreIncomeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), showMoreIncome.class));
+                startActivity(new Intent(MainActivity.this, ShowMoreIncome.class));
             }
         });
+
 
         return inflater.inflate(R.layout.fragment_home_page, container, false);
     }

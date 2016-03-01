@@ -60,7 +60,7 @@ public class History extends Payments {
     @Override    // Need to rework
     public String toString() {
         String formattedString = "";
-        formattedString += dates + "%" + categories + "%" + transactionAmount + "%" + paymentNotes;
+        formattedString += dates + "%" + categories + "%" + transactionAmount + "%" + paymentNotes + "%";
         return formattedString;
     }
     //TODO:: set up all parsing methods and converting to string methods. Getters and setters too.

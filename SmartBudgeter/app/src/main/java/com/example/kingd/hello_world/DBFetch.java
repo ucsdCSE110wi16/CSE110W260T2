@@ -44,7 +44,7 @@ public class DBFetch extends Activity {
         name = "Fuheng Deng";
         past = new ArrayList<History>();
         future = new ArrayList<Unpaid>();
-        read = "";
+        read = "James|800.00|2016/02/26%fruits%-20.00%AA%^2016/02/25%clothes%-60%BB%^|2016/03/27%rent%-500.0%CC%false%^2016/03/29%salary%8000%DD%false%^|";
     }
 
     public static void setBalance(double bal) {
@@ -55,11 +55,11 @@ public class DBFetch extends Activity {
         return balance;
     }
 
-    public static void addFunds(double add) {
+    public static void addBalance(double add) {
         balance += add;
     }
 
-    public static void subFunds(double sub) {
+    public static void subBalance(double sub) {
         balance -= sub;
     }
 
@@ -109,7 +109,7 @@ public class DBFetch extends Activity {
         }
     }
 
-    //the stored format: name|balance|past1^past2^...|future1^future2^..|
+    //the stored format: name|balance|past1^...past2^|future1^...future2^|
     public String StoreToString() {
         stored = name + "|" + balance + "|";
         for(int i = 0; i < past.size(); i++){
@@ -182,10 +182,11 @@ public class DBFetch extends Activity {
         future = new ArrayList<Unpaid>();
         past = new ArrayList<History>();
         int currentIndex = 0, counter = 0, index = 0, carrotAt;
-        int pipeAt, percentAt;
+        int pipeAt = 0, percentAt = 0;
         History hist;
         Unpaid unpaid;
-        while (true) {
+        int a = 0;
+        while (pipeAt != -1) {
             pipeAt = read.indexOf("|", currentIndex);
             if (pipeAt > -1) {
                 if (counter == 0)
@@ -213,7 +214,7 @@ public class DBFetch extends Activity {
                         if (carrotAt > percentAt) {
                             unpaid = unpaid.rePopulateFromString(read.substring(currentIndex, carrotAt));
                             future.add(unpaid);
-                            currentIndex = percentAt + 1;
+                            currentIndex = carrotAt + 1;
                         }
                     } while(carrotAt < pipeAt - 1);
                 }
@@ -221,7 +222,7 @@ public class DBFetch extends Activity {
                 counter++;
             }
             else {
-                System.out.println("Oops read file is empty!");
+                System.out.println("File reading finished!");
                 break;
             }
         }
@@ -237,10 +238,8 @@ public class DBFetch extends Activity {
     }
 
     public void sortHistoryByDate() {
-        //String temp = "";
         for(int i = 0; i < past.size() ; i++) {
             for (int j = i + 1; j < past.size(); j++) {
-                //temp = past.get(i).getPaymentDate();
                 String dateI = past.get(i).getPaymentDate();
                 String dateJ = past.get(j).getPaymentDate();
                 if (dateI.substring(0, 4).compareTo(dateJ.substring(0, 4)) < 0) {

@@ -32,9 +32,6 @@
             android:layout_height="match_parent" />
     </LinearLayout>
 
-<!--
-        <include layout="@layout/content_main" />
--->
 
     <!-- The navigation drawer that comes from the left -->
     <!-- Note that `android:layout_gravity` needs to be set to 'start' -->
@@ -43,7 +40,6 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@android:color/white"
         app:menu="@menu/drawer_view" />
 
     <!-- Side navigation drawer UI
