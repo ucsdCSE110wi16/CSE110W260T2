@@ -29,49 +29,6 @@ public class homePage extends Fragment {
 
     public static DBFetch dbFetch = new DBFetch();
 
-/*
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment homePage.
-     */
-    // TODO: Rename and change types and number of parameters
-    /*
-    public static homePage newInstance(String param1, String param2) {
-        homePage fragment = new homePage();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-    public homePage() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-    */
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -97,6 +54,7 @@ public class homePage extends Fragment {
         TextView categoryField2 = (TextView) llayout.findViewById(R.id.categoryField2);
         TextView amountField2 = (TextView) llayout.findViewById(R.id.amountField2);
         TextView notesField2 = (TextView) llayout.findViewById(R.id.notesField2);
+        TextView notesField = (TextView) llayout.findViewById(R.id.notesField);
         boolean paymentSet = false, incomeSet = false;
         for(int i = 0; i < dbFetch.getFuture().size(); i++) {
             if(dbFetch.getFuture().get(i).getTransactionAmt() > 0 && incomeSet == false){
@@ -121,7 +79,7 @@ public class homePage extends Fragment {
 
         showMorePaymentsBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ShowMorePayments.class));
+                startActivity(new Intent(getActivity(), showMorePayments.class));
             }
         });
 
@@ -130,7 +88,7 @@ public class homePage extends Fragment {
 
         showMoreIncomeBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ShowMoreIncome.class));
+                startActivity(new Intent(getActivity(), showMoreIncome.class));
             }
         });
 
