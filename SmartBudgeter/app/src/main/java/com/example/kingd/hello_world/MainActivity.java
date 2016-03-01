@@ -1,10 +1,8 @@
 package com.example.kingd.hello_world;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /*
         if (savedInstanceState == null) {
             homePage hPage = new homePage();
             getSupportFragmentManager().beginTransaction()
@@ -46,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         else {
 
         }
+        */
 
         //initialize the dbFetch project
         //dbFetch.readFromFile();
@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
         dbFetch.printAccount();
 
         // Code for Navigation Bar
-        mDrawerList = (ListView)findViewById(R.id.navList);mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView)findViewById(R.id.navList);
+        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
 
         addDrawerItems();
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.string.drawer_open, R.string.drawer_close) {
@@ -73,37 +75,45 @@ public class MainActivity extends AppCompatActivity {
 
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
+
             }
         };
 
 
-        // Update Next Payment fields
-        TextView dateField = (TextView) findViewById(R.id.amountField);
+        // Update Next Payment and Next Income fields
+        TextView dateField = (TextView) findViewById(R.id.dateField);
         TextView categoryField = (TextView) findViewById(R.id.categoryField);
-        TextView amountField = (TextView) findViewById(R.id.categoryField);
+        TextView amountField = (TextView) findViewById(R.id.amountField);
         TextView notesField = (TextView) findViewById(R.id.notesField);
-        dateField.setText(dbFetch.getFuture().get(0).getPaymentDate()); // Replace with getters
-        categoryField.setText(dbFetch.getFuture().get(0).getCategories());
-        amountField.setText(Double.toString(Math.abs(dbFetch.getFuture().get(0).getTransactionAmt())));
-        notesField.setText(dbFetch.getFuture().get(0).getNotes());
-
-
-        // Update Next Income fields
-        TextView dateField2 = (TextView) findViewById(R.id.amountField2);
+        TextView dateField2 = (TextView) findViewById(R.id.dateField2);
         TextView categoryField2 = (TextView) findViewById(R.id.categoryField2);
-        TextView amountField2 = (TextView) findViewById(R.id.categoryField2);
+        TextView amountField2 = (TextView) findViewById(R.id.amountField2);
         TextView notesField2 = (TextView) findViewById(R.id.notesField2);
-        dateField2.setText(""); // Replace with getters
-        categoryField2.setText("");
-        amountField2.setText("");
-        notesField2.setText("");
+        boolean paymentSet = false, incomeSet = false;
+        for(int i = 0; i < dbFetch.getFuture().size(); i++) {
+            if(dbFetch.getFuture().get(i).getTransactionAmt() > 0 && incomeSet == false){
+                dateField2.setText(dbFetch.getFuture().get(i).getPaymentDate()); // Replace with getters
+                categoryField2.setText(dbFetch.getFuture().get(i).getCategories());
+                amountField2.setText(Double.toString(Math.abs(dbFetch.getFuture().get(i).getTransactionAmt())));
+                notesField2.setText(dbFetch.getFuture().get(i).getNotes());
+                incomeSet = true;
+            }
+            else if(dbFetch.getFuture().get(i).getTransactionAmt() <= 0 && paymentSet == false){
+                dateField.setText(dbFetch.getFuture().get(i).getPaymentDate()); // Replace with getters
+                categoryField.setText(dbFetch.getFuture().get(i).getCategories());
+                amountField.setText(Double.toString(Math.abs(dbFetch.getFuture().get(i).getTransactionAmt())));
+                notesField.setText(dbFetch.getFuture().get(i).getNotes());
+                paymentSet = true;
+            }
+        }
+
 
         // Show more payments button listener
         Button showMorePaymentsBtn = (Button)findViewById(R.id.showMorePayments);
 
         showMorePaymentsBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, showMorePayments.class));
+                startActivity(new Intent(MainActivity.this, ShowMorePayments.class));
             }
         });
 
@@ -112,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
         showMoreIncomeBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, showMoreIncome.class));
+                startActivity(new Intent(MainActivity.this, ShowMoreIncome.class));
             }
         });
 
@@ -129,21 +139,26 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void addDrawerItems() {
-        String[] osArray = { "Calendar", "Add Payment/Income", "Edit Payment/Income",
-                "Delete Payment/Income", "Home Page" };
+        String[] osArray = { "View Calendar", "Add Payment/Income", "Modify Payment/Income" };
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
 
-        mDrawerList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Bundle args = new Bundle();
-                Intent intent = new Intent(MainActivity.this, Calendar.class);
-                startActivity(intent);
-            }
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                switch (position) {
+                    case 0:
+                        startActivity(new Intent(MainActivity.this, Calendar.class));
+                        break;
+                    case 1:
+                        startActivity(new Intent(MainActivity.this, AddNewEvent.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(MainActivity.this, ModifyExistingEvent.class));
+                        break;
+                }
+
 
             }
         });

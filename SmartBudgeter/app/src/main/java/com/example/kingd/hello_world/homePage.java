@@ -1,6 +1,5 @@
 package com.example.kingd.hello_world;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -111,7 +110,7 @@ public class homePage extends Fragment {
         showMorePaymentsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    startActivity(new Intent(getActivity(), showMorePayments.class));
+                    startActivity(new Intent(getActivity(), ShowMorePayments.class));
             }
         });
 
@@ -121,7 +120,7 @@ public class homePage extends Fragment {
         showMoreIncomeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), showMoreIncome.class));
+                startActivity(new Intent(getActivity(), ShowMoreIncome.class));
             }
         });
 
