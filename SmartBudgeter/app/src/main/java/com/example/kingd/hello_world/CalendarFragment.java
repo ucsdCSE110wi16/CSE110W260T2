@@ -28,7 +28,7 @@ import java.util.Date;
  */
 public class CalendarFragment extends Fragment {
 
-    public static DBFetch dbFetch = new DBFetch();
+    //public static DBFetch dbFetch;
 
     public CalendarFragment() {
         // Required empty public constructor
@@ -49,26 +49,31 @@ public class CalendarFragment extends Fragment {
                                              @Override
                                              public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                                                  int index = 0;
-                                                 Date tempD = new Date(year, month, dayOfMonth);
-                                                 String selectedDate = Integer.toString(year) + '/' + Integer.toString(month) + '/' + Integer.toString(dayOfMonth);
-                                                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-                                                 Date date = new Date();
-                                                 if (date.compareTo(tempD) == -1) {
-                                                     while (index < dbFetch.getFuture().size() - 1) {
-                                                         TextView calendarCategory = (TextView) getActivity().findViewById(R.id.CategoryShow);
-                                                         TextView calendarAmount = (TextView) getActivity().findViewById(R.id.AmountShow);
-                                                         if (dbFetch.getFuture().get(index).getPaymentDate().equals(selectedDate)) {
-                                                             //if(calendarCategory.getText() != null){
-                                                             calendarCategory.setText(dbFetch.getFuture().get(index).getCategories());
-                                                             calendarAmount.setText(Double.toString(dbFetch.getFuture().get(index).getTransactionAmt()));
-                                                             //}
-
-                                                         } else {
-                                                             calendarCategory.setText("N/A");
-                                                             calendarAmount.setText("N/A");
-                                                         }
-                                                     }
+                                                 boolean setIf = false;
+                                                 String selectedDate = "";
+                                                 if(month+1 < 10) {
+                                                     selectedDate += Integer.toString(year) + "/0" + Integer.toString(month + 1) + "/" + Integer.toString(dayOfMonth);
                                                  }
+                                                 else {
+                                                     selectedDate += Integer.toString(year) + "/" + Integer.toString(month + 1) + "/" + Integer.toString(dayOfMonth);
+                                                 }
+                                                 System.out.println("The selected Date is: " + selectedDate);
+                                                 while (index < homePage.dbFetch.getFuture().size()) {
+                                                     TextView calendarCategory = (TextView) getActivity().findViewById(R.id.CategoryShow);
+                                                     TextView calendarAmount = (TextView) getActivity().findViewById(R.id.AmountShow);
+                                                     //System.out.println(dbFetch.getFuture().get(index).getPaymentDate());
+                                                     if(homePage.dbFetch.getFuture().get(index).getPaymentDate().equals(selectedDate)) {
+                                                         calendarCategory.setText(homePage.dbFetch.getFuture().get(index).getCategories());
+                                                         calendarAmount.setText(Double.toString(homePage.dbFetch.getFuture().get(index).getTransactionAmt()));
+                                                         setIf = true;
+                                                     }
+                                                     else if(homePage.dbFetch.getFuture().get(index).getPaymentDate().compareTo(selectedDate) < 0 && setIf == false) {
+                                                         calendarCategory.setText("N/A");
+                                                         calendarAmount.setText("N/A");
+                                                     }
+                                                     index++;
+                                                 }
+
                                              }
                                          }
 
