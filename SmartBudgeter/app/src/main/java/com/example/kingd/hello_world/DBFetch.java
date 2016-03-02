@@ -41,10 +41,10 @@ public class DBFetch extends Activity {
 
     public DBFetch() {
         balance = 0.00;
-        name = "Fuheng Deng";
+        name = ""; //"Fuheng Deng";
         past = new ArrayList<History>();
         future = new ArrayList<Unpaid>();
-        read = "James|800.00|2016/02/26%fruits%-20.00%AA%^2016/02/25%clothes%-60%BB%^|2016/03/27%rent%-500.0%CC%false%^2016/03/29%salary%8000%DD%false%^|";
+        read = "";//"James|800.00|2016/02/26%fruits%-20.00%AA%^2016/02/25%clothes%-60%BB%^|2016/03/27%rent%-500.0%CC%false%^2016/03/29%salary%8000%DD%false%^|";
     }
 
     public static void setBalance(double bal) {
@@ -79,15 +79,6 @@ public class DBFetch extends Activity {
         hist.addNotes(notes);
         past.add((History) hist);
     }
-
-    /*public void addToHistoryWithCurrentDate(String cate, double amt, String notes ) {
-        Payments hist = new History();
-        hist.addCurrentDate();
-        hist.addCategories(cate);
-        hist.addTransaction(amt);
-        hist.addNotes(notes);
-        past.add((History) hist);
-    }*/
 
     public void addToUnpaid(String date, String cate, double amt, String notes ) {
         Payments toPay = new Unpaid();
