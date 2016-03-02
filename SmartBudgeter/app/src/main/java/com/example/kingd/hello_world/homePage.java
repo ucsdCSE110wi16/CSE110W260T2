@@ -16,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.IOException;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,11 +46,14 @@ public class homePage extends Fragment {
 
 
         //initialize the dbFetch project
-        //dbFetch.readFromFile();
-        dbFetch.rePopulateFromRead();
-        dbFetch.sortHistoryByDate();
-        dbFetch.sortUnpaidByDate();
-        dbFetch.printAccount();
+        dbFetch.readFromFile();
+        if(!dbFetch.isReadEmpty()) {
+            System.out.println("read not empty");
+            dbFetch.rePopulateFromRead();
+            dbFetch.sortHistoryByDate();
+            dbFetch.sortUnpaidByDate();
+            dbFetch.printAccount();
+        }
 
         // Update Next Payment and Next Income fields
         TextView dateField = (TextView) llayout.findViewById(R.id.dateField);
@@ -78,6 +83,8 @@ public class homePage extends Fragment {
         }
 
 
+
+
         // Show more payments button listener
         Button showMorePaymentsBtn = (Button) llayout.findViewById(R.id.showMorePayments);
 
@@ -98,8 +105,13 @@ public class homePage extends Fragment {
                 startActivity(intent);
             }
         });
-
-
+        try {
+            dbFetch.writeStoreUser();
+            System.out.println("writing successful");
+        }
+        catch(Exception ec){
+            ec.printStackTrace();
+        }
         return llayout;
     }
 
@@ -142,4 +154,6 @@ public class homePage extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
 }
