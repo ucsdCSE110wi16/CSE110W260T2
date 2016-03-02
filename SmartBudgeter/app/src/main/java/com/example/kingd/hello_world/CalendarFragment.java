@@ -26,7 +26,7 @@ public class CalendarFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         FragmentActivity faActivity = (FragmentActivity) super.getActivity();
-        LinearLayout llayout = (LinearLayout) inflater.inflate(R.layout.content_calendar, container,
+        LinearLayout llayout = (LinearLayout) inflater.inflate(R.layout.fragment_calendar, container,
                 false);
 
         return inflater.inflate(R.layout.fragment_calendar, container, false);

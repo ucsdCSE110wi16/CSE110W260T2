@@ -34,8 +34,8 @@ public class homePage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        FragmentActivity faActivity = (FragmentActivity) super.getActivity();
-        LinearLayout llayout = (LinearLayout) inflater.inflate(R.layout.content_main
+        final FragmentActivity faActivity = (FragmentActivity) super.getActivity();
+        View llayout = inflater.inflate(R.layout.fragment_home_page
                 , container, false);
 
 
@@ -78,8 +78,9 @@ public class homePage extends Fragment {
         Button showMorePaymentsBtn = (Button) llayout.findViewById(R.id.showMorePayments);
 
         showMorePaymentsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), showMorePayments.class));
+                startActivity(new Intent(faActivity, showMorePayments.class));
             }
         });
 
@@ -87,8 +88,9 @@ public class homePage extends Fragment {
         Button showMoreIncomeBtn = (Button)llayout.findViewById(R.id.showMoreIncome);
 
         showMoreIncomeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), showMoreIncome.class));
+                startActivity(new Intent(faActivity, showMoreIncome.class));
             }
         });
 
