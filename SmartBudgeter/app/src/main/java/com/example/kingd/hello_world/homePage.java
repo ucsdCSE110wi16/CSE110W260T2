@@ -84,7 +84,7 @@ public class homePage extends Fragment {
         showMorePaymentsBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().startActivity(new Intent(getActivity(), showMorePayments.class));
+                startActivity(new Intent(getActivity(), showMorePayments.class));
             }
         });
 
