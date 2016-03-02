@@ -36,15 +36,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.kingd.hello_world.MainActivity" />
         </activity>
-        <activity
-            android:name=".AddNewEvent"
-            android:label="@string/title_activity_add_new_event"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.kingd.hello_world.MainActivity" />
-        </activity>
     </application>
 
 </manifest>
