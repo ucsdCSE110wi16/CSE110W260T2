@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ShowMorePayments"
+            android:name=".showMorePayments"
             android:label="@string/title_activity_show_more_payments"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -28,7 +28,7 @@
                 android:value="com.example.kingd.hello_world.MainActivity" />
         </activity>
         <activity
-            android:name=".ShowMoreIncome"
+            android:name=".showMoreIncome"
             android:label="@string/title_activity_show_more_income"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

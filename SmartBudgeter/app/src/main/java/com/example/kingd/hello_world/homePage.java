@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -80,20 +81,21 @@ public class homePage extends Fragment {
         // Show more payments button listener
         Button showMorePaymentsBtn = (Button) llayout.findViewById(R.id.showMorePayments);
 
-        showMorePaymentsBtn.setOnClickListener(new View.OnClickListener() {
+        showMorePaymentsBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(faActivity, showMorePayments.class));
+                getActivity().startActivity(new Intent(getActivity(), showMorePayments.class));
             }
         });
 
         // Show more income button listener
         Button showMoreIncomeBtn = (Button)llayout.findViewById(R.id.showMoreIncome);
 
-        showMoreIncomeBtn.setOnClickListener(new View.OnClickListener() {
+        showMoreIncomeBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(faActivity, showMoreIncome.class));
+                Intent intent = new Intent(getActivity(), showMoreIncome.class);
+                startActivity(intent);
             }
         });
 
