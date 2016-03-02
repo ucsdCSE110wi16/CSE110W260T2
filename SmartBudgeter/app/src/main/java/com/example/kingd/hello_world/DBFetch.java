@@ -34,17 +34,17 @@ public class DBFetch extends Activity {
     private static final String FILENAME = "config.txt";
     private static String name, stored, read;
     private static double balance;
-
     private static ArrayList<Unpaid> future;
     private static ArrayList<History> past;
 
-    private GoogleApiClient client;
+    //private GoogleApiClient client;
 
     public DBFetch() {
-        balance = 0.0;
-        name = "";
+        balance = 0.00;
+        name = "Fuheng Deng";
         past = new ArrayList<History>();
         future = new ArrayList<Unpaid>();
+        read = "James|800.00|2016/02/26%fruits%-20.00%AA%^2016/02/25%clothes%-60%BB%^|2016/03/27%rent%-500.0%CC%false%^2016/03/29%salary%8000%DD%false%^|";
     }
 
     public static void setBalance(double bal) {
@@ -55,11 +55,11 @@ public class DBFetch extends Activity {
         return balance;
     }
 
-    public static void addFunds(double add) {
+    public static void addBalance(double add) {
         balance += add;
     }
 
-    public static void subFunds(double sub) {
+    public static void subBalance(double sub) {
         balance -= sub;
     }
 
@@ -80,14 +80,14 @@ public class DBFetch extends Activity {
         past.add((History) hist);
     }
 
-    public void addToHistoryWithCurrentDate(String cate, double amt, String notes ) {
+    /*public void addToHistoryWithCurrentDate(String cate, double amt, String notes ) {
         Payments hist = new History();
         hist.addCurrentDate();
         hist.addCategories(cate);
         hist.addTransaction(amt);
         hist.addNotes(notes);
         past.add((History) hist);
-    }
+    }*/
 
     public void addToUnpaid(String date, String cate, double amt, String notes ) {
         Payments toPay = new Unpaid();
@@ -109,93 +109,125 @@ public class DBFetch extends Activity {
         }
     }
 
+    //the stored format: name|balance|past1^...past2^|future1^...future2^|
     public String StoreToString() {
         stored = name + "|" + balance + "|";
-        for(int i = 0; i < future.size(); i++){
-            stored += future.get(i).toString() + "^";
+        for(int i = 0; i < past.size(); i++){
+            stored += past.get(i).toString() + "^";
         }
         stored += "|";
-        for(int j = 0; j < past.size(); j++){
-            stored += past.get(j).toString() + "^";
+        for(int j = 0; j < future.size(); j++){
+            stored += future.get(j).toString() + "^";
         }
+        stored += "|";
+        System.out.println(past.size() + " " + future.size());
         return stored;
     }
 
     public void readFromFile() {
 
         String ret = "";
+        File varTmpDir = new File(FILENAME);
+        if (varTmpDir.exists()) {
+            try {
+                InputStream inputStream = openFileInput(FILENAME);
 
-        try {
-            InputStream inputStream = openFileInput(FILENAME);
+                if (inputStream != null) {
+                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                    String receiveString = "";
+                    StringBuilder stringBuilder = new StringBuilder();
 
-            if ( inputStream != null ) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
-                StringBuilder stringBuilder = new StringBuilder();
+                    while ((receiveString = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(receiveString);
+                    }
 
-                while ( (receiveString = bufferedReader.readLine()) != null ) {
-                    stringBuilder.append(receiveString);
+                    inputStream.close();
+                    ret = stringBuilder.toString();
                 }
+            } catch (FileNotFoundException e) {
+                System.err.println("File not found: " + e.toString());
+            } catch (IOException e) {
+                System.err.println("Can not read file: " + e.toString());
+            }
+            read = ret;
+        }
 
-                inputStream.close();
-                ret = stringBuilder.toString();
+        else {
+            try {
+                PrintWriter writer = new PrintWriter(FILENAME, "UTF-8");
+                writer.close();
+            } catch (FileNotFoundException e) {
+                System.err.println("File not found: " + e.toString());
+            } catch (IOException e) {
+                System.err.println("Can not read file: " + e.toString());
             }
         }
-        catch (FileNotFoundException e) {
-            System.err.println("File not found: " + e.toString());
-        } catch (IOException e) {
-            System.err.println("Can not read file: " + e.toString());
-        }
 
-        read = ret;
+    }
+
+    public ArrayList<Unpaid> getFuture(){
+        return future;
+    }
+
+    public ArrayList<History> getPast(){
+        return past;
+    }
+
+    public boolean isReadEmpty(){
+        return read.equals("");
     }
 
     public void rePopulateFromRead(){
         future = new ArrayList<Unpaid>();
         past = new ArrayList<History>();
         int currentIndex = 0, counter = 0, index = 0, carrotAt;
-        int pipeAt, percentAt;
-        while (true) {
-            History hist;
-            Unpaid unpaid;
+        int pipeAt = 0, percentAt = 0;
+        History hist;
+        Unpaid unpaid;
+        int a = 0;
+        while (pipeAt != -1) {
             pipeAt = read.indexOf("|", currentIndex);
             if (pipeAt > -1) {
                 if (counter == 0)
-                    setBalance(Double.parseDouble(read.substring(currentIndex, pipeAt)));
-                else if (counter == 1)
                     setName(read.substring(currentIndex, pipeAt));
+                else if (counter == 1)
+                    setBalance(Double.parseDouble(read.substring(currentIndex, pipeAt)));
                 else if (counter == 2) {
-                    
-                    do { // Need to rework
-                        carrotAt = read.indexOf("^", currentIndex);
+                    do {
                         hist = new History();
+                        carrotAt = read.indexOf("^", currentIndex);
                         percentAt = read.indexOf("%", currentIndex);
-                        if (pipeAt > percentAt) {
+                        if (carrotAt > percentAt) {
                             hist = hist.rePopulateFromString(read.substring(currentIndex, carrotAt));
                             past.add(hist);
                             currentIndex = carrotAt + 1;
                         }
 
-                    } while(percentAt < pipeAt);
+                    } while(carrotAt < pipeAt - 1);
                 }
                 else {
                     do {
-                        carrotAt = read.indexOf("^", currentIndex);
                         unpaid = new Unpaid();
+                        carrotAt = read.indexOf("^", currentIndex);
                         percentAt = read.indexOf("%", currentIndex);
-                        if (pipeAt > percentAt) {
-                            unpaid = unpaid.rePopulateFromString(read.substring(currentIndex, pipeAt));
+                        if (carrotAt > percentAt) {
+                            unpaid = unpaid.rePopulateFromString(read.substring(currentIndex, carrotAt));
                             future.add(unpaid);
-                            currentIndex = percentAt + 1;
+                            currentIndex = carrotAt + 1;
                         }
-                    } while(percentAt < pipeAt);
+                    } while(carrotAt < pipeAt - 1);
                 }
-                currentIndex = pipeAt + 1; // +1?
+                currentIndex = pipeAt + 1;
                 counter++;
+            }
+            else {
+                System.out.println("File reading finished!");
+                break;
             }
         }
     }
+
     public void printAccount() {
         System.out.println("Account Owner: " + name);
         System.out.println("Balance: " + balance);
@@ -206,54 +238,50 @@ public class DBFetch extends Activity {
     }
 
     public void sortHistoryByDate() {
-        String temp = "";
-        int i = 0;
-        while (i < past.size()) {
-            for (int j = i + 1; j < past.size() - 1; j++) {
-                temp = past.get(i).getPaymentDate();
-                if (temp.substring(0, 3).equalsIgnoreCase(past.get(j).getPaymentDate().substring(0, 3))) {
-                    if (temp.substring(5, 7).equalsIgnoreCase(past.get(j).getPaymentDate().substring(5, 7))) {
-                        if (temp.substring(9, 11).equalsIgnoreCase(past.get(j).getPaymentDate().substring(9, 11)))
-                            continue;
-                    } else if (Integer.getInteger(temp.substring(5, 7)) < Integer.getInteger(past.get(j).getPaymentDate().substring(5, 7)))
-                        continue;
-                    else {
+        for(int i = 0; i < past.size() ; i++) {
+            for (int j = i + 1; j < past.size(); j++) {
+                String dateI = past.get(i).getPaymentDate();
+                String dateJ = past.get(j).getPaymentDate();
+                if (dateI.substring(0, 4).compareTo(dateJ.substring(0, 4)) < 0) {
+                    Collections.swap(past, i, j);
+                }
+                else if(dateI.substring(0, 4).compareTo(dateJ.substring(0, 4)) == 0){
+                    if(dateI.substring(5, 7).compareTo(dateJ.substring(5, 7)) < 0) {
                         Collections.swap(past, i, j);
                     }
-                } else if (Integer.getInteger(temp.substring(5, 7)) < Integer.getInteger(past.get(j).getPaymentDate().substring(5, 7)))
-                    continue;
-                else
-                    Collections.swap(past, i, j);
-
+                    else if(dateI.substring(5, 7).compareTo(dateJ.substring(5, 7)) == 0){
+                        if(dateI.substring(8, 10).compareTo(dateJ.substring(8, 10)) < 0) {
+                            Collections.swap(past, i, j);
+                        }
+                    }
+                }
             }
         }
     }
 
     public void sortUnpaidByDate() {
-        String temp = "";
-        int i = 0;
-        while (i < future.size()) {
-            for (int j = i + 1; j < future.size() - 1; j++) {
-                temp = past.get(i).getPaymentDate();
-                if (temp.substring(0, 3).equalsIgnoreCase(future.get(j).getPaymentDate().substring(0, 3))) {
-                    if (temp.substring(5, 7).equalsIgnoreCase(future.get(j).getPaymentDate().substring(5, 7))) {
-                        if (temp.substring(9, 11).equalsIgnoreCase(future.get(j).getPaymentDate().substring(9, 11)))
-                            continue;
-                    } else if (Integer.getInteger(temp.substring(5, 7)) > Integer.getInteger((future.get(j).getPaymentDate().substring(5, 7))))
-                        continue;
-                    else {
-                        Collections.swap(past, i, j);
+        for(int i = 0; i < future.size() ; i++) {
+            for (int j = i + 1; j < future.size(); j++) {
+                String dateI = future.get(i).getPaymentDate();
+                String dateJ = future.get(j).getPaymentDate();
+                if (dateI.substring(0, 4).compareTo(dateJ.substring(0, 4)) < 0) {
+                    Collections.swap(future, i, j);
+                }
+                else if(dateI.substring(0, 4).compareTo(dateJ.substring(0, 4)) == 0){
+                    if(dateI.substring(5, 7).compareTo(dateJ.substring(5, 7)) < 0) {
+                        Collections.swap(future, i, j);
                     }
-                } else if (Integer.getInteger(temp.substring(5, 7)) > Integer.getInteger((future.get(j).getPaymentDate().substring(5, 7))))
-                    continue;
-                else
-                    Collections.swap(past, i, j);
-
+                    else if(dateI.substring(5, 7).compareTo(dateJ.substring(5, 7)) == 0){
+                        if(dateI.substring(8, 10).compareTo(dateJ.substring(8, 10)) < 0) {
+                            Collections.swap(future, i, j);
+                        }
+                    }
+                }
             }
         }
     }
 
-    @Override
+    /*@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

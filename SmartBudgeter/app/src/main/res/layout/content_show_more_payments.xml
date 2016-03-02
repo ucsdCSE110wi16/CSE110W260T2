@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.kingd.hello_world.futurePayDays"
-    tools:showIn="@layout/activity_future_pay_days">
+    tools:context=".ShowMorePayments"
+    tools:showIn="@layout/activity_show_more_payments">
 
 </RelativeLayout>

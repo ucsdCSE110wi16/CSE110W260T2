@@ -11,4 +11,14 @@
         <item>Delete Payment/Expense</item>
         <item>Main Page</item>
     </string-array>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="title_activity_show_more_payments">showMorePayments</string>
+    <string name="title_activity_show_more_income">showMoreIncome</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_add_new_event">AddNewEvent</string>
+    <string name="title_activity_modify_existing_event">ModifyExistingEvent</string>
 </resources>

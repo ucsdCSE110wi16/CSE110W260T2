@@ -1,10 +1,10 @@
-Names: Vincent Lim, Fuheng Deng, Kevin Tain, Jimmy Hiott
+Names: Vincent Lim, Fuheng Deng, Kevin Tain, James Hiott
 
-Project: SmartBudgeter - A Money Management App (tentative)
+Project: SmartBudgeter - A Money Management App
 
-Things to keep in mind: always have a way to cancel selections.
-
-UserStories: 
+-------------------------------------------------------------------
+High Priority
+-------------------------------------------------------------------
 
   UserStory1.1: Balance
     As a user
@@ -14,19 +14,22 @@ UserStories:
     Tasks:
     Parse balance from database
     Show balance amount
+  Priority: 10
+    
 
-  UserStory1.2: Upcoming Event
+  UserStory1.2: Next Payment
     As a user
-    I want to see my upcoming event on the homepage
+    I want to see my next payment on the homepage
     So that I know what payment I must pay next
 
     Tasks:
-    Parse upcoming event info from database
+    Parse next payment info from database
     Show event info
+  Priority: 10
 
-  UserStory1.3: Next Pay Day
+  UserStory1.3: Next Income
     As a user
-    I want to see my next pay day on the homepage
+    I want to see my next income on the homepage
     So that I know when and how much I will get payed
     
     Tasks:
@@ -34,57 +37,86 @@ UserStories:
     Show next pay day info
   Priority: 10
   
-  UserStory2: Show-more button for upcoming event
+  UserStory2.1: Show-more button for next payment
     As a user
-    I want a show-more button underneath the event details
-    So that I can see more of the upcoming events (category, amount and date)
+    I want a show-more button underneath the next payment details
+    So that I can see more of the upcoming payments (date, category, amount, and notes)
 
-    Tasks: Create list of options
-      When selected, do certain functionalities (listed in other User Stories)
-  Priority: 7
-
-  UserStory3: Drop down menu
+    Tasks:
+    Create a show more payments button listener on the homepage
+    When selected, open up a new activity that will show more payment events
+  Priority: 8
+  
+  UserStory2.2: Show-more button for next income
     As a user
-    I want a drop down menu on the homepage
-    So that when I click on the menu button, it gives a list of options to 
-	- access my calendar
-	- edit my expenses
-	- edit my income
+    I want a show-more button underneath the next income details
+    So that I can see more of the upcoming income (date, category, amount, and notes)
 
-    Tasks: Create classes for income and expenses
-      Create a calendar
+    Tasks:
+    Create show more income button listener on the homepage
+    When selected, open up a new activity that will show more income events
+  Priority: 8
+
+  UserStory3: Navigation Drawer Menu
+    As a user
+    I want a button that opens a navigation drawer
+    So that when I click on the a navigation drawer item, it opens the associated activity
+    for which I can
+      - access my calendar
+      - add payments and income
+      - edit payments and income
+      - delete payments and income
+
+    Tasks: 
+      Create a button for payments and income on the navigation drawer
       Create a button to go to calendar
-      Create buttons to edit incomes and expenses
-  Priority: 10
+      Create buttons to add/edit/delete incomes and expenses
+  Priority: 7
 
   UserStory4: View Calendar
     As a user
     I want a monthly calendar of events
     So that I can see all of the events in the current month chronologically
+    
+    Tasks:
+      Create a calendar activity
+      Parse data from the database to display on the activities
   Priority: 5
+  
 
-  UserStory5: Add Income and Expenses
+  UserStory5: Add Payments and Income
     As a user
-    I want to be able to add income and expenses
+    I want to be able to add payments and income
     So that I can view them on the home page and on the calendar
 
-      Tasks: Create classes for income and expenses
-  Priority: 9
+    Tasks: 
+    Create an activity which allows the user to add a payment or income
+    Modify the database to include a new payment or income
+  Priority: 8
 
   UserStory6: Remove Income and Expenses
     As a user
-    I want to be able to remove existing income and expenses
+    I want to be able to remove existing payments and income
     So that future unintended events will not happen
-
     Tasks: 
+    Create an activity which allows the user to select an event to remove
+    Modify the database to remove a payment or income
   Priority: 8
 
-  UserStory7: Modify Payments and Expenses
+  UserStory7: Edit Payments and Income
     As a user
-    I want to be able to modify existing income and expenses
-    So that I can make adjustments to the category, amount, and dates
+    I want to be able to edit existing payments and income
+    So that I can make adjustments to the category, amount, dates, and notes
+    Tasks:
+    Modify the activity from UserStory6 to allow the user to open an edit activity
+    Create an activity which allows the user to edit the selected event
+    Update the payment or income in the database
   Priority: 8
 
+-------------------------------------------------------------------
+Low Priority
+-------------------------------------------------------------------
+  
   UserStory8: History Log
     As a user
     I want to be able to view past events
@@ -101,4 +133,4 @@ UserStories:
     As a user
     I want to see which payments have been paid for
     So that I know whether or not I have to worry about the payment still
-  Priority: 7
+  Priority: 2

@@ -84,6 +84,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Date:"
                 android:id="@+id/dateText"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_margin="3dp" />
 
             <TextView
@@ -95,6 +96,7 @@
                 android:layout_below="@+id/dateText"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_margin="3dp" />
 
             <TextView
@@ -106,6 +108,7 @@
                 android:layout_below="@+id/categoryText"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_margin="3dp" />
 
             <TextView
@@ -118,6 +121,7 @@
                 android:layout_alignBottom="@+id/amountText"
                 android:layout_toEndOf="@+id/amountText"
                 android:layout_alignTop="@+id/amountText"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_toRightOf="@+id/amountText" />
 
             <TextView
@@ -130,6 +134,7 @@
                 android:layout_above="@+id/amountField"
                 android:layout_alignTop="@+id/categoryText"
                 android:layout_toRightOf="@+id/categoryText"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_toEndOf="@+id/categoryText" />
 
             <TextView
@@ -137,6 +142,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/dateField"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_alignTop="@+id/dateText"
                 android:layout_toRightOf="@+id/dateText" />
 
@@ -150,6 +156,7 @@
                 android:layout_alignStart="@+id/amountText"
                 android:layout_alignRight="@+id/categoryText"
                 android:layout_alignEnd="@+id/categoryText"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_below="@+id/amountText" />
 
             <TextView
@@ -159,6 +166,7 @@
                 android:id="@+id/notesField"
                 android:layout_alignTop="@+id/notesText"
                 android:layout_alignLeft="@+id/categoryField"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_alignStart="@+id/categoryField" />
 
         </RelativeLayout>
@@ -214,6 +222,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Date:"
                     android:id="@+id/dateText2"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_margin="3dp" />
 
                 <TextView
@@ -225,6 +234,7 @@
                     android:layout_below="@+id/dateText2"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_margin="3dp" />
 
                 <TextView
@@ -236,6 +246,7 @@
                     android:layout_below="@+id/categoryText2"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_margin="3dp" />
 
                 <TextView
@@ -246,6 +257,7 @@
                     android:password="false"
                     android:layout_alignTop="@+id/amountText2"
                     android:layout_toRightOf="@+id/notesText2"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_toEndOf="@+id/notesText2" />
 
                 <TextView
@@ -258,6 +270,7 @@
                     android:layout_alignRight="@+id/amountField2"
                     android:layout_alignEnd="@+id/amountField2"
                     android:layout_above="@+id/amountField2"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_toRightOf="@+id/categoryText2"
                     android:layout_toEndOf="@+id/categoryText2" />
 
@@ -268,6 +281,7 @@
                     android:id="@+id/dateField2"
                     android:textIsSelectable="false"
                     android:layout_alignTop="@+id/dateText2"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_toRightOf="@+id/dateText2"
                     android:layout_toEndOf="@+id/dateText2" />
 
@@ -279,6 +293,7 @@
                     android:id="@+id/notesText2"
                     android:layout_alignLeft="@+id/amountText2"
                     android:layout_alignStart="@+id/amountText2"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_alignRight="@+id/categoryText2"
                     android:layout_alignEnd="@+id/categoryText2"
                     android:layout_below="@+id/amountText2" />
@@ -289,6 +304,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:id="@+id/notesField2"
                     android:layout_alignLeft="@+id/categoryField2"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_alignStart="@+id/categoryField2"
                     android:layout_alignTop="@+id/notesText2" />
 

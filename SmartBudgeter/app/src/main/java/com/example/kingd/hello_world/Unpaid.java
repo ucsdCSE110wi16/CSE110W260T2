@@ -17,6 +17,10 @@ public class Unpaid extends Payments{
         categories = "";
     }
 
+    public boolean getPayed() {
+        return this.payed;
+    }
+
     @Override
     public void printOneLine() {
         System.out.println("Date of Transaction: " + getPaymentDate());
@@ -29,32 +33,36 @@ public class Unpaid extends Payments{
     public Unpaid rePopulateFromString(String st) {
         int currentIndex = 0, counter = 0;
         int percentAt;
-        while (true) {
+        while (counter <= 4) {
             percentAt = st.indexOf("%", currentIndex);
             if (percentAt > -1) {
-                if (counter == 0)
-                    addDate(st.substring(currentIndex, percentAt));
-                else if (counter == 1)
-                    addCategories(st.substring(currentIndex, percentAt));
-                else if (counter == 2)
-                    addTransaction(Double.parseDouble(st.substring(currentIndex, percentAt)));
-                else if (counter == 3)
-                    addNotes(st.substring(currentIndex, percentAt));
+                if (counter == 0) {
+                    this.addDate(st.substring(currentIndex, percentAt));
+                }
+                else if (counter == 1) {
+                    this.addCategories(st.substring(currentIndex, percentAt));
+                }
+                else if (counter == 2) {
+                    this.addTransaction(Double.parseDouble(st.substring(currentIndex, percentAt)));
+                }
+                else if (counter == 3) {
+                    this.addNotes(st.substring(currentIndex, percentAt));
+                }
                 else {
                     if (Boolean.parseBoolean(st.substring(currentIndex, percentAt)))
-                        setPayed();
+                        this.setPayed();
                     else
-                        setUnPayed();
+                        this.setUnPayed();
                 }
 
-                currentIndex = percentAt + 1; // +1?
+                currentIndex = percentAt + 1;
                 counter++;
             }
             else {
-                if (Boolean.parseBoolean(st.substring(currentIndex, st.length() - 1)))
+                /*if (Boolean.parseBoolean(st.substring(currentIndex, st.length() - 1)))
                     setPayed();
                 else
-                    setUnPayed();
+                    setUnPayed();*/
 
                 break;
             }
@@ -64,14 +72,9 @@ public class Unpaid extends Payments{
     @Override  // Need to rework
     public String toString() {
         String formattedString = "";
-        //int indexCounter = 0;
-        //while (indexCounter < dates.length()) {
-            formattedString += dates + "%" + categories + "%"
+        formattedString += dates + "%" + categories + "%"
                     + transactionAmount + "%" + paymentNotes
-                    + "%" + payed;
-            //++indexCounter;
-        //}
-
+                    + "%" + payed + "%";
         return formattedString;
     }
 
