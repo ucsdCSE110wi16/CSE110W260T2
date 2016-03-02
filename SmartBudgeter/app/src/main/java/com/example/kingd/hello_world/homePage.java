@@ -1,12 +1,15 @@
 package com.example.kingd.hello_world;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NavUtils;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -105,6 +109,22 @@ public class homePage extends Fragment {
                 startActivity(intent);
             }
         });
+
+        return llayout;
+    }
+
+
+        //Toast.makeText(this.getActivity().getApplicationContext(),"Thanks for using application!!", Toast.LENGTH_LONG).show();
+
+    @Override
+    public void onResume() {
+        System.err.println("onResume of LoginFragment");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        System.err.println("OnPause of loginFragment");
         try {
             dbFetch.writeStoreUser();
             System.out.println("writing successful");
@@ -112,7 +132,7 @@ public class homePage extends Fragment {
         catch(Exception ec){
             ec.printStackTrace();
         }
-        return llayout;
+        super.onPause();
     }
 
     /*

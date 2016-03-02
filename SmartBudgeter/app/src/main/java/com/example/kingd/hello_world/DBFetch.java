@@ -90,6 +90,11 @@ public class DBFetch extends Activity {
     }
 
     public void writeStoreUser() throws IOException {
+        if (name == "" && balance == 0 && past.size() == 0 && future.size() == 0) {
+            System.out.println("Attempting to write empty object to config file - Terminating method.");
+            return;
+        }
+
         FileOutputStream outputStream;
         try {
             outputStream = openFileOutput(FILENAME, Context.MODE_PRIVATE);
