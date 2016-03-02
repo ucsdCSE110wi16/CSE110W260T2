@@ -29,6 +29,9 @@ public class homePage extends Fragment {
 
     public static DBFetch dbFetch = new DBFetch();
 
+    public homePage() {
+        // empty constructor
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -95,7 +98,7 @@ public class homePage extends Fragment {
         });
 
 
-        return inflater.inflate(R.layout.fragment_home_page, container, false);
+        return llayout;
     }
 
     /*

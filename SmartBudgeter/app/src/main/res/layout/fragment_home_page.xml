@@ -257,6 +257,7 @@
                     android:password="false"
                     android:layout_alignTop="@+id/amountText2"
                     android:layout_toRightOf="@+id/notesText2"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_toEndOf="@+id/notesText2" />
 
                 <TextView
