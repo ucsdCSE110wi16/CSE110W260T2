@@ -110,15 +110,12 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = CalendarFragment.class;
                 break;
             case R.id.nav_second_fragment:
-                fragmentClass = CalendarFragment.class;
+                fragmentClass = AddEvent.class;
                 break;
             case R.id.nav_third_fragment:
-                fragmentClass = CalendarFragment.class;
+                fragmentClass = EditEvent.class;
                 break;
             case R.id.nav_fourth_fragment:
-                fragmentClass = CalendarFragment.class;
-                break;
-            case R.id.nav_fifth_fragment:
                 fragmentClass = homePage.class;
                 break;
             default:
