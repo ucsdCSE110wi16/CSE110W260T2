@@ -44,7 +44,6 @@ public class CalendarFragment extends Fragment {
 
         CalendarView calendar = (CalendarView) llayout.findViewById(R.id.calendarView);
 
-
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
                                              @Override
                                              public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
@@ -58,20 +57,23 @@ public class CalendarFragment extends Fragment {
                                                      selectedDate += Integer.toString(year) + "/" + Integer.toString(month + 1) + "/" + Integer.toString(dayOfMonth);
                                                  }
                                                  System.out.println("The selected Date is: " + selectedDate);
+                                                 TextView calendarCategory = (TextView) getActivity().findViewById(R.id.CategoryShow);
+                                                 TextView calendarAmount = (TextView) getActivity().findViewById(R.id.AmountShow);
                                                  while (index < homePage.dbFetch.getFuture().size()) {
-                                                     TextView calendarCategory = (TextView) getActivity().findViewById(R.id.CategoryShow);
-                                                     TextView calendarAmount = (TextView) getActivity().findViewById(R.id.AmountShow);
                                                      //System.out.println(dbFetch.getFuture().get(index).getPaymentDate());
                                                      if(homePage.dbFetch.getFuture().get(index).getPaymentDate().equals(selectedDate)) {
                                                          calendarCategory.setText(homePage.dbFetch.getFuture().get(index).getCategories());
                                                          calendarAmount.setText(Double.toString(homePage.dbFetch.getFuture().get(index).getTransactionAmt()));
                                                          setIf = true;
                                                      }
-                                                     else if(homePage.dbFetch.getFuture().get(index).getPaymentDate().compareTo(selectedDate) < 0 && setIf == false) {
-                                                         calendarCategory.setText("N/A");
-                                                         calendarAmount.setText("N/A");
+                                                     else if(homePage.dbFetch.getFuture().get(index).getPaymentDate().compareTo(selectedDate) < 0){
+                                                         break;
                                                      }
                                                      index++;
+                                                 }
+                                                 if(setIf == false) {
+                                                     calendarCategory.setText("N/A");
+                                                     calendarAmount.setText("N/A");
                                                  }
 
                                              }

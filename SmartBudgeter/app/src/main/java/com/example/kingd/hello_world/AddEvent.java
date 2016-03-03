@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
 /**
@@ -31,6 +32,10 @@ public class AddEvent extends Fragment {
         // Inflate the layout for this fragment
         LinearLayout llayout = (LinearLayout) inflater.inflate(R.layout.fragment_add_event, container,
                 false);
+
+        TextView amountAdd = (TextView)llayout.findViewById(R.id.AmountToAddText);
+
+
         return llayout;
     }
 }

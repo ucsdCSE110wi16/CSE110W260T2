@@ -20,6 +20,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 
 
@@ -44,7 +46,7 @@ public class homePage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final FragmentActivity faActivity = (FragmentActivity) super.getActivity();
+        //final FragmentActivity faActivity = (FragmentActivity) super.getActivity();
         View llayout = inflater.inflate(R.layout.fragment_home_page
                 , container, false);
 
@@ -58,6 +60,10 @@ public class homePage extends Fragment {
             dbFetch.sortUnpaidByDate();
             dbFetch.printAccount();
         }
+
+        //Update the balance
+        TextView balanceField = (TextView)llayout.findViewById(R.id.balanceField);
+        balanceField.setText(Double.toString(dbFetch.getBalance()));
 
         // Update Next Payment and Next Income fields
         TextView dateField = (TextView) llayout.findViewById(R.id.dateField);
@@ -119,6 +125,46 @@ public class homePage extends Fragment {
     @Override
     public void onResume() {
         System.err.println("onResume of LoginFragment");
+
+        dbFetch.readFromFile();
+        if(!dbFetch.isReadEmpty()) {
+            System.out.println("read not empty");
+            dbFetch.rePopulateFromRead();
+            dbFetch.sortHistoryByDate();
+            dbFetch.sortUnpaidByDate();
+            dbFetch.printAccount();
+        }
+
+        //Update the balance
+        TextView balanceField = (TextView)getActivity().findViewById(R.id.balanceField);
+        balanceField.setText(Double.toString(dbFetch.getBalance()));
+
+        // Update Next Payment and Next Income fields
+        TextView dateField = (TextView) getActivity().findViewById(R.id.dateField);
+        TextView categoryField = (TextView) getActivity().findViewById(R.id.categoryField);
+        TextView amountField = (TextView) getActivity().findViewById(R.id.amountField);
+        TextView dateField2 = (TextView) getActivity().findViewById(R.id.dateField2);
+        TextView categoryField2 = (TextView) getActivity().findViewById(R.id.categoryField2);
+        TextView amountField2 = (TextView) getActivity().findViewById(R.id.amountField2);
+        TextView notesField2 = (TextView) getActivity().findViewById(R.id.notesField2);
+        TextView notesField = (TextView) getActivity().findViewById(R.id.notesField);
+        boolean paymentSet = false, incomeSet = false;
+        for(int i = 0; i < dbFetch.getFuture().size(); i++) {
+            if(dbFetch.getFuture().get(i).getTransactionAmt() > 0 && incomeSet == false){
+                dateField2.setText(dbFetch.getFuture().get(i).getPaymentDate()); // Replace with getters
+                categoryField2.setText(dbFetch.getFuture().get(i).getCategories());
+                amountField2.setText(Double.toString(Math.abs(dbFetch.getFuture().get(i).getTransactionAmt())));
+                notesField2.setText(dbFetch.getFuture().get(i).getNotes());
+                incomeSet = true;
+            }
+            else if(dbFetch.getFuture().get(i).getTransactionAmt() <= 0 && paymentSet == false){
+                dateField.setText(dbFetch.getFuture().get(i).getPaymentDate()); // Replace with getters
+                categoryField.setText(dbFetch.getFuture().get(i).getCategories());
+                amountField.setText(Double.toString(Math.abs(dbFetch.getFuture().get(i).getTransactionAmt())));
+                notesField.setText(dbFetch.getFuture().get(i).getNotes());
+                paymentSet = true;
+            }
+        }
         super.onResume();
     }
 

@@ -40,11 +40,11 @@ public class DBFetch extends Activity {
     //private GoogleApiClient client;
 
     public DBFetch() {
-        balance = 0.00;
-        name = ""; //"Fuheng Deng";
+        balance = 800.00;
+        name = "Fuheng Deng";
         past = new ArrayList<History>();
         future = new ArrayList<Unpaid>();
-        read = "";//"James|800.00|2016/02/26%fruits%-20.00%AA%^2016/02/25%clothes%-60%BB%^|2016/03/27%rent%-500.0%CC%false%^2016/03/29%salary%8000%DD%false%^|";
+        read = "James|800.00|2016/02/26%fruits%-20.00%AA%^2016/02/25%clothes%-60%BB%^|2016/03/27%rent%-500.0%CC%false%^2016/03/29%salary%8000%DD%false%^|";
     }
 
     public static void setBalance(double bal) {
