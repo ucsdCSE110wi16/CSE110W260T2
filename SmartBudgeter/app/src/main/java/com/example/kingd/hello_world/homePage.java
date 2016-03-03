@@ -1,12 +1,15 @@
 package com.example.kingd.hello_world;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NavUtils;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.IOException;
 
 
 /**
@@ -44,11 +50,14 @@ public class homePage extends Fragment {
 
 
         //initialize the dbFetch project
-        //dbFetch.readFromFile();
-        dbFetch.rePopulateFromRead();
-        dbFetch.sortHistoryByDate();
-        dbFetch.sortUnpaidByDate();
-        dbFetch.printAccount();
+        dbFetch.readFromFile();
+        if(!dbFetch.isReadEmpty()) {
+            System.out.println("read not empty");
+            dbFetch.rePopulateFromRead();
+            dbFetch.sortHistoryByDate();
+            dbFetch.sortUnpaidByDate();
+            dbFetch.printAccount();
+        }
 
         // Update Next Payment and Next Income fields
         TextView dateField = (TextView) llayout.findViewById(R.id.dateField);
@@ -78,6 +87,8 @@ public class homePage extends Fragment {
         }
 
 
+
+
         // Show more payments button listener
         Button showMorePaymentsBtn = (Button) llayout.findViewById(R.id.showMorePayments);
 
@@ -99,8 +110,29 @@ public class homePage extends Fragment {
             }
         });
 
-
         return llayout;
+    }
+
+
+        //Toast.makeText(this.getActivity().getApplicationContext(),"Thanks for using application!!", Toast.LENGTH_LONG).show();
+
+    @Override
+    public void onResume() {
+        System.err.println("onResume of LoginFragment");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        System.err.println("OnPause of loginFragment");
+        try {
+            dbFetch.writeStoreUser();
+            System.out.println("writing successful");
+        }
+        catch(Exception ec){
+            ec.printStackTrace();
+        }
+        super.onPause();
     }
 
     /*
@@ -142,4 +174,6 @@ public class homePage extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
 }
