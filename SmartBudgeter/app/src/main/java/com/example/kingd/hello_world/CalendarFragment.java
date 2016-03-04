@@ -60,18 +60,7 @@ public class CalendarFragment extends Fragment {
                                              public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                                                  int index = 0;
                                                  boolean setIf = false;
-                                                 String selectedDate = "";
-                                                 String yyyy = Integer.toString(year);
-                                                 String mm = Integer.toString(month + 1);
-                                                 String dd = Integer.toString(dayOfMonth);
-                                                 if (month + 1 < 10) {
-                                                     mm = "0" + mm;
-                                                 }
-                                                 if(dayOfMonth < 10) {
-                                                     dd = "0" + dd;
-                                                 }
-                                                 selectedDate += yyyy + "/" + mm + "/" + dd;
-                                                 System.out.println("The selected Date is: " + selectedDate);
+                                                 String selectedDate = homePage.dbFetch.changeToCorrectDateForm(year,month,dayOfMonth);
                                                  TextView calendarCategory = (TextView) getActivity().findViewById(R.id.CategoryShow);
                                                  TextView calendarAmount = (TextView) getActivity().findViewById(R.id.AmountShow);
                                                  if(selectedDate.compareTo(homePage.dbFetch.getCurrentDate()) > 0) {

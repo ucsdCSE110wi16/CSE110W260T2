@@ -76,19 +76,8 @@ public class AddEvent extends Fragment {
         datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                String selectedDate = "";
-                String yyyy = Integer.toString(year);
-                String mm = Integer.toString(monthOfYear + 1);
-                String dd = Integer.toString(dayOfMonth);
-                if (monthOfYear + 1 < 10) {
-                    mm = "0" + mm;
-                }
-                if(dayOfMonth < 10) {
-                    dd = "0" + dd;
-                }
-                selectedDate += yyyy + "/" + mm + "/" + dd;
+                String selectedDate = homePage.dbFetch.changeToCorrectDateForm(year,monthOfYear,dayOfMonth);
                 date = selectedDate;
-                System.out.println("The selected date is: " + date);
             }
         });
         categoriesSpinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {

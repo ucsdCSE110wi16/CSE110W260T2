@@ -322,6 +322,21 @@ public class DBFetch extends Activity {
         }
     }
 
+    public String changeToCorrectDateForm(int year, int month, int day){
+        String date = "";
+        String yyyy = Integer.toString(year);
+        String mm = Integer.toString(month + 1);
+        String dd = Integer.toString(day);
+        if (month + 1 < 10) {
+            mm = "0" + mm;
+        }
+        if(day < 10) {
+            dd = "0" + dd;
+        }
+        date += yyyy + "/" + mm + "/" + dd;
+        return date;
+    }
+
     /*@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
