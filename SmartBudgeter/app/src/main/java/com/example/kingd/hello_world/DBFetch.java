@@ -36,8 +36,8 @@ public class DBFetch extends Activity {
     private static final String FILENAME = "config.txt";
     private static String name, stored, read;
     private static double balance;
-    private static ArrayList<Unpaid> future;
-    private static ArrayList<History> past;
+    private static ArrayList<Payments> future;
+    private static ArrayList<Payments> past;
     private static String curDate;
 
     //private GoogleApiClient client;
@@ -45,8 +45,8 @@ public class DBFetch extends Activity {
     public DBFetch() {
         balance = 0.00;
         name = "Fuheng Deng";
-        past = new ArrayList<History>();
-        future = new ArrayList<Unpaid>();
+        past = new ArrayList<Payments>();
+        future = new ArrayList<Payments>();
         read = "";//"James|800.00|2016/02/26%fruits%-20.00%AA%^2016/02/25%clothes%-60%BB%^|2016/03/27%rent%-500.0%CC%false%^2016/03/29%salary%8000%DD%false%^|";
         Date d = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
@@ -87,23 +87,23 @@ public class DBFetch extends Activity {
         return name;
     }
 
-    public void addToHistory(String date, String cate, double amt, String notes ) {
-        Payments hist = new History();
+    public static void addToHistory(String date, String cate, double amt, String notes ) {
+        Payments hist = new Payments();
         hist.addDate(date);
         hist.addCategories(cate);
         hist.addTransaction(amt);
         hist.addNotes(notes);
-        past.add((History) hist);
+        past.add(hist);
     }
 
-    public void addToUnpaid(String date, String cate, double amt, String notes) {
-        Payments toPay = new Unpaid();
+    public static void addToUnpaid(String date, String cate, double amt, String notes) {
+        Payments toPay = new Payments();
         toPay.addDate(date);
         toPay.addCategories(cate);
         toPay.addTransaction(amt);
         toPay.addNotes(notes);
         //toPay.setUnPayed();
-        future.add((Unpaid) toPay);
+        future.add(toPay);
     }
 
     public void writeStoreUser() throws IOException {
@@ -123,7 +123,7 @@ public class DBFetch extends Activity {
     }
 
     //the stored format: name|balance|past1^...past2^|future1^...future2^|
-    public String StoreToString() {
+    public static String StoreToString() {
         stored = name + "|" + balance + "|";
         for(int i = 0; i < past.size(); i++){
             stored += past.get(i).toString() + "^";
@@ -179,25 +179,22 @@ public class DBFetch extends Activity {
 
     }
 
-    public ArrayList<Unpaid> getFuture(){
+    public static ArrayList<Payments> getFuture(){
         return future;
     }
 
-    public ArrayList<History> getPast(){
+    public static ArrayList<Payments> getPast(){
         return past;
     }
 
-    public boolean isReadEmpty(){
+    public static boolean isReadEmpty(){
         return read.equals("");
     }
 
-    public void rePopulateFromRead(){
-        future = new ArrayList<Unpaid>();
-        past = new ArrayList<History>();
+    public static void rePopulateFromRead(){
         int currentIndex = 0, counter = 0, index = 0, carrotAt;
         int pipeAt = 0, percentAt = 0;
         Payments payments;
-        int a = 0;
         while (pipeAt != -1) {
             pipeAt = read.indexOf("|", currentIndex);
             if (pipeAt > -1) {
@@ -207,12 +204,12 @@ public class DBFetch extends Activity {
                     setBalance(Double.parseDouble(read.substring(currentIndex, pipeAt)));
                 else if (counter == 2) {
                     do {
-                        payments = new History();
+                        payments = new Payments();
                         carrotAt = read.indexOf("^", currentIndex);
                         percentAt = read.indexOf("%", currentIndex);
                         if (carrotAt > percentAt) {
                             payments = payments.rePopulateFromString(read.substring(currentIndex, carrotAt));
-                            past.add((History)payments);
+                            past.add(payments);
                             currentIndex = carrotAt + 1;
                         }
 
@@ -220,12 +217,12 @@ public class DBFetch extends Activity {
                 }
                 else {
                     do {
-                        payments = new Unpaid();
+                        payments = new Payments();
                         carrotAt = read.indexOf("^", currentIndex);
                         percentAt = read.indexOf("%", currentIndex);
                         if (carrotAt > percentAt) {
                             payments = payments.rePopulateFromString(read.substring(currentIndex, carrotAt));
-                            future.add((Unpaid)payments);
+                            future.add(payments);
                             currentIndex = carrotAt + 1;
                         }
                     } while(carrotAt < pipeAt - 1);
@@ -240,7 +237,7 @@ public class DBFetch extends Activity {
         }
     }
 
-    public void printAccount() {
+    public static void printAccount() {
         System.out.println("Account Owner: " + name);
         System.out.println("Balance: " + balance);
         for (int i = 0; i < past.size(); i++)
@@ -250,7 +247,7 @@ public class DBFetch extends Activity {
     }
 
     //from the nearest unpaid to the furthest-away unpaid
-    public void sortHistoryByDate() {
+    public static void sortHistoryByDate() {
         for(int i = 0; i < past.size() ; i++) {
             for (int j = i + 1; j < past.size(); j++) {
                 String dateI = past.get(i).getPaymentDate();
@@ -273,7 +270,7 @@ public class DBFetch extends Activity {
     }
 
     //from the nearest unpaid to the furthest-away unpaid
-    public void sortUnpaidByDate() {
+    public static void sortUnpaidByDate() {
         for(int i = 0; i < future.size() ; i++) {
             for (int j = i + 1; j < future.size(); j++) {
                 String dateI = future.get(i).getPaymentDate();
@@ -296,33 +293,33 @@ public class DBFetch extends Activity {
     }
 
     //check if the future has been the past, if so, move them to the past and modify the balance
-    public void checkAndMoveFuture() {
+    public static void checkAndMoveFuture() {
         int index = 0;
         while (index < getFuture().size()) {
             if(getFuture().get(index).getPaymentDate().compareTo(curDate) <= 0) {
                 Payments temp = getFuture().get(index);
-                past.add((History)temp);
+                past.add(temp);
                 future.remove(index);
                 addBalance(temp.getTransactionAmt());
             }
-            else if(homePage.dbFetch.getFuture().get(index).getPaymentDate().compareTo(curDate) > 0){
+            else if(getFuture().get(index).getPaymentDate().compareTo(curDate) > 0){
                 break;
             }
             index++;
         }
     }
 
-    public History getCurrentEvent(){
-        int i = 0;
-        if(homePage.dbFetch.getPast().size() != 0 && homePage.dbFetch.getCurrentDate().compareTo(homePage.dbFetch.getPast().get(0).getPaymentDate()) == 0){
-            return homePage.dbFetch.getPast().get(0);
+    public static Payments getCurrentEvent(){
+        if(getPast().size() != 0 && getCurrentDate().compareTo(getPast().get(0).getPaymentDate()) == 0){
+            return getPast().get(0);
         }
         else {
+            System.err.println("Current date event doesn't exist!");
             return null;
         }
     }
 
-    public String changeToCorrectDateForm(int year, int month, int day){
+    public static String changeToCorrectDateForm(int year, int month, int day){
         String date = "";
         String yyyy = Integer.toString(year);
         String mm = Integer.toString(month + 1);

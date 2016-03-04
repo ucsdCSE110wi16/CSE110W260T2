@@ -97,7 +97,10 @@ public class Payments {
         return this;
     }
 
-
-    //public String toString() {}
+    public String toString() {
+        String formattedString = "";
+        formattedString += dates + "%" + categories + "%" + transactionAmount + "%" + paymentNotes + "%";
+        return formattedString;
+    }
 
 }

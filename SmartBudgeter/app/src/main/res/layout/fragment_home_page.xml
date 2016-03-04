@@ -264,14 +264,10 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:id="@+id/categoryField2"
-                    android:password="false"
-                    android:layout_alignTop="@+id/categoryText2"
-                    android:layout_alignRight="@+id/amountField2"
-                    android:layout_alignEnd="@+id/amountField2"
                     android:layout_above="@+id/amountField2"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_alignTop="@+id/categoryText2"
                     android:layout_toRightOf="@+id/categoryText2"
-                    android:layout_toEndOf="@+id/categoryText2" />
+                    android:textColor="@color/colorPrimaryDark" />
 
                 <TextView
                     android:layout_width="wrap_content"

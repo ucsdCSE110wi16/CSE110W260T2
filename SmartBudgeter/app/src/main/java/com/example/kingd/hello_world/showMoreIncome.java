@@ -1,10 +1,14 @@
 package com.example.kingd.hello_world;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,9 +24,14 @@ public class showMoreIncome extends AppCompatActivity {
     // Determine how many incomes to show
     private int numIncomesToShow = 7;
 
+    public showMoreIncome() {
+        // empty constructor
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_show_more_income);
 
         // Toolbar
@@ -59,5 +68,6 @@ public class showMoreIncome extends AppCompatActivity {
             listDataChild.put(listDataHeader.get(index), income);
         }
     }
+
 
 }

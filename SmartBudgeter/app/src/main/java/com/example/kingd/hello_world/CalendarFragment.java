@@ -45,9 +45,9 @@ public class CalendarFragment extends Fragment {
         //show the current day's event if there are any
         TextView calendarCategory = (TextView) llayout.findViewById(R.id.CategoryShow);
         TextView calendarAmount = (TextView) llayout.findViewById(R.id.AmountShow);
-        if(homePage.dbFetch.getCurrentEvent() != null) {
-            calendarCategory.setText(homePage.dbFetch.getCurrentEvent().getCategories());
-            calendarAmount.setText(Double.toString(homePage.dbFetch.getCurrentEvent().getTransactionAmt()));
+        if(DBFetch.getCurrentEvent() != null) {
+            calendarCategory.setText(DBFetch.getCurrentEvent().getCategories());
+            calendarAmount.setText(Double.toString(DBFetch.getCurrentEvent().getTransactionAmt()));
         }
         else {
             calendarCategory.setText("N/A");
@@ -60,18 +60,18 @@ public class CalendarFragment extends Fragment {
                                              public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                                                  int index = 0;
                                                  boolean setIf = false;
-                                                 String selectedDate = homePage.dbFetch.changeToCorrectDateForm(year,month,dayOfMonth);
+                                                 String selectedDate = DBFetch.changeToCorrectDateForm(year,month,dayOfMonth);
                                                  TextView calendarCategory = (TextView) getActivity().findViewById(R.id.CategoryShow);
                                                  TextView calendarAmount = (TextView) getActivity().findViewById(R.id.AmountShow);
-                                                 if(selectedDate.compareTo(homePage.dbFetch.getCurrentDate()) > 0) {
-                                                     while (index < homePage.dbFetch.getFuture().size()) {
+                                                 if(selectedDate.compareTo(DBFetch.getCurrentDate()) > 0) {
+                                                     while (index < DBFetch.getFuture().size()) {
                                                          //System.out.println(dbFetch.getFuture().get(index).getPaymentDate());
-                                                         if(homePage.dbFetch.getFuture().get(index).getPaymentDate().equals(selectedDate)) {
-                                                             calendarCategory.setText(homePage.dbFetch.getFuture().get(index).getCategories());
-                                                             calendarAmount.setText(Double.toString(homePage.dbFetch.getFuture().get(index).getTransactionAmt()));
+                                                         if(DBFetch.getFuture().get(index).getPaymentDate().equals(selectedDate)) {
+                                                             calendarCategory.setText(DBFetch.getFuture().get(index).getCategories());
+                                                             calendarAmount.setText(Double.toString(DBFetch.getFuture().get(index).getTransactionAmt()));
                                                              setIf = true;
                                                          }
-                                                         else if(homePage.dbFetch.getFuture().get(index).getPaymentDate().compareTo(selectedDate) < 0){
+                                                         else if(DBFetch.getFuture().get(index).getPaymentDate().compareTo(selectedDate) < 0){
                                                              break;
                                                          }
                                                          index++;
@@ -79,14 +79,14 @@ public class CalendarFragment extends Fragment {
                                                  }
                                                  else {
                                                      index = 0;
-                                                     while (index < homePage.dbFetch.getPast().size()) {
+                                                     while (index < DBFetch.getPast().size()) {
                                                          //System.out.println(dbFetch.getFuture().get(index).getPaymentDate());
-                                                         if(homePage.dbFetch.getPast().get(index).getPaymentDate().equals(selectedDate)) {
-                                                             calendarCategory.setText(homePage.dbFetch.getPast().get(index).getCategories());
-                                                             calendarAmount.setText(Double.toString(homePage.dbFetch.getPast().get(index).getTransactionAmt()));
+                                                         if(DBFetch.getPast().get(index).getPaymentDate().equals(selectedDate)) {
+                                                             calendarCategory.setText(DBFetch.getPast().get(index).getCategories());
+                                                             calendarAmount.setText(Double.toString(DBFetch.getPast().get(index).getTransactionAmt()));
                                                              setIf = true;
                                                          }
-                                                         else if(homePage.dbFetch.getPast().get(index).getPaymentDate().compareTo(selectedDate) < 0){
+                                                         else if(DBFetch.getPast().get(index).getPaymentDate().compareTo(selectedDate) < 0){
                                                              break;
                                                          }
                                                          index++;

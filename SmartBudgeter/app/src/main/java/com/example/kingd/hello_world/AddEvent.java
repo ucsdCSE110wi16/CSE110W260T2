@@ -1,5 +1,6 @@
 package com.example.kingd.hello_world;
 
+import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -41,7 +42,7 @@ public class AddEvent extends Fragment {
     private String notes;
 
     public AddEvent() {
-        date = homePage.dbFetch.getCurrentDate();
+        date = DBFetch.getCurrentDate();
         categories = "N/A";
         amount = 0.0;
         notes = "N/A";
@@ -76,7 +77,7 @@ public class AddEvent extends Fragment {
         datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                String selectedDate = homePage.dbFetch.changeToCorrectDateForm(year,monthOfYear,dayOfMonth);
+                String selectedDate = DBFetch.changeToCorrectDateForm(year,monthOfYear,dayOfMonth);
                 date = selectedDate;
             }
         });
@@ -98,13 +99,13 @@ public class AddEvent extends Fragment {
                 Fragment fragment = null;
                 amount = Double.parseDouble(amountAdd.getText().toString());
                 notes = notedAdd.getText().toString();
-                String curDate = homePage.dbFetch.getCurrentDate();
+                String curDate = DBFetch.getCurrentDate();
                 if (curDate.compareTo(date) >= 0) {
-                    homePage.dbFetch.addToHistory(date, categories, amount, notes);
+                    DBFetch.addToHistory(date, categories, amount, notes);
                     System.out.println("Added to the history");
-                    homePage.dbFetch.addBalance(amount);
+                    DBFetch.addBalance(amount);
                 } else {
-                    homePage.dbFetch.addToUnpaid(date, categories, amount, notes);
+                    DBFetch.addToUnpaid(date, categories, amount, notes);
                     System.out.println("Added to the unpaid");
                 }
                 Class homepageFragment = homePage.class;
@@ -113,9 +114,10 @@ public class AddEvent extends Fragment {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, fragment)
-                        .commit();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragment_container, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 

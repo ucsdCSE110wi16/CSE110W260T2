@@ -35,6 +35,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        System.out.println("onCreate");
+        DBFetch.setCurrentDate();
+        dbFetch.readFromFile();
+        if(!DBFetch.isReadEmpty()) {
+            System.out.println("read not empty");
+            DBFetch.rePopulateFromRead();
+        }
+        DBFetch.sortHistoryByDate();
+        DBFetch.sortUnpaidByDate();
+        DBFetch.checkAndMoveFuture();
+        DBFetch.printAccount();
+
         setContentView(R.layout.activity_main);
 
         // Set a Toolbar to replace the ActionBar.
