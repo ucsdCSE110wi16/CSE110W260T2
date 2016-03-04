@@ -157,14 +157,14 @@ public class homePage extends Fragment {
             if(dbFetch.getFuture().get(i).getTransactionAmt() > 0 && incomeSet == false){
                 dateField2.setText(dbFetch.getFuture().get(i).getPaymentDate()); // Replace with getters
                 categoryField2.setText(dbFetch.getFuture().get(i).getCategories());
-                amountField2.setText(Double.toString(Math.abs(dbFetch.getFuture().get(i).getTransactionAmt())));
+                amountField2.setText(Double.toString(dbFetch.getFuture().get(i).getTransactionAmt()));
                 notesField2.setText(dbFetch.getFuture().get(i).getNotes());
                 incomeSet = true;
             }
             else if(dbFetch.getFuture().get(i).getTransactionAmt() <= 0 && paymentSet == false){
                 dateField.setText(dbFetch.getFuture().get(i).getPaymentDate()); // Replace with getters
                 categoryField.setText(dbFetch.getFuture().get(i).getCategories());
-                amountField.setText(Double.toString(Math.abs(dbFetch.getFuture().get(i).getTransactionAmt())));
+                amountField.setText(Double.toString(dbFetch.getFuture().get(i).getTransactionAmt()));
                 notesField.setText(dbFetch.getFuture().get(i).getNotes());
                 paymentSet = true;
             }

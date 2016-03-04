@@ -75,9 +75,9 @@ public class DBFetch extends Activity {
         balance += add;
     }
 
-    public static void subBalance(double sub) {
+    /*public static void subBalance(double sub) {
         balance -= sub;
-    }
+    }*/
 
     public static void setName(String n) {
         name = n;

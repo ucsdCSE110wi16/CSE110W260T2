@@ -114,7 +114,7 @@ public class AddEvent extends Fragment {
                 if (curDate.compareTo(date) >= 0) {
                     homePage.dbFetch.addToHistory(date, categories, amount, notes);
                     System.out.println("Added to the history");
-                    homePage.dbFetch.subBalance(amount);
+                    homePage.dbFetch.addBalance(amount);
                 } else {
                     homePage.dbFetch.addToUnpaid(date, categories, amount, notes);
                     System.out.println("Added to the unpaid");
