@@ -52,11 +52,13 @@ public class homePage extends Fragment {
 
 
         //initialize the dbFetch project
+        dbFetch.setCurrentDate();
         dbFetch.readFromFile();
         if(!dbFetch.isReadEmpty()) {
             System.out.println("read not empty");
             dbFetch.rePopulateFromRead();
         }
+        dbFetch.checkAndMoveFuture();
         dbFetch.sortHistoryByDate();
         dbFetch.sortUnpaidByDate();
         dbFetch.printAccount();
@@ -126,11 +128,13 @@ public class homePage extends Fragment {
     public void onResume() {
         System.err.println("onResume of LoginFragment");
 
+        dbFetch.setCurrentDate();
         dbFetch.readFromFile();
         if(!dbFetch.isReadEmpty()) {
             System.out.println("read not empty");
             dbFetch.rePopulateFromRead();
         }
+        dbFetch.checkAndMoveFuture();
         dbFetch.sortHistoryByDate();
         dbFetch.sortUnpaidByDate();
         dbFetch.printAccount();

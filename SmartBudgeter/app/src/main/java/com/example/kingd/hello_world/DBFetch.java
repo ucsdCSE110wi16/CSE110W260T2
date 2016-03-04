@@ -18,8 +18,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.*;
 import java.lang.String;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Properties;
 
 /**
@@ -36,19 +38,33 @@ public class DBFetch extends Activity {
     private static double balance;
     private static ArrayList<Unpaid> future;
     private static ArrayList<History> past;
+    private static String curDate;
 
     //private GoogleApiClient client;
 
     public DBFetch() {
-        balance = 800.00;
+        balance = 0.00;
         name = "Fuheng Deng";
         past = new ArrayList<History>();
         future = new ArrayList<Unpaid>();
         read = "";//"James|800.00|2016/02/26%fruits%-20.00%AA%^2016/02/25%clothes%-60%BB%^|2016/03/27%rent%-500.0%CC%false%^2016/03/29%salary%8000%DD%false%^|";
+        Date d = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        curDate = format.format(d);
     }
 
     public static void setBalance(double bal) {
         balance = bal;
+    }
+
+    public static void setCurrentDate() {
+        Date d = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        curDate = format.format(d);
+    }
+
+    public static String getCurrentDate(){
+        return curDate;
     }
 
     public static double getBalance() {
@@ -86,7 +102,7 @@ public class DBFetch extends Activity {
         toPay.addCategories(cate);
         toPay.addTransaction(amt);
         toPay.addNotes(notes);
-        toPay.setUnPayed();
+        //toPay.setUnPayed();
         future.add((Unpaid) toPay);
     }
 
@@ -234,6 +250,7 @@ public class DBFetch extends Activity {
             future.get(j).printOneLine();
     }
 
+    //from the nearest unpaid to the furthest-away unpaid
     public void sortHistoryByDate() {
         for(int i = 0; i < past.size() ; i++) {
             for (int j = i + 1; j < past.size(); j++) {
@@ -256,25 +273,42 @@ public class DBFetch extends Activity {
         }
     }
 
+    //from the nearest unpaid to the furthest-away unpaid
     public void sortUnpaidByDate() {
         for(int i = 0; i < future.size() ; i++) {
             for (int j = i + 1; j < future.size(); j++) {
                 String dateI = future.get(i).getPaymentDate();
                 String dateJ = future.get(j).getPaymentDate();
-                if (dateI.substring(0, 4).compareTo(dateJ.substring(0, 4)) < 0) {
+                if (dateI.substring(0, 4).compareTo(dateJ.substring(0, 4)) > 0) {
                     Collections.swap(future, i, j);
                 }
                 else if(dateI.substring(0, 4).compareTo(dateJ.substring(0, 4)) == 0){
-                    if(dateI.substring(5, 7).compareTo(dateJ.substring(5, 7)) < 0) {
+                    if(dateI.substring(5, 7).compareTo(dateJ.substring(5, 7)) > 0) {
                         Collections.swap(future, i, j);
                     }
                     else if(dateI.substring(5, 7).compareTo(dateJ.substring(5, 7)) == 0){
-                        if(dateI.substring(8, 10).compareTo(dateJ.substring(8, 10)) < 0) {
+                        if(dateI.substring(8, 10).compareTo(dateJ.substring(8, 10)) > 0) {
                             Collections.swap(future, i, j);
                         }
                     }
                 }
             }
+        }
+    }
+
+    //check if the future has been the past, if so, move them to the past
+    public void checkAndMoveFuture() {
+        int index = 0;
+        while (index < getFuture().size()) {
+            if(getFuture().get(index).getPaymentDate().compareTo(curDate) <= 0) {
+                Payments temp = getFuture().get(index);
+                past.add((History)temp);
+                future.remove(index);
+            }
+            else if(homePage.dbFetch.getFuture().get(index).getPaymentDate().compareTo(curDate) > 0){
+                break;
+            }
+            index++;
         }
     }
 

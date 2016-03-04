@@ -9,15 +9,16 @@ import java.util.Date;
  */
 public class History extends Payments {
     private double transactionAmount;
-    //private boolean payed;
+    private boolean payed;
     private String categories, dates, paymentNotes;
 
 
     public History() {
-        transactionAmount = 0;
-        //payed = true;
+        transactionAmount = 0;;
+        payed = false;
         paymentNotes = "";
-        categories = "";;
+        dates = "";
+        categories = "";
 
     }
 

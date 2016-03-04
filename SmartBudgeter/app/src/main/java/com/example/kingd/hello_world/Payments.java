@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class Payments {
     private double transactionAmount;
-    private boolean payed;
+    //private boolean payed;
     private String paymentNotes, dates, categories; // TODO: implement cata
 
     /*public void addCurrentDate() {
@@ -33,12 +33,12 @@ public class Payments {
     public void setTransaction(double amt) {
         transactionAmount = amt;
     }
-    public void setUnPayed() {
+    /*public void setUnPayed() {
         payed = false;
     }
     public void setPayed() {
         payed = true;
-    }
+    }*/
     public void setCategories(String cate) {
         categories = cate;
     }
@@ -58,9 +58,9 @@ public class Payments {
         return this.dates;
     }
 
-    public boolean getPayed() {
+    /*public boolean getPayed() {
         return this.payed;
-    }
+    }*/
 
     public void printOneLine() {}
     public Payments rePopulateFromString(String st){return this;}

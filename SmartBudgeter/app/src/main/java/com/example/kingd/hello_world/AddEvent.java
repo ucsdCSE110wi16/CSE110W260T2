@@ -104,44 +104,17 @@ public class AddEvent extends Fragment {
                 }
             }
         });
-        amountAdd.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                amount = Double.parseDouble(amountAdd.getText().toString());
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-        });
-        notedAdd.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                notes = notedAdd.getText().toString();
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-        });
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragment = null;
-                Date d = new Date();
-                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-                String curDate = format.format(d);
+                amount = Double.parseDouble(amountAdd.getText().toString());
+                notes = notedAdd.getText().toString();
+                String curDate = homePage.dbFetch.getCurrentDate();
                 if (curDate.compareTo(date) >= 0) {
                     homePage.dbFetch.addToHistory(date, categories, amount, notes);
                     System.out.println("Added to the history");
+                    homePage.dbFetch.subBalance(amount);
                 } else {
                     homePage.dbFetch.addToUnpaid(date, categories, amount, notes);
                     System.out.println("Added to the unpaid");

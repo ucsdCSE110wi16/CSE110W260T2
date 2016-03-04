@@ -57,17 +57,34 @@ public class CalendarFragment extends Fragment {
                                                  System.out.println("The selected Date is: " + selectedDate);
                                                  TextView calendarCategory = (TextView) getActivity().findViewById(R.id.CategoryShow);
                                                  TextView calendarAmount = (TextView) getActivity().findViewById(R.id.AmountShow);
-                                                 while (index < homePage.dbFetch.getFuture().size()) {
-                                                     //System.out.println(dbFetch.getFuture().get(index).getPaymentDate());
-                                                     if(homePage.dbFetch.getFuture().get(index).getPaymentDate().equals(selectedDate)) {
-                                                         calendarCategory.setText(homePage.dbFetch.getFuture().get(index).getCategories());
-                                                         calendarAmount.setText(Double.toString(homePage.dbFetch.getFuture().get(index).getTransactionAmt()));
-                                                         setIf = true;
+                                                 if(selectedDate.compareTo(homePage.dbFetch.getCurrentDate()) > 0) {
+                                                     while (index < homePage.dbFetch.getFuture().size()) {
+                                                         //System.out.println(dbFetch.getFuture().get(index).getPaymentDate());
+                                                         if(homePage.dbFetch.getFuture().get(index).getPaymentDate().equals(selectedDate)) {
+                                                             calendarCategory.setText(homePage.dbFetch.getFuture().get(index).getCategories());
+                                                             calendarAmount.setText(Double.toString(homePage.dbFetch.getFuture().get(index).getTransactionAmt()));
+                                                             setIf = true;
+                                                         }
+                                                         else if(homePage.dbFetch.getFuture().get(index).getPaymentDate().compareTo(selectedDate) < 0){
+                                                             break;
+                                                         }
+                                                         index++;
                                                      }
-                                                     else if(homePage.dbFetch.getFuture().get(index).getPaymentDate().compareTo(selectedDate) < 0){
-                                                         break;
+                                                 }
+                                                 else {
+                                                     index = 0;
+                                                     while (index < homePage.dbFetch.getPast().size()) {
+                                                         //System.out.println(dbFetch.getFuture().get(index).getPaymentDate());
+                                                         if(homePage.dbFetch.getPast().get(index).getPaymentDate().equals(selectedDate)) {
+                                                             calendarCategory.setText(homePage.dbFetch.getPast().get(index).getCategories());
+                                                             calendarAmount.setText(Double.toString(homePage.dbFetch.getPast().get(index).getTransactionAmt()));
+                                                             setIf = true;
+                                                         }
+                                                         else if(homePage.dbFetch.getPast().get(index).getPaymentDate().compareTo(selectedDate) < 0){
+                                                             break;
+                                                         }
+                                                         index++;
                                                      }
-                                                     index++;
                                                  }
                                                  if(setIf == false) {
                                                      calendarCategory.setText("N/A");

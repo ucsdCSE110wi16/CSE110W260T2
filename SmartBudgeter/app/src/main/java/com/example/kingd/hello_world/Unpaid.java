@@ -6,12 +6,12 @@ import java.util.ArrayList;
  */
 public class Unpaid extends Payments{
     private double transactionAmount;
-    private boolean payed;
+    //private boolean payed;
     private String paymentNotes, dates, categories;
 
     public Unpaid() {
         transactionAmount = 0;;
-        payed = false;
+        //payed = false;
         paymentNotes = "";
         dates = "";
         categories = "";
@@ -29,7 +29,7 @@ public class Unpaid extends Payments{
     public Unpaid rePopulateFromString(String st) {
         int currentIndex = 0, counter = 0;
         int percentAt;
-        while (counter <= 4) {
+        while (counter <= 3) {
             percentAt = st.indexOf("%", currentIndex);
             if (percentAt > -1) {
                 if (counter == 0) {
@@ -44,12 +44,12 @@ public class Unpaid extends Payments{
                 else if (counter == 3) {
                     this.addNotes(st.substring(currentIndex, percentAt));
                 }
-                else {
+                /*else {
                     if (Boolean.parseBoolean(st.substring(currentIndex, percentAt)))
                         this.setPayed();
                     else
                         this.setUnPayed();
-                }
+                }*/
 
                 currentIndex = percentAt + 1;
                 counter++;
@@ -70,7 +70,7 @@ public class Unpaid extends Payments{
         String formattedString = "";
         formattedString += dates + "%" + categories + "%"
                     + transactionAmount + "%" + paymentNotes
-                    + "%" + payed + "%";
+                    + "%" ;
         return formattedString;
     }
 
