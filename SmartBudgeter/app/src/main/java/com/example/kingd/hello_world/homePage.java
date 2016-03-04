@@ -56,10 +56,10 @@ public class homePage extends Fragment {
         if(!dbFetch.isReadEmpty()) {
             System.out.println("read not empty");
             dbFetch.rePopulateFromRead();
-            dbFetch.sortHistoryByDate();
-            dbFetch.sortUnpaidByDate();
-            dbFetch.printAccount();
         }
+        dbFetch.sortHistoryByDate();
+        dbFetch.sortUnpaidByDate();
+        dbFetch.printAccount();
 
         //Update the balance
         TextView balanceField = (TextView)llayout.findViewById(R.id.balanceField);
@@ -130,10 +130,10 @@ public class homePage extends Fragment {
         if(!dbFetch.isReadEmpty()) {
             System.out.println("read not empty");
             dbFetch.rePopulateFromRead();
-            dbFetch.sortHistoryByDate();
-            dbFetch.sortUnpaidByDate();
-            dbFetch.printAccount();
         }
+        dbFetch.sortHistoryByDate();
+        dbFetch.sortUnpaidByDate();
+        dbFetch.printAccount();
 
         //Update the balance
         TextView balanceField = (TextView)getActivity().findViewById(R.id.balanceField);
