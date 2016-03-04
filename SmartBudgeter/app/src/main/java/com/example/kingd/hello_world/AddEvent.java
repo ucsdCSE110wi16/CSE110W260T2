@@ -41,7 +41,7 @@ public class AddEvent extends Fragment {
     private String notes;
 
     public AddEvent() {
-        date = "N/A";
+        date = homePage.dbFetch.getCurrentDate();
         categories = "N/A";
         amount = 0.0;
         notes = "N/A";
@@ -69,8 +69,7 @@ public class AddEvent extends Fragment {
         Button addButton = (Button)llayout.findViewById(R.id.AddButton);
 
         //initialize the spinner
-        String[] spinnerList = {"food", "clothes", "rent", "miscellaneous"};
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,spinnerList);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,homePage.spinnerList);
         categoriesSpinner.setAdapter(arrayAdapter);
 
         //set onClickListener method

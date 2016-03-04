@@ -42,18 +42,31 @@ public class CalendarFragment extends Fragment {
 
         CalendarView calendar = (CalendarView) llayout.findViewById(R.id.calendarView);
 
+        //show the current day's event if there are any
+        if(homePage.dbFetch.getCurrentEvent() != null) {
+            TextView calendarCategory = (TextView) llayout.findViewById(R.id.CategoryShow);
+            TextView calendarAmount = (TextView) llayout.findViewById(R.id.AmountShow);
+            calendarCategory.setText(homePage.dbFetch.getCurrentEvent().getCategories());
+            calendarAmount.setText(Double.toString(homePage.dbFetch.getCurrentEvent().getTransactionAmt()));
+        }
+
+        //show the selected day event if there are any
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
                                              @Override
                                              public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                                                  int index = 0;
                                                  boolean setIf = false;
                                                  String selectedDate = "";
-                                                 if(month+1 < 10) {
-                                                     selectedDate += Integer.toString(year) + "/0" + Integer.toString(month + 1) + "/" + Integer.toString(dayOfMonth);
+                                                 String yyyy = Integer.toString(year);
+                                                 String mm = Integer.toString(month + 1);
+                                                 String dd = Integer.toString(dayOfMonth);
+                                                 if (month + 1 < 10) {
+                                                     mm = "0" + mm;
                                                  }
-                                                 else {
-                                                     selectedDate += Integer.toString(year) + "/" + Integer.toString(month + 1) + "/" + Integer.toString(dayOfMonth);
+                                                 if(dayOfMonth < 10) {
+                                                     dd = "0" + dd;
                                                  }
+                                                 selectedDate += yyyy + "/" + mm + "/" + dd;
                                                  System.out.println("The selected Date is: " + selectedDate);
                                                  TextView calendarCategory = (TextView) getActivity().findViewById(R.id.CategoryShow);
                                                  TextView calendarAmount = (TextView) getActivity().findViewById(R.id.AmountShow);

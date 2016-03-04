@@ -37,6 +37,7 @@ import java.io.IOException;
 public class homePage extends Fragment {
 
     public static DBFetch dbFetch = new DBFetch();
+    public static String[] spinnerList = {"food", "clothes", "rent", "salary", "miscellaneous"};
 
     public homePage() {
         // empty constructor
