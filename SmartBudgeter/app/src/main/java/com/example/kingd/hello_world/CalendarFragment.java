@@ -43,11 +43,15 @@ public class CalendarFragment extends Fragment {
         CalendarView calendar = (CalendarView) llayout.findViewById(R.id.calendarView);
 
         //show the current day's event if there are any
+        TextView calendarCategory = (TextView) llayout.findViewById(R.id.CategoryShow);
+        TextView calendarAmount = (TextView) llayout.findViewById(R.id.AmountShow);
         if(homePage.dbFetch.getCurrentEvent() != null) {
-            TextView calendarCategory = (TextView) llayout.findViewById(R.id.CategoryShow);
-            TextView calendarAmount = (TextView) llayout.findViewById(R.id.AmountShow);
             calendarCategory.setText(homePage.dbFetch.getCurrentEvent().getCategories());
             calendarAmount.setText(Double.toString(homePage.dbFetch.getCurrentEvent().getTransactionAmt()));
+        }
+        else {
+            calendarCategory.setText("N/A");
+            calendarAmount.setText("N/A");
         }
 
         //show the selected day event if there are any

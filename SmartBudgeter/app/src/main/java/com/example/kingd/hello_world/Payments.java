@@ -62,8 +62,41 @@ public class Payments {
         return this.payed;
     }*/
 
-    public void printOneLine() {}
-    public Payments rePopulateFromString(String st){return this;}
+    public void printOneLine() {
+        System.out.println("Date of Transaction: " + getPaymentDate());
+        System.out.println("Category of Transaction: " + getCategories());
+        System.out.println("Amount of Transaction: " + getTransactionAmt());
+        System.out.println("Notes: " + getNotes());
+    }
+
+    public Payments rePopulateFromString(String st){
+        int currentIndex = 0, counter = 0;
+        int percentAt;
+        while (counter <= 3) {
+            percentAt = st.indexOf("%", currentIndex);
+            if (percentAt > -1) {
+                if (counter == 0) {
+                    this.addDate(st.substring(currentIndex, percentAt));
+                }
+                else if (counter == 1) {
+                    this.addCategories(st.substring(currentIndex, percentAt));
+                }
+                else if (counter == 2) {
+                    this.addTransaction(Double.parseDouble(st.substring(currentIndex, percentAt)));
+                }
+                else {
+                    this.addNotes(st.substring(currentIndex, percentAt));
+                }
+                currentIndex = percentAt + 1;
+                counter++;
+            }
+            else {
+                break;
+            }
+        }
+        return this;
+    }
+
 
     //public String toString() {}
 

@@ -196,8 +196,7 @@ public class DBFetch extends Activity {
         past = new ArrayList<History>();
         int currentIndex = 0, counter = 0, index = 0, carrotAt;
         int pipeAt = 0, percentAt = 0;
-        History hist;
-        Unpaid unpaid;
+        Payments payments;
         int a = 0;
         while (pipeAt != -1) {
             pipeAt = read.indexOf("|", currentIndex);
@@ -208,12 +207,12 @@ public class DBFetch extends Activity {
                     setBalance(Double.parseDouble(read.substring(currentIndex, pipeAt)));
                 else if (counter == 2) {
                     do {
-                        hist = new History();
+                        payments = new History();
                         carrotAt = read.indexOf("^", currentIndex);
                         percentAt = read.indexOf("%", currentIndex);
                         if (carrotAt > percentAt) {
-                            hist = hist.rePopulateFromString(read.substring(currentIndex, carrotAt));
-                            past.add(hist);
+                            payments = payments.rePopulateFromString(read.substring(currentIndex, carrotAt));
+                            past.add((History)payments);
                             currentIndex = carrotAt + 1;
                         }
 
@@ -221,12 +220,12 @@ public class DBFetch extends Activity {
                 }
                 else {
                     do {
-                        unpaid = new Unpaid();
+                        payments = new Unpaid();
                         carrotAt = read.indexOf("^", currentIndex);
                         percentAt = read.indexOf("%", currentIndex);
                         if (carrotAt > percentAt) {
-                            unpaid = unpaid.rePopulateFromString(read.substring(currentIndex, carrotAt));
-                            future.add(unpaid);
+                            payments = payments.rePopulateFromString(read.substring(currentIndex, carrotAt));
+                            future.add((Unpaid)payments);
                             currentIndex = carrotAt + 1;
                         }
                     } while(carrotAt < pipeAt - 1);
@@ -296,7 +295,7 @@ public class DBFetch extends Activity {
         }
     }
 
-    //check if the future has been the past, if so, move them to the past
+    //check if the future has been the past, if so, move them to the past and modify the balance
     public void checkAndMoveFuture() {
         int index = 0;
         while (index < getFuture().size()) {
@@ -304,6 +303,7 @@ public class DBFetch extends Activity {
                 Payments temp = getFuture().get(index);
                 past.add((History)temp);
                 future.remove(index);
+                addBalance(temp.getTransactionAmt());
             }
             else if(homePage.dbFetch.getFuture().get(index).getPaymentDate().compareTo(curDate) > 0){
                 break;
@@ -314,7 +314,7 @@ public class DBFetch extends Activity {
 
     public History getCurrentEvent(){
         int i = 0;
-        if(homePage.dbFetch.getCurrentDate().compareTo(homePage.dbFetch.getPast().get(0).getPaymentDate()) == 0){
+        if(homePage.dbFetch.getPast().size() != 0 && homePage.dbFetch.getCurrentDate().compareTo(homePage.dbFetch.getPast().get(0).getPaymentDate()) == 0){
             return homePage.dbFetch.getPast().get(0);
         }
         else {

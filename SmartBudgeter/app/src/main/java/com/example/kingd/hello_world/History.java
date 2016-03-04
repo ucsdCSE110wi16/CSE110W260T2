@@ -21,16 +21,7 @@ public class History extends Payments {
         categories = "";
 
     }
-
-    @Override
-    public void printOneLine() {
-        System.out.println("Date of Transaction: " + getPaymentDate());
-        System.out.println("Category of Transaction: " + getCategories());
-        System.out.println("Amount of Transaction: " + getTransactionAmt());
-        System.out.println("Notes: " + getNotes());
-        //System.out.println("Payed or not?" + isPayedOrNot());
-    }
-
+/*
     @Override // Need to rework
     public History rePopulateFromString(String stored) {
         int currentIndex = 0, counter = 0;
@@ -56,7 +47,7 @@ public class History extends Payments {
             }
         }
         return this;
-    }
+    }*/
 
     @Override    // Need to rework
     public String toString() {
