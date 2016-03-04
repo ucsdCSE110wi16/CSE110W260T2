@@ -17,10 +17,6 @@ public class Unpaid extends Payments{
         categories = "";
     }
 
-    public boolean getPayed() {
-        return this.payed;
-    }
-
     @Override
     public void printOneLine() {
         System.out.println("Date of Transaction: " + getPaymentDate());

@@ -28,8 +28,6 @@ import java.util.Date;
  */
 public class CalendarFragment extends Fragment {
 
-    //public static DBFetch dbFetch;
-
     public CalendarFragment() {
         // Required empty public constructor
     }
