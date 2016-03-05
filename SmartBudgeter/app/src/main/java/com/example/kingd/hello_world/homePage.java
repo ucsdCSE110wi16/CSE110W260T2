@@ -38,7 +38,6 @@ import java.util.ArrayList;
  */
 public class homePage extends Fragment {
 
-    public static String[] spinnerList = {"food", "clothes", "rent", "salary", "miscellaneous"};
     public static ArrayList<Payments> income = new ArrayList<Payments>();
     public static ArrayList<Payments> payment = new ArrayList<Payments>();
 

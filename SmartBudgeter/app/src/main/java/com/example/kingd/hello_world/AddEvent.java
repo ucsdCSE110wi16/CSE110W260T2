@@ -70,15 +70,14 @@ public class AddEvent extends Fragment {
         Button addButton = (Button)llayout.findViewById(R.id.AddButton);
 
         //initialize the spinner
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,homePage.spinnerList);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,DBFetch.spinnerList);
         categoriesSpinner.setAdapter(arrayAdapter);
 
         //set onClickListener method
         datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                String selectedDate = DBFetch.changeToCorrectDateForm(year,monthOfYear,dayOfMonth);
-                date = selectedDate;
+                date = DBFetch.changeToCorrectDateForm(year,monthOfYear,dayOfMonth);
             }
         });
         categoriesSpinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
@@ -88,9 +87,7 @@ public class AddEvent extends Fragment {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                if(!categoriesSpinner.getItemAtPosition(0).toString().equals(null)) {
-                    categories = categoriesSpinner.getItemAtPosition(0).toString();
-                }
+                categories = categoriesSpinner.getItemAtPosition(0).toString();
             }
         });
         addButton.setOnClickListener(new View.OnClickListener() {

@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = AddEvent.class;
                 break;
             case R.id.nav_third_fragment:
-                fragmentClass = EditEvent.class;
+                fragmentClass = EditEvent_PickCategory.class;
                 break;
             case R.id.nav_fourth_fragment:
                 fragmentClass = homePage.class;

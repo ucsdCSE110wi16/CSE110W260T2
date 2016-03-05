@@ -40,6 +40,7 @@ public class DBFetch extends Activity {
     private static ArrayList<Payments> past;
     private static String curDate;
     public static boolean change;
+    public static String[] spinnerList = {"food", "clothes", "rent", "salary", "miscellaneous"};;
 
     //private GoogleApiClient client;
 
@@ -373,5 +374,26 @@ public class DBFetch extends Activity {
         return payment;
     }
 
+    public static ArrayList<Payments> getEventsByCategory(String category){
+        ArrayList<Payments> cateList = new ArrayList<Payments>();
+        if(getFuture().size() != 0){
+            for(int i = 0; i < getFuture().size(); i++){
+                if(getFuture().get(i).getCategories().equals(category)){
+                    cateList.add(getFuture().get(i));
+                }
+            }
+        }
+        if(getPast().size() != 0){
+            for(int i = 0; i < getPast().size(); i++){
+                if (getPast().get(i).getCategories().equals(category)){
+                    cateList.add(getPast().get(i));
+                }
+            }
+        }
+        return cateList;
+    }
+
 }
+
+
 
