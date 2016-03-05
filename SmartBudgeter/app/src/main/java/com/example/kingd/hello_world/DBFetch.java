@@ -39,6 +39,7 @@ public class DBFetch extends Activity {
     private static ArrayList<Payments> future;
     private static ArrayList<Payments> past;
     private static String curDate;
+    public static boolean change;
 
     //private GoogleApiClient client;
 
@@ -51,6 +52,7 @@ public class DBFetch extends Activity {
         Date d = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
         curDate = format.format(d);
+        change = false;
     }
 
     public static void setBalance(double bal) {
@@ -87,6 +89,19 @@ public class DBFetch extends Activity {
         return name;
     }
 
+    public static void setChangeTrue(){
+        change = true;
+    }
+
+    public static void setChangeFalse(){
+        change = false;
+    }
+
+    public static boolean getChange(){
+        return change;
+    }
+
+
     public static void addToHistory(String date, String cate, double amt, String notes ) {
         Payments hist = new Payments();
         hist.addDate(date);
@@ -107,7 +122,7 @@ public class DBFetch extends Activity {
     }
 
     public void writeStoreUser() throws IOException {
-        if (name == "" && balance == 0 && past.size() == 0 && future.size() == 0) {
+        if (name.equals("") && balance == 0 && past.size() == 0 && future.size() == 0) {
             System.out.println("Attempting to write empty object to config file - Terminating method.");
             return;
         }
@@ -334,53 +349,29 @@ public class DBFetch extends Activity {
         return date;
     }
 
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-    }
-    /*
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "DBFetch Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app:///http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
+    public static ArrayList<Payments> getIncome(ArrayList<Payments> list){
+        ArrayList<Payments> income = new ArrayList<Payments>();
+        Payments temp;
+        for(int i = 0 ; i < list.size() ; i++){
+            temp = list.get(i);
+            if(temp.getTransactionAmt() > 0){
+                income.add(temp);
+            }
+        }
+        return income;
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
+    public static ArrayList<Payments> getPayment(ArrayList<Payments> list){
+        ArrayList<Payments> payment = new ArrayList<Payments>();
+        Payments temp;
+        for(int i = 0 ; i < list.size() ; i++){
+            temp = list.get(i);
+            if(temp.getTransactionAmt() <= 0){
+                payment.add(temp);
+            }
+        }
+        return payment;
+    }
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "DBFetch Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app:///http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
-    } */
 }
 

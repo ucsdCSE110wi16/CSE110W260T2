@@ -114,6 +114,7 @@ public class AddEvent extends Fragment {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                DBFetch.setChangeTrue();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.fragment_container, fragment);
                 transaction.addToBackStack(null);

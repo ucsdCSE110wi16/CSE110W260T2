@@ -24,6 +24,7 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 /**
@@ -38,6 +39,8 @@ import java.io.IOException;
 public class homePage extends Fragment {
 
     public static String[] spinnerList = {"food", "clothes", "rent", "salary", "miscellaneous"};
+    public static ArrayList<Payments> income = new ArrayList<Payments>();
+    public static ArrayList<Payments> payment = new ArrayList<Payments>();
 
     public homePage() {
         // empty constructor
@@ -64,16 +67,22 @@ public class homePage extends Fragment {
 
         System.err.println("onResume of LoginFragment");
 
-        DBFetch.setCurrentDate();
-        MainActivity.dbFetch.readFromFile();
-        if(!DBFetch.isReadEmpty()) {
-            System.out.println("read not empty");
-            DBFetch.rePopulateFromRead();
+        if(DBFetch.getChange() == true){
+            MainActivity.dbFetch.readFromFile();
+            if(!DBFetch.isReadEmpty()) {
+                System.out.println("read not empty");
+                DBFetch.rePopulateFromRead();
+            }
+            DBFetch.sortHistoryByDate();
+            DBFetch.sortUnpaidByDate();
+            DBFetch.printAccount();
+            income = DBFetch.getIncome(DBFetch.getFuture());
+            payment = DBFetch.getPayment(DBFetch.getFuture());
         }
-        DBFetch.sortHistoryByDate();
-        DBFetch.sortUnpaidByDate();
+
+        DBFetch.setCurrentDate();
         DBFetch.checkAndMoveFuture();
-        DBFetch.printAccount();
+
 
         //Update the balance
         TextView balanceField = (TextView)getActivity().findViewById(R.id.balanceField);
@@ -88,22 +97,32 @@ public class homePage extends Fragment {
         TextView amountField2 = (TextView) getActivity().findViewById(R.id.amountField2);
         TextView notesField2 = (TextView) getActivity().findViewById(R.id.notesField2);
         TextView notesField = (TextView) getActivity().findViewById(R.id.notesField);
-        boolean paymentSet = false, incomeSet = false;
-        for(int i = 0; i < DBFetch.getFuture().size(); i++) {
-            if(DBFetch.getFuture().get(i).getTransactionAmt() > 0 && incomeSet == false){
-                dateField2.setText(DBFetch.getFuture().get(i).getPaymentDate()); // Replace with getters
-                categoryField2.setText(DBFetch.getFuture().get(i).getCategories());
-                amountField2.setText(Double.toString(Math.abs(DBFetch.getFuture().get(i).getTransactionAmt())));
-                notesField2.setText(DBFetch.getFuture().get(i).getNotes());
-                incomeSet = true;
-            }
-            else if(DBFetch.getFuture().get(i).getTransactionAmt() <= 0 && paymentSet == false){
-                dateField.setText(DBFetch.getFuture().get(i).getPaymentDate()); // Replace with getters
-                categoryField.setText(DBFetch.getFuture().get(i).getCategories());
-                amountField.setText(Double.toString(Math.abs(DBFetch.getFuture().get(i).getTransactionAmt())));
-                notesField.setText(DBFetch.getFuture().get(i).getNotes());
-                paymentSet = true;
-            }
+
+        //Next Payment Getter
+        if(payment.size() != 0) {
+            dateField.setText(payment.get(0).getPaymentDate()); // Replace with getters
+            categoryField.setText(payment.get(0).getCategories());
+            amountField.setText(Double.toString(payment.get(0).getTransactionAmt()));
+            notesField.setText(payment.get(0).getNotes());
+        }
+        else {
+            dateField.setText("N/A");
+            categoryField.setText("N/A");
+            amountField.setText("N/A");
+            notesField.setText("N/A");
+        }
+        //Next Income Getter
+        if(income.size() != 0) {
+            dateField2.setText(income.get(0).getPaymentDate());
+            categoryField2.setText(income.get(0).getCategories());
+            amountField2.setText(Double.toString(income.get(0).getTransactionAmt()));
+            notesField2.setText(income.get(0).getNotes());
+        }
+        else {
+            dateField2.setText("N/A");
+            categoryField2.setText("N/A");
+            amountField2.setText("N/A");
+            notesField2.setText("N/A");
         }
 
         // Show more payments button listener
@@ -127,6 +146,8 @@ public class homePage extends Fragment {
                 startActivity(intent);
             }
         });
+
+        DBFetch.setChangeFalse();
 
         super.onResume();
     }

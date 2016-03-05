@@ -48,6 +48,7 @@ public class showMoreIncome extends AppCompatActivity {
 
         // Set list adapter
         expListView.setAdapter(listAdapter);
+
     }
 
     /*
@@ -56,16 +57,28 @@ public class showMoreIncome extends AppCompatActivity {
     private void prepareIncomeListData() {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<>();
+        ArrayList<Payments> Get = DBFetch.getPayment(DBFetch.getFuture());
+        int numberOfIncomeEvents = Get.size();
 
         for (int index = 0; index < numIncomesToShow; index++){
             List<String> income = new ArrayList<String>();
+            if(index < numberOfIncomeEvents){
+                listDataHeader.add("Next Income " + (index + 1));   // Replace with getters
+                income.add("Date: " + DBFetch.getFuture().get(index).getPaymentDate());
+                income.add("Category: " + DBFetch.getFuture().get(index).getCategories());
+                income.add("Amount: " + DBFetch.getFuture().get(index).getTransactionAmt());
+                income.add("Notes: " + DBFetch.getFuture().get(index).getNotes());
+                listDataChild.put(listDataHeader.get(index), income);
+            }
+            else {
+                listDataHeader.add("Next Income " + (index + 1));   // Replace with getters
+                income.add("Date: " + "N/A");
+                income.add("Category: " + "N/A");
+                income.add("Amount: " + "N/A");
+                income.add("Notes: " + "N/A");
+                listDataChild.put(listDataHeader.get(index), income);
+            }
 
-            listDataHeader.add("Next Income " + (index + 1));   // Replace with getters
-            income.add("Date:" + (index + 1));
-            income.add("Category:");
-            income.add("Amount:");
-            income.add("Notes:");
-            listDataChild.put(listDataHeader.get(index), income);
         }
     }
 
