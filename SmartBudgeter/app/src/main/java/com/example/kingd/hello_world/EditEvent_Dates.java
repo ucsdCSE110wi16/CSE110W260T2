@@ -28,8 +28,10 @@ public class EditEvent_Dates extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        LinearLayout llayout = (LinearLayout) inflater.inflate(R.layout.fragment_edit_event_pick_category, container,
+        LinearLayout llayout = (LinearLayout) inflater.inflate(R.layout.fragment_edit_event_dates, container,
                 false);
+
+        System.out.println("I'm here");
 
         cateList = DBFetch.getEventsByCategory(EditEvent_PickCategory.getCategory());
 

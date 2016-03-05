@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
@@ -51,6 +52,18 @@ public class EditEvent_PickCategory extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 category = categoriesSpinner.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                category = categoriesSpinner.getItemAtPosition(0).toString();
+            }
+        });
+
+        Button button = (Button)llayout.findViewById(R.id.button);
+        button.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
                 android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
                 Fragment fragment = null;
                 Class eventDates = EditEvent_Dates.class;
@@ -63,11 +76,6 @@ public class EditEvent_PickCategory extends Fragment {
                 transaction.replace(R.id.fragment_container, fragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                category = categoriesSpinner.getItemAtPosition(0).toString();
             }
         });
 
