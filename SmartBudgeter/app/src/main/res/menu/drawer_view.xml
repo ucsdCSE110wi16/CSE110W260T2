@@ -12,9 +12,6 @@
             android:title="Edit Payments/Expenses" />
         <item
             android:id="@+id/nav_fourth_fragment"
-            android:title="Delete Payments/Expenses" />
-        <item
-            android:id="@+id/nav_fifth_fragment"
             android:title="Home Page" />
     </group>
 </menu>

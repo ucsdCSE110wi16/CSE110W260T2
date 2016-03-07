@@ -8,8 +8,7 @@
         <item>Calendar</item>
         <item>Add Payment/Expense</item>
         <item>Edit Payment/Expense</item>
-        <item>Delete Payment/Expense</item>
-        <item>Main Page</item>
+        <item>Home Page</item>
     </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>

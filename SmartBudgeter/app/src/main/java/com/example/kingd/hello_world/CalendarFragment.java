@@ -28,8 +28,6 @@ import java.util.Date;
  */
 public class CalendarFragment extends Fragment {
 
-    public static DBFetch dbFetch = new DBFetch();
-
     public CalendarFragment() {
         // Required empty public constructor
     }
@@ -39,39 +37,68 @@ public class CalendarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        FragmentActivity faActivity = (FragmentActivity) super.getActivity();
         LinearLayout llayout = (LinearLayout) inflater.inflate(R.layout.fragment_calendar, container,
                 false);
 
         CalendarView calendar = (CalendarView) llayout.findViewById(R.id.calendarView);
 
+        //show the current day's event if there are any
+        TextView calendarCategory = (TextView) llayout.findViewById(R.id.CategoryShow);
+        TextView calendarAmount = (TextView) llayout.findViewById(R.id.AmountShow);
+        if(DBFetch.getCurrentEvent() != null) {
+            calendarCategory.setText(DBFetch.getCurrentEvent().getCategories());
+            calendarAmount.setText(Double.toString(DBFetch.getCurrentEvent().getTransactionAmt()));
+        }
+        else {
+            calendarCategory.setText("N/A");
+            calendarAmount.setText("N/A");
+        }
 
+        //show the selected day event if there are any
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-                                             @Override
-                                             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                                                 int index = 0;
-                                                 Date tempD = new Date(year, month, dayOfMonth);
-                                                 String selectedDate = Integer.toString(year) + '/' + Integer.toString(month) + '/' + Integer.toString(dayOfMonth);
-                                                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-                                                 Date date = new Date();
-                                                 if (date.compareTo(tempD) == -1) {
-                                                     while (index < dbFetch.getFuture().size() - 1) {
-                                                         TextView calendarCategory = (TextView) getActivity().findViewById(R.id.CategoryShow);
-                                                         TextView calendarAmount = (TextView) getActivity().findViewById(R.id.AmountShow);
-                                                         if (dbFetch.getFuture().get(index).getPaymentDate().equals(selectedDate)) {
-                                                             //if(calendarCategory.getText() != null){
-                                                             calendarCategory.setText(dbFetch.getFuture().get(index).getCategories());
-                                                             calendarAmount.setText(Double.toString(dbFetch.getFuture().get(index).getTransactionAmt()));
-                                                             //}
+             @Override
+             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+                 int index = 0;
+                 boolean setIf = false;
+                 String selectedDate = DBFetch.changeToCorrectDateForm(year,month,dayOfMonth);
+                 TextView calendarCategory = (TextView) getActivity().findViewById(R.id.CategoryShow);
+                 TextView calendarAmount = (TextView) getActivity().findViewById(R.id.AmountShow);
+                 if(selectedDate.compareTo(DBFetch.getCurrentDate()) > 0) {
+                     while (index < DBFetch.getFuture().size()) {
+                         //System.out.println(dbFetch.getFuture().get(index).getPaymentDate());
+                         if(DBFetch.getFuture().get(index).getPaymentDate().equals(selectedDate)) {
+                             calendarCategory.setText(DBFetch.getFuture().get(index).getCategories());
+                             calendarAmount.setText(Double.toString(DBFetch.getFuture().get(index).getTransactionAmt()));
+                             setIf = true;
+                         }
+                         else if(DBFetch.getFuture().get(index).getPaymentDate().compareTo(selectedDate) < 0){
+                             break;
+                         }
+                         index++;
+                     }
+                 }
+                 else {
+                     index = 0;
+                     while (index < DBFetch.getPast().size()) {
+                         //System.out.println(dbFetch.getFuture().get(index).getPaymentDate());
+                         if(DBFetch.getPast().get(index).getPaymentDate().equals(selectedDate)) {
+                             calendarCategory.setText(DBFetch.getPast().get(index).getCategories());
+                             calendarAmount.setText(Double.toString(DBFetch.getPast().get(index).getTransactionAmt()));
+                             setIf = true;
+                         }
+                         else if(DBFetch.getPast().get(index).getPaymentDate().compareTo(selectedDate) < 0){
+                             break;
+                         }
+                         index++;
+                     }
+                 }
+                 if(setIf == false) {
+                     calendarCategory.setText("N/A");
+                     calendarAmount.setText("N/A");
+                 }
 
-                                                         } else {
-                                                             calendarCategory.setText("N/A");
-                                                             calendarAmount.setText("N/A");
-                                                         }
-                                                     }
-                                                 }
-                                             }
-                                         }
+             }
+         }
 
         );
 

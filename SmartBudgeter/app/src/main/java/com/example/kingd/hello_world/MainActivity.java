@@ -30,11 +30,22 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ActionBarDrawerToggle drawerToggle;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        System.out.println("onCreate");
+        DBFetch.setCurrentDate();
+        dbFetch.readFromFile();
+        if(!DBFetch.isReadEmpty()) {
+            System.out.println("read not empty");
+            DBFetch.rePopulateFromRead();
+        }
+        DBFetch.sortHistoryByDate();
+        DBFetch.sortUnpaidByDate();
+        DBFetch.checkAndMoveFuture();
+        DBFetch.printAccount();
+
         setContentView(R.layout.activity_main);
 
         // Set a Toolbar to replace the ActionBar.
@@ -110,15 +121,12 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = CalendarFragment.class;
                 break;
             case R.id.nav_second_fragment:
-                fragmentClass = CalendarFragment.class;
+                fragmentClass = AddEvent.class;
                 break;
             case R.id.nav_third_fragment:
-                fragmentClass = CalendarFragment.class;
+                fragmentClass = EditEvent_PickCategory.class;
                 break;
             case R.id.nav_fourth_fragment:
-                fragmentClass = CalendarFragment.class;
-                break;
-            case R.id.nav_fifth_fragment:
                 fragmentClass = homePage.class;
                 break;
             default:

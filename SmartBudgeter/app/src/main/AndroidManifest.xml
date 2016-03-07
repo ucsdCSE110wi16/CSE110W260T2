@@ -21,7 +21,7 @@
         </activity>
         <activity
             android:name=".showMorePayments"
-            android:label="@string/title_activity_show_more_payments"
+            android:label="More Payments"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
@@ -31,7 +31,7 @@
         </activity>
         <activity
             android:name=".showMoreIncome"
-            android:label="@string/title_activity_show_more_income"
+            android:label="More Income"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">

@@ -18,8 +18,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.*;
 import java.lang.String;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Properties;
 
 /**
@@ -34,21 +36,38 @@ public class DBFetch extends Activity {
     private static final String FILENAME = "config.txt";
     private static String name, stored, read;
     private static double balance;
-    private static ArrayList<Unpaid> future;
-    private static ArrayList<History> past;
+    private static ArrayList<Payments> future;
+    private static ArrayList<Payments> past;
+    private static String curDate;
+    public static boolean change;
+    public static String[] spinnerList = {"food", "clothes", "rent", "salary", "miscellaneous"};;
 
     //private GoogleApiClient client;
 
     public DBFetch() {
         balance = 0.00;
         name = "Fuheng Deng";
-        past = new ArrayList<History>();
-        future = new ArrayList<Unpaid>();
-        read = "James|800.00|2016/02/26%fruits%-20.00%AA%^2016/02/25%clothes%-60%BB%^|2016/03/27%rent%-500.0%CC%false%^2016/03/29%salary%8000%DD%false%^|";
+        past = new ArrayList<Payments>();
+        future = new ArrayList<Payments>();
+        read = "";//"James|800.00|2016/02/26%fruits%-20.00%AA%^2016/02/25%clothes%-60%BB%^|2016/03/27%rent%-500.0%CC%false%^2016/03/29%salary%8000%DD%false%^|";
+        Date d = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        curDate = format.format(d);
+        change = false;
     }
 
     public static void setBalance(double bal) {
         balance = bal;
+    }
+
+    public static void setCurrentDate() {
+        Date d = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        curDate = format.format(d);
+    }
+
+    public static String getCurrentDate(){
+        return curDate;
     }
 
     public static double getBalance() {
@@ -59,9 +78,9 @@ public class DBFetch extends Activity {
         balance += add;
     }
 
-    public static void subBalance(double sub) {
+    /*public static void subBalance(double sub) {
         balance -= sub;
-    }
+    }*/
 
     public static void setName(String n) {
         name = n;
@@ -71,34 +90,44 @@ public class DBFetch extends Activity {
         return name;
     }
 
-    public void addToHistory(String date, String cate, double amt, String notes ) {
-        Payments hist = new History();
+    public static void setChangeTrue(){
+        change = true;
+    }
+
+    public static void setChangeFalse(){
+        change = false;
+    }
+
+    public static boolean getChange(){
+        return change;
+    }
+
+
+    public static void addToHistory(String date, String cate, double amt, String notes ) {
+        Payments hist = new Payments();
         hist.addDate(date);
         hist.addCategories(cate);
         hist.addTransaction(amt);
         hist.addNotes(notes);
-        past.add((History) hist);
+        past.add(hist);
     }
 
-    /*public void addToHistoryWithCurrentDate(String cate, double amt, String notes ) {
-        Payments hist = new History();
-        hist.addCurrentDate();
-        hist.addCategories(cate);
-        hist.addTransaction(amt);
-        hist.addNotes(notes);
-        past.add((History) hist);
-    }*/
-
-    public void addToUnpaid(String date, String cate, double amt, String notes ) {
-        Payments toPay = new Unpaid();
+    public static void addToUnpaid(String date, String cate, double amt, String notes) {
+        Payments toPay = new Payments();
         toPay.addDate(date);
         toPay.addCategories(cate);
         toPay.addTransaction(amt);
         toPay.addNotes(notes);
-        future.add((Unpaid) toPay);
+        //toPay.setUnPayed();
+        future.add(toPay);
     }
 
     public void writeStoreUser() throws IOException {
+        if (name.equals("") && balance == 0 && past.size() == 0 && future.size() == 0) {
+            System.out.println("Attempting to write empty object to config file - Terminating method.");
+            return;
+        }
+
         FileOutputStream outputStream;
         try {
             outputStream = openFileOutput(FILENAME, Context.MODE_PRIVATE);
@@ -110,7 +139,7 @@ public class DBFetch extends Activity {
     }
 
     //the stored format: name|balance|past1^...past2^|future1^...future2^|
-    public String StoreToString() {
+    public static String StoreToString() {
         stored = name + "|" + balance + "|";
         for(int i = 0; i < past.size(); i++){
             stored += past.get(i).toString() + "^";
@@ -166,26 +195,22 @@ public class DBFetch extends Activity {
 
     }
 
-    public ArrayList<Unpaid> getFuture(){
+    public static ArrayList<Payments> getFuture(){
         return future;
     }
 
-    public ArrayList<History> getPast(){
+    public static ArrayList<Payments> getPast(){
         return past;
     }
 
-    public boolean isReadEmpty(){
+    public static boolean isReadEmpty(){
         return read.equals("");
     }
 
-    public void rePopulateFromRead(){
-        future = new ArrayList<Unpaid>();
-        past = new ArrayList<History>();
+    public static void rePopulateFromRead(){
         int currentIndex = 0, counter = 0, index = 0, carrotAt;
         int pipeAt = 0, percentAt = 0;
-        History hist;
-        Unpaid unpaid;
-        int a = 0;
+        Payments payments;
         while (pipeAt != -1) {
             pipeAt = read.indexOf("|", currentIndex);
             if (pipeAt > -1) {
@@ -195,12 +220,12 @@ public class DBFetch extends Activity {
                     setBalance(Double.parseDouble(read.substring(currentIndex, pipeAt)));
                 else if (counter == 2) {
                     do {
-                        hist = new History();
+                        payments = new Payments();
                         carrotAt = read.indexOf("^", currentIndex);
                         percentAt = read.indexOf("%", currentIndex);
                         if (carrotAt > percentAt) {
-                            hist = hist.rePopulateFromString(read.substring(currentIndex, carrotAt));
-                            past.add(hist);
+                            payments = payments.rePopulateFromString(read.substring(currentIndex, carrotAt));
+                            past.add(payments);
                             currentIndex = carrotAt + 1;
                         }
 
@@ -208,12 +233,12 @@ public class DBFetch extends Activity {
                 }
                 else {
                     do {
-                        unpaid = new Unpaid();
+                        payments = new Payments();
                         carrotAt = read.indexOf("^", currentIndex);
                         percentAt = read.indexOf("%", currentIndex);
                         if (carrotAt > percentAt) {
-                            unpaid = unpaid.rePopulateFromString(read.substring(currentIndex, carrotAt));
-                            future.add(unpaid);
+                            payments = payments.rePopulateFromString(read.substring(currentIndex, carrotAt));
+                            future.add(payments);
                             currentIndex = carrotAt + 1;
                         }
                     } while(carrotAt < pipeAt - 1);
@@ -228,7 +253,7 @@ public class DBFetch extends Activity {
         }
     }
 
-    public void printAccount() {
+    public static void printAccount() {
         System.out.println("Account Owner: " + name);
         System.out.println("Balance: " + balance);
         for (int i = 0; i < past.size(); i++)
@@ -237,7 +262,8 @@ public class DBFetch extends Activity {
             future.get(j).printOneLine();
     }
 
-    public void sortHistoryByDate() {
+    //from the nearest unpaid to the furthest-away unpaid
+    public static void sortHistoryByDate() {
         for(int i = 0; i < past.size() ; i++) {
             for (int j = i + 1; j < past.size(); j++) {
                 String dateI = past.get(i).getPaymentDate();
@@ -259,20 +285,21 @@ public class DBFetch extends Activity {
         }
     }
 
-    public void sortUnpaidByDate() {
+    //from the nearest unpaid to the furthest-away unpaid
+    public static void sortUnpaidByDate() {
         for(int i = 0; i < future.size() ; i++) {
             for (int j = i + 1; j < future.size(); j++) {
                 String dateI = future.get(i).getPaymentDate();
                 String dateJ = future.get(j).getPaymentDate();
-                if (dateI.substring(0, 4).compareTo(dateJ.substring(0, 4)) < 0) {
+                if (dateI.substring(0, 4).compareTo(dateJ.substring(0, 4)) > 0) {
                     Collections.swap(future, i, j);
                 }
                 else if(dateI.substring(0, 4).compareTo(dateJ.substring(0, 4)) == 0){
-                    if(dateI.substring(5, 7).compareTo(dateJ.substring(5, 7)) < 0) {
+                    if(dateI.substring(5, 7).compareTo(dateJ.substring(5, 7)) > 0) {
                         Collections.swap(future, i, j);
                     }
                     else if(dateI.substring(5, 7).compareTo(dateJ.substring(5, 7)) == 0){
-                        if(dateI.substring(8, 10).compareTo(dateJ.substring(8, 10)) < 0) {
+                        if(dateI.substring(8, 10).compareTo(dateJ.substring(8, 10)) > 0) {
                             Collections.swap(future, i, j);
                         }
                     }
@@ -281,53 +308,92 @@ public class DBFetch extends Activity {
         }
     }
 
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-    }
-    /*
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "DBFetch Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app:///http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
+    //check if the future has been the past, if so, move them to the past and modify the balance
+    public static void checkAndMoveFuture() {
+        int index = 0;
+        while (index < getFuture().size()) {
+            if(getFuture().get(index).getPaymentDate().compareTo(curDate) <= 0) {
+                Payments temp = getFuture().get(index);
+                past.add(temp);
+                future.remove(index);
+                addBalance(temp.getTransactionAmt());
+            }
+            else if(getFuture().get(index).getPaymentDate().compareTo(curDate) > 0){
+                break;
+            }
+            index++;
+        }
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
+    public static Payments getCurrentEvent(){
+        if(getPast().size() != 0 && getCurrentDate().compareTo(getPast().get(0).getPaymentDate()) == 0){
+            return getPast().get(0);
+        }
+        else {
+            System.err.println("Current date event doesn't exist!");
+            return null;
+        }
+    }
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "DBFetch Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app:///http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
-    } */
+    public static String changeToCorrectDateForm(int year, int month, int day){
+        String date = "";
+        String yyyy = Integer.toString(year);
+        String mm = Integer.toString(month + 1);
+        String dd = Integer.toString(day);
+        if (month + 1 < 10) {
+            mm = "0" + mm;
+        }
+        if(day < 10) {
+            dd = "0" + dd;
+        }
+        date += yyyy + "/" + mm + "/" + dd;
+        return date;
+    }
+
+    public static ArrayList<Payments> getIncome(ArrayList<Payments> list){
+        ArrayList<Payments> income = new ArrayList<Payments>();
+        Payments temp;
+        for(int i = 0 ; i < list.size() ; i++){
+            temp = list.get(i);
+            if(temp.getTransactionAmt() > 0){
+                income.add(temp);
+            }
+        }
+        return income;
+    }
+
+    public static ArrayList<Payments> getPayment(ArrayList<Payments> list){
+        ArrayList<Payments> payment = new ArrayList<Payments>();
+        Payments temp;
+        for(int i = 0 ; i < list.size() ; i++){
+            temp = list.get(i);
+            if(temp.getTransactionAmt() <= 0){
+                payment.add(temp);
+            }
+        }
+        return payment;
+    }
+
+    public static ArrayList<Payments> getEventsByCategory(String category){
+        ArrayList<Payments> cateList = new ArrayList<Payments>();
+        if(getFuture().size() != 0){
+            for(int i = 0; i < getFuture().size(); i++){
+                if(getFuture().get(i).getCategories().equals(category)){
+                    cateList.add(getFuture().get(i));
+                }
+            }
+        }
+        if(getPast().size() != 0){
+            for(int i = 0; i < getPast().size(); i++){
+                if (getPast().get(i).getCategories().equals(category)){
+                    cateList.add(getPast().get(i));
+                }
+            }
+        }
+        return cateList;
+    }
+
 }
+
+
 
