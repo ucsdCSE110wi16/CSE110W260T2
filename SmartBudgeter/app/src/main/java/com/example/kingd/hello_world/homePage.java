@@ -25,6 +25,7 @@ import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 /**
@@ -72,8 +73,8 @@ public class homePage extends Fragment {
                 System.out.println("read not empty");
                 DBFetch.rePopulateFromRead();
             }
-            DBFetch.sortHistoryByDate();
-            DBFetch.sortUnpaidByDate();
+            Collections.sort(DBFetch.getPast(), new pastDateComparator());
+            Collections.sort(DBFetch.getFuture(), new futureDateComparator());
             DBFetch.printAccount();
             income = DBFetch.getIncome(DBFetch.getFuture());
             payment = DBFetch.getPayment(DBFetch.getFuture());

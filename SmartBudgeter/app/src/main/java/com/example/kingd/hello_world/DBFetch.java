@@ -262,52 +262,6 @@ public class DBFetch extends Activity {
             future.get(j).printOneLine();
     }
 
-    //from the nearest unpaid to the furthest-away unpaid
-    public static void sortHistoryByDate() {
-        for(int i = 0; i < past.size() ; i++) {
-            for (int j = i + 1; j < past.size(); j++) {
-                String dateI = past.get(i).getPaymentDate();
-                String dateJ = past.get(j).getPaymentDate();
-                if (dateI.substring(0, 4).compareTo(dateJ.substring(0, 4)) < 0) {
-                    Collections.swap(past, i, j);
-                }
-                else if(dateI.substring(0, 4).compareTo(dateJ.substring(0, 4)) == 0){
-                    if(dateI.substring(5, 7).compareTo(dateJ.substring(5, 7)) < 0) {
-                        Collections.swap(past, i, j);
-                    }
-                    else if(dateI.substring(5, 7).compareTo(dateJ.substring(5, 7)) == 0){
-                        if(dateI.substring(8, 10).compareTo(dateJ.substring(8, 10)) < 0) {
-                            Collections.swap(past, i, j);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    //from the nearest unpaid to the furthest-away unpaid
-    public static void sortUnpaidByDate() {
-        for(int i = 0; i < future.size() ; i++) {
-            for (int j = i + 1; j < future.size(); j++) {
-                String dateI = future.get(i).getPaymentDate();
-                String dateJ = future.get(j).getPaymentDate();
-                if (dateI.substring(0, 4).compareTo(dateJ.substring(0, 4)) > 0) {
-                    Collections.swap(future, i, j);
-                }
-                else if(dateI.substring(0, 4).compareTo(dateJ.substring(0, 4)) == 0){
-                    if(dateI.substring(5, 7).compareTo(dateJ.substring(5, 7)) > 0) {
-                        Collections.swap(future, i, j);
-                    }
-                    else if(dateI.substring(5, 7).compareTo(dateJ.substring(5, 7)) == 0){
-                        if(dateI.substring(8, 10).compareTo(dateJ.substring(8, 10)) > 0) {
-                            Collections.swap(future, i, j);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     //check if the future has been the past, if so, move them to the past and modify the balance
     public static void checkAndMoveFuture() {
         int index = 0;

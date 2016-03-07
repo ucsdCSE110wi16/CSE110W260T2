@@ -21,6 +21,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.Collections;
+
 public class MainActivity extends AppCompatActivity {
 
     public static DBFetch dbFetch = new DBFetch();
@@ -41,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("read not empty");
             DBFetch.rePopulateFromRead();
         }
-        DBFetch.sortHistoryByDate();
-        DBFetch.sortUnpaidByDate();
+        Collections.sort(DBFetch.getPast(),new pastDateComparator());
+        Collections.sort(DBFetch.getFuture(),new futureDateComparator());
         DBFetch.checkAndMoveFuture();
         DBFetch.printAccount();
 
