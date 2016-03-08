@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         System.out.println("onCreate");
         DBFetch.setCurrentDate();
@@ -59,15 +60,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         else {
-            startActivity(new Intent(MainActivity.this, PopupWindow.class));
+            Intent intent = new Intent(this, PopupWindowActivity.class);
+            startActivity(intent);
         }
 
         Collections.sort(DBFetch.getPast(),new pastDateComparator());
-        Collections.sort(DBFetch.getFuture(),new futureDateComparator());
+        Collections.sort(DBFetch.getFuture(), new futureDateComparator());
         DBFetch.checkAndMoveFuture();
         DBFetch.printAccount();
-
-        setContentView(R.layout.activity_main);
 
         // Set a Toolbar to replace the ActionBar.
         toolbar = (Toolbar) findViewById(R.id.toolbar);
