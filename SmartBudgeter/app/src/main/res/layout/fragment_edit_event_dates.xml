@@ -5,8 +5,9 @@
     tools:context="com.example.kingd.hello_world.EditEvent_Dates">
 
     <ListView
+        android:id="@+id/chooseEventList"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="wrap_content">
     </ListView>
 
     <TextView
