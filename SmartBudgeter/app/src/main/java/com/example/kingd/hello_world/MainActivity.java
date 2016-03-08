@@ -49,12 +49,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         System.out.println("onCreate");
         DBFetch.setCurrentDate();
         dbFetch.readFromFile();
-        if (!DBFetch.isReadEmpty()) {
+        if (!DBFetch.getName().equals("") && DBFetch.getBalance() != 0.00) { //!dbFetch.isReadEmpty()){
             System.out.println("read not empty");
             DBFetch.rePopulateFromRead();
         }
@@ -68,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         Collections.sort(DBFetch.getFuture(), new futureDateComparator());
         DBFetch.checkAndMoveFuture();
         DBFetch.printAccount();
+        setContentView(R.layout.activity_main);
 
         // Set a Toolbar to replace the ActionBar.
         toolbar = (Toolbar) findViewById(R.id.toolbar);

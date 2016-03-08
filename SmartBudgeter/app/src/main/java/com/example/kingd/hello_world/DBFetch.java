@@ -46,7 +46,7 @@ public class DBFetch extends Activity {
 
     public DBFetch() {
         balance = 0.00;
-        name = "Fuheng Deng";
+        name = "";
         past = new ArrayList<Payments>();
         future = new ArrayList<Payments>();
         read = "";//"James|800.00|2016/02/26%fruits%-20.00%AA%^2016/02/25%clothes%-60%BB%^|2016/03/27%rent%-500.0%CC%false%^2016/03/29%salary%8000%DD%false%^|";
@@ -154,23 +154,19 @@ public class DBFetch extends Activity {
     }
 
     public void readFromFile() {
-
         String ret = "";
         File varTmpDir = new File(FILENAME);
         if (varTmpDir.exists()) {
             try {
                 InputStream inputStream = openFileInput(FILENAME);
-
                 if (inputStream != null) {
                     InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                     BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                     String receiveString = "";
                     StringBuilder stringBuilder = new StringBuilder();
-
                     while ((receiveString = bufferedReader.readLine()) != null) {
                         stringBuilder.append(receiveString);
                     }
-
                     inputStream.close();
                     ret = stringBuilder.toString();
                 }
@@ -182,19 +178,7 @@ public class DBFetch extends Activity {
             read = ret;
         }
 
-        else {
-            try {
-                PrintWriter writer = new PrintWriter(FILENAME, "UTF-8");
-                writer.close();
-            } catch (FileNotFoundException e) {
-                System.err.println("File not found: " + e.toString());
-            } catch (IOException e) {
-                System.err.println("Can not read file: " + e.toString());
-            }
-        }
-
     }
-
     public static ArrayList<Payments> getFuture(){
         return future;
     }
