@@ -1,6 +1,8 @@
 package com.example.kingd.hello_world;
 
 import android.app.Activity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -26,6 +28,7 @@ import java.util.ArrayList;
 public class EditEvent_Dates extends Fragment {
 
     private ListView lv;
+    private static Payments payment;
 
     private static ArrayList<Payments> cateList = new ArrayList<Payments>();
 
@@ -54,14 +57,32 @@ public class EditEvent_Dates extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                
-                /*String item = ((TextView) view).getText().toString();
-                Toast.makeText(getActivity().getBaseContext(), item, Toast.LENGTH_LONG).show();*/
+
+                String item = ((TextView) view).getText().toString();
+                payment = DBFetch.fromStringToPayments(item);
+                android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+                Fragment fragment = null;
+                Class EditFragment = EditAndDeletePage.class;
+                try {
+                    fragment = (Fragment) EditFragment.newInstance();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragment_container, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+                //Toast.makeText(getActivity().getBaseContext(), item, Toast.LENGTH_LONG).show();
 
             }
         });
 
         return llayout;
+    }
+
+    public static Payments getPayment(){
+        return payment;
     }
 
 }

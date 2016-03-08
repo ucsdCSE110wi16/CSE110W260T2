@@ -331,6 +331,18 @@ public class DBFetch extends Activity {
         return cateList;
     }
 
+    public static Payments fromStringToPayments(String str){
+        Payments payments = new Payments();
+        ArrayList<String> content = new ArrayList<String>();
+        int indexOf = 0, currentIndex = 0;
+        for(int i = 0; i < 4; i++){
+            indexOf = str.indexOf("%",currentIndex);
+            content.add(str.substring(currentIndex, indexOf));
+            currentIndex = indexOf + 1;
+        }
+        return payments;
+    }
+
 }
 
 
