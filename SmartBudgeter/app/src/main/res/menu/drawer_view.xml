@@ -6,12 +6,12 @@
             android:title="Calendar" />
         <item
             android:id="@+id/nav_second_fragment"
-            android:title="Add Payments/Expenses" />
+            android:title="Add Income/Payments" />
         <item
             android:id="@+id/nav_third_fragment"
-            android:title="Edit Payments/Expenses" />
+            android:title="Edit Add Income/Payments" />
         <item
             android:id="@+id/nav_fourth_fragment"
-            android:title="Home Page" />
+            android:title="Home" />
     </group>
 </menu>
