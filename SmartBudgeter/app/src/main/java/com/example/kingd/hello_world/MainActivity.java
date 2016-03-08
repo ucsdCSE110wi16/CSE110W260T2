@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().add(R.id.fragment_container, mainPage)
                     .addToBackStack(null)
                     .commit();
+            setTitle("Hello, " + DBFetch.getName() + "!");
         } else {
 
         }
@@ -167,7 +168,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Highlight the selected item, update the title, and close the drawer
         menuItem.setChecked(true);
-        setTitle(menuItem.getTitle());
+
+        if(fragmentClass == homePage.class) {
+            setTitle("Hello, " + DBFetch.getName() + "!");
+        }
+        else {
+            setTitle(menuItem.getTitle());
+        }
+
         mDrawer.closeDrawers();
     }
 

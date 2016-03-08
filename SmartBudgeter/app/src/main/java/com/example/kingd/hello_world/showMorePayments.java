@@ -55,7 +55,7 @@ public class showMorePayments extends AppCompatActivity {
             List<String> payment = new ArrayList<String>();
 
             if(index < numberOfPaymentEvents){
-                listDataHeader.add("Next Income " + (index + 1));   // Replace with getters
+                listDataHeader.add("Next Payment " + (index + 1));   // Replace with getters
                 payment.add("Date: " + DBFetch.getFuture().get(index).getPaymentDate());
                 payment.add("Category: " + DBFetch.getFuture().get(index).getCategories());
                 payment.add("Amount: " + DBFetch.getFuture().get(index).getTransactionAmt());
@@ -63,7 +63,7 @@ public class showMorePayments extends AppCompatActivity {
                 listDataChild.put(listDataHeader.get(index), payment);
             }
             else {
-                listDataHeader.add("Next Income " + (index + 1));   // Replace with getters
+                listDataHeader.add("Next Payment " + (index + 1));   // Replace with getters
                 payment.add("Date: " + "N/A");
                 payment.add("Category: " + "N/A");
                 payment.add("Amount: " + "N/A");
