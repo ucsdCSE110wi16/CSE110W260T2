@@ -26,9 +26,13 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+<<<<<<< HEAD
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+=======
+import java.util.Collections;
+>>>>>>> 3f99b997776562e8a43f5c7dede5b73079abb6f7
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,11 +59,16 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("read not empty");
             DBFetch.rePopulateFromRead();
         }
+<<<<<<< HEAD
         else {
             startActivity(new Intent(MainActivity.this, PopupWindow.class));
         }
         DBFetch.sortHistoryByDate();
         DBFetch.sortUnpaidByDate();
+=======
+        Collections.sort(DBFetch.getPast(),new pastDateComparator());
+        Collections.sort(DBFetch.getFuture(),new futureDateComparator());
+>>>>>>> 3f99b997776562e8a43f5c7dede5b73079abb6f7
         DBFetch.checkAndMoveFuture();
         DBFetch.printAccount();
 

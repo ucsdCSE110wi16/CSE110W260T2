@@ -31,8 +31,6 @@ public class EditEvent_Dates extends Fragment {
         LinearLayout llayout = (LinearLayout) inflater.inflate(R.layout.fragment_edit_event_dates, container,
                 false);
 
-        System.out.println("I'm here");
-
         cateList = DBFetch.getEventsByCategory(EditEvent_PickCategory.getCategory());
 
 
