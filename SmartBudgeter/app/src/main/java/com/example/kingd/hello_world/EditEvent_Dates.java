@@ -54,10 +54,9 @@ public class EditEvent_Dates extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-
-                String item = ((TextView) view).getText().toString();
-
-                Toast.makeText(getActivity().getBaseContext(), item, Toast.LENGTH_LONG).show();
+                
+                /*String item = ((TextView) view).getText().toString();
+                Toast.makeText(getActivity().getBaseContext(), item, Toast.LENGTH_LONG).show();*/
 
             }
         });
