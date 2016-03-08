@@ -8,10 +8,8 @@ package com.example.kingd.hello_world;
         base.setBalance(1000.00);
         base.setName("James");
 
-        base.past.addCurrentDate();
-        base.past.addCatagories("Stuff");
-        base.past.addTransaction(1000.00);
-        base.past.addNotes("Initial Deposit");
+        base.setCurrentDate();
+        base.addToHistory("2016/03/07", "Stuff", 1000.00, "Initial Deposit");
         base.printAccount();
     }
 }*/
