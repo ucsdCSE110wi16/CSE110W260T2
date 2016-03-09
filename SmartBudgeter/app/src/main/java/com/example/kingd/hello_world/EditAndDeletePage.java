@@ -111,12 +111,17 @@ public class EditAndDeletePage extends Fragment {
                 modified_amt = Double.parseDouble(amountAdd.getText().toString());
                 modified_note = noteAdd.getText().toString();
                 DBFetch.deleteEvent(payment);
+                if(payment.getPaymentDate().compareTo(DBFetch.getCurrentDate()) <= 0){
+                    DBFetch.addBalance(-payment.getTransactionAmt());
+                }
+                DBFetch.addBalance(-payment.getTransactionAmt());
                 payment.setDate(modified_date);
                 payment.setCategories(modified_cate);
                 payment.setTransaction(modified_amt);
                 payment.setNotes(modified_note);
                 if(modified_date.compareTo(DBFetch.getCurrentDate()) <= 0){
                     DBFetch.addToHistory(payment);
+                    DBFetch.addBalance(modified_amt);
                 }
                 else {
                     DBFetch.addToUnpaid(payment);
@@ -140,6 +145,9 @@ public class EditAndDeletePage extends Fragment {
             @Override
             public void onClick(View v) {
                 DBFetch.deleteEvent(payment);
+                if(payment.getPaymentDate().compareTo(DBFetch.getCurrentDate()) <= 0){
+                    DBFetch.addBalance(-payment.getTransactionAmt());
+                }
                 DBFetch.setChangeTrue();
                 android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
                 Fragment fragment = null;
