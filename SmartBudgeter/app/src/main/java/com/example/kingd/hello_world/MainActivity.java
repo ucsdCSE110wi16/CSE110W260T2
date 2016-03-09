@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("onCreate");
         DBFetch.setCurrentDate();
         dbFetch.readFromFile(getApplicationContext());
-        if (!DBFetch.getName().equals("") && DBFetch.getBalance() != 0.00) { //!dbFetch.isReadEmpty()){
+        if (!dbFetch.isReadEmpty()){
             System.out.println("read not empty");
             DBFetch.rePopulateFromRead();
         }

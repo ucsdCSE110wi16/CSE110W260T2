@@ -137,7 +137,7 @@ public class DBFetch extends Activity {
         File file = context.getFilesDir();
         FileOutputStream outputStream; //= context.openFileOutput(FILENAME, context.MODE_WORLD_READABLE);
         try {
-            outputStream = openFileOutput(file.toString() + FILENAME, Context.MODE_PRIVATE);
+            outputStream = new FileOutputStream(new File(file.getPath() + FILENAME));
             outputStream.write(StoreToString().getBytes());
             outputStream.close();
         } catch (Exception e) {
@@ -147,16 +147,20 @@ public class DBFetch extends Activity {
 
     //the stored format: name|balance|past1^...past2^|future1^...future2^|
     public static String StoreToString() {
-        stored = name + "|" + balance + "|";
-        for(int i = 0; i < past.size(); i++){
-            stored += past.get(i).toString() + "^";
+        if (name == "" && balance == 0.0) {
+            stored = "";
+        }else {
+            stored = name + "|" + balance + "|";
+            for (int i = 0; i < past.size(); i++) {
+                stored += past.get(i).toString() + "^";
+            }
+            stored += "|";
+            for (int j = 0; j < future.size(); j++) {
+                stored += future.get(j).toString() + "^";
+            }
+            stored += "|";
+            System.out.println(past.size() + " " + future.size());
         }
-        stored += "|";
-        for(int j = 0; j < future.size(); j++){
-            stored += future.get(j).toString() + "^";
-        }
-        stored += "|";
-        System.out.println(past.size() + " " + future.size());
         return stored;
     }
 
