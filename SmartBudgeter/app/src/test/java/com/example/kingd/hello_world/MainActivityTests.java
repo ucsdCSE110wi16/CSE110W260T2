@@ -1,7 +1,7 @@
-/*package com.example.kingd.hello_world;
+package com.example.kingd.hello_world;
 
 
-        /*import android.support.test.espresso.matcher.ViewMatchers;
+        import android.support.test.espresso.matcher.ViewMatchers;
         import android.support.test.rule.ActivityTestRule;
         import android.support.test.runner.AndroidJUnit4;
 
@@ -34,50 +34,51 @@
         import static org.hamcrest.CoreMatchers.startsWith;
         import static org.hamcrest.Matchers.allOf;
         import static org.hamcrest.Matchers.endsWith;
-        import static org.hamcrest.Matchers.not;*/
-/*
+        import static org.hamcrest.Matchers.not;
+
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTests {
-*/
+
     /**
      * Launches {@link MainActivity} for every test
      */
 
-    /*@Rule
+    @Rule
     public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
-=======
-    //@Rule
-    //public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
->>>>>>> 660d201cd181f1e6e344895d8ddd42fcf730c697
+
+    @Rule
+    public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
+
 
     /**
      * Test if showMorePayments button is clickable.
      */
 
-    /*@Test
+    @Test
     public void testSMPIsClickable() {
         onView(withId(R.id.showMorePayments)).check(matches(isClickable()));
     }
-=======
-    //@Test
-    //public void testSMPIsClickable() {
-      //  onView(withId(R.id.showMorePayments)).check(matches(isClickable()));
-    //}
->>>>>>> 660d201cd181f1e6e344895d8ddd42fcf730c697
+
+    @Test
+    public void testSMPIsClickable() {
+        onView(withId(R.id.showMoreIncome)).check(matches(isClickable()));
+    }
+
 
     /**
      * Test showMoreIncome Button is clickable.
      */
 
-    /*@Test
+    @Test
     public void testSMPIsClickable() {
         onView(withId(R.id.showMoreIncome)).check(matches(isClickable()));
     }
-}*/
+}
 
-    //@Test
-    //public void testSMPIsClickable() {
-    //    onView(withId(R.id.showMoreIncome)).check(matches(isClickable()));
-  //  }
-//}
+    @Test
+    public void testSMPIsClickable() {
+        onView(withId(R.id.showMoreIncome)).check(matches(isClickable()));
+    }
+
+}
 
