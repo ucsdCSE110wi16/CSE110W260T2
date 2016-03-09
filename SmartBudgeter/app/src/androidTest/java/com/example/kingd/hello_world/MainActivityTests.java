@@ -5,8 +5,13 @@ package com.example.kingd.hello_world;
         import android.support.test.rule.ActivityTestRule;
         import android.support.test.runner.AndroidJUnit4;
         import android.test.ActivityUnitTestCase;
+        import android.test.suitebuilder.annotation.LargeTest;
+        import android.test.suitebuilder.annotation.SmallTest;
 
         import com.example.kingd.hello_world.MainActivity;
+        import com.example.kingd.hello_world.R;
+        import com.example.kingd.hello_world.showMoreIncome;
+        import com.example.kingd.hello_world.showMorePayments;
 
         import org.junit.Rule;
         import org.junit.Test;
@@ -17,6 +22,8 @@ package com.example.kingd.hello_world;
 
         import dalvik.annotation.TestTarget;
 
+        import static android.support.test.espresso.intent.Intents.intended;
+        import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
         import static android.support.test.espresso.Espresso.closeSoftKeyboard;
         import static android.support.test.espresso.Espresso.onView;
         import static android.support.test.espresso.Espresso.openContextualActionModeOverflowMenu;
@@ -39,17 +46,19 @@ package com.example.kingd.hello_world;
         import static android.support.test.espresso.matcher.ViewMatchers.withHint;
         import static android.support.test.espresso.matcher.ViewMatchers.withId;
         import static android.support.test.espresso.matcher.ViewMatchers.withText;
+        import static org.hamcrest.CoreMatchers.notNullValue;
         import static org.hamcrest.CoreMatchers.startsWith;
         import static org.hamcrest.Matchers.allOf;
         import static org.hamcrest.Matchers.endsWith;
         import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTests extends ActivityUnitTestCase<MainActivity>{
+@LargeTest
+public class MainActivityTests {
 
-    public MainActivityTests(){
-        super(MainActivity.class);
-    }
+    //public MainActivityTests(){
+        //super(MainActivity.class);
+    //}
 
     /**
      * Launches {@link MainActivity} for every test
@@ -62,46 +71,26 @@ public class MainActivityTests extends ActivityUnitTestCase<MainActivity>{
      * Test if showMorePayments button is clickable.
      */
 
-    @Test
+   /* @Test
     public void testToolBarDisplayed(){
-        try {
-            onView(withId(R.id.toolbar)).check(matches(isDisplayed()));
-            System.out.println("Toolbar is displayed! Test Passed!");
-        } catch (AssertionFailedError e){
-            System.err.println("Toolbar isn't displayed");
-        }
-    }
+        if( onView(withId(R.id.toolbar)).check(matches(isDisplayed())). )
 
-    @Test
-    public void testDrawerToggleClickable(){
-        try {
-            onView(withId(R.id.drawer_layout)).check(matches(isClickable()));
-            System.out.println("Drawer Toggle is clickable! Test Passed!");
-        } catch(Exception e) {
-            System.out.println("DrawerToggle isn't clickable");
-        }
     }
 
     @Test
     public void testNavigationDrawerDisplayed(){
-        try {
-            onView(withId(R.id.drawer_layout)).perform(click());
-            onView(withId(R.id.nvView)).check(matches(isDisplayed()));
-            System.out.println("Navigation drawer is displayed! Test Passed!");
-        } catch (Exception e){
-            System.err.println("Navigation drawer isn't displayed");
-        }
+        onView(withId(R.id.drawer_layout)).perform(click());
+        onView(withId(R.id.nvView)).check(matches(isEnabled()));
     }
 
-
+*/
     @Test
     public void testSMPClickable() {
-        try{
-            onView(withId(R.id.showMorePayments)).check(matches(isClickable()));
-            System.out.println("The showmorepayments button is clickable! Test passed!");
-        }catch(Exception e) {
-            System.out.println("The showmorepayments button isn't clickable!");
-        }
+        onView(withId(R.id.showMorePayments)).check(matches(notNullValue()));
+        onView(withId(R.id.showMorePayments)).check(matches(isClickable()));
+        onView(withId(R.id.showMorePayments)).perform(click());
+        intended(hasComponent(showMorePayments.class.getName()));
+        System.out.println("The showmorepayments button is clickable! Test passed!");
     }
 
     /**
@@ -110,70 +99,52 @@ public class MainActivityTests extends ActivityUnitTestCase<MainActivity>{
 
     @Test
     public void testSMIClickable() {
-        try{
-            onView(withId(R.id.showMoreIncome)).check(matches(isClickable()));
-            System.out.println("The showmoreincome button is clickable! Test passed!");
-        }catch(Exception e) {
-            System.out.println("The showmoreincome button isn't clickable!");
-        }
+        onView(withId(R.id.showMoreIncome)).check(matches(isClickable()));
+        System.out.println("The showmoreincome button is clickable! Test passed!");
+
 
     }
 
     @Test
     public void testAddButtonClickable() {
-        try{
-            onView(withId(R.id.AddButton)).check(matches(isClickable()));
-            System.out.println("The add button is clickable! Test passed!");
-        }catch(Exception e) {
-            System.out.println("The add button isn't clickable!");
-        }
+        onView(withId(R.id.AddButton)).check(matches(isClickable()));
+        System.out.println("The add button is clickable! Test passed!");
 
     }
 
     @Test
     public void testEditCatergoryNextButtonClickable() {
-        try{
-            onView(withId(R.id.button)).check(matches(isClickable()));
-            System.out.println("The next button is clickable! Test passed!");
-        }catch(Exception e) {
-            System.out.println("The next button isn't clickable!");
-        }
+
+        onView(withId(R.id.button)).check(matches(isClickable()));
+        System.out.println("The next button is clickable! Test passed!");
     }
 
     @Test
     public void testEditDatesListViewClickable() {
-        try{
-            onView(withId(R.id.chooseEventList)).check(matches(isClickable()));
-            System.out.println("The Edit Dates List View is clickable! Test passed!");
-        }catch(Exception e) {
-            System.out.println("The Edit Dates List View isn't clickable!");
-        }
+        onView(withId(R.id.chooseEventList)).check(matches(isClickable()));
+        System.out.println("The Edit Dates List View is clickable! Test passed!");
     }
 
     @Test
     public void testEditDeletePageClickable() {
-        try{
-            onView(withId(R.id.editDatePicker)).check(matches(isClickable()));
-            System.out.println("The DatePicker is clickable!");
-        }catch(Exception e) {
-            System.out.println("The DatePicker isn't clickable!");
-        }
-        try{
-            onView(withId(R.id.EditButton)).check(matches(isClickable()));
-            System.out.println("The Edit Button is clickable!");
-        }catch(Exception e) {
-            System.out.println("The Edit Button isn't clickable!");
-        }
-        try{
-            onView(withId(R.id.DeleteButton)).check(matches(isClickable()));
-            System.out.println("The Delete Button is clickable!");
-        }catch(Exception e) {
-            System.out.println("The Delete Button isn't clickable!");
-        }
+
+        onView(withId(R.id.editDatePicker)).check(matches(isClickable()));
+        onView(withId(R.id.EditButton)).check(matches(isClickable()));
+        onView(withId(R.id.DeleteButton)).check(matches(isClickable()));
     }
 
 
+    @Test
+    public void clickonSMPTest(){
+        onView(withId(R.id.showMorePayments)).perform(click());
+        intended(hasComponent(showMorePayments.class.getName()));
+    }
 
+    @Test
+    public void clickonSMITest(){
+        onView(withId(R.id.showMoreIncome)).perform(click());
+        intended(hasComponent(showMoreIncome.class.getName()));
+    }
 
 }
 
