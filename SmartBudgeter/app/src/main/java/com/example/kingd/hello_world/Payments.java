@@ -8,37 +8,30 @@ import java.util.Date;
  * Created by James on 2/4/2016.
  */
 public class Payments {
-    private double transactionAmount;
+    private static double transactionAmount;
     //private boolean payed;
-    private String paymentNotes, dates, categories; // TODO: implement cata
+    private static String paymentNotes, dates, categories; // TODO: implement cata
 
     /*public void addCurrentDate() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd"); // HH:mm:ss");
         Date d = new Date();
         addDate(dateFormat.format(d));
     }*/
+    public Payments(){
 
-    public void addDate(String d) {
-        dates = d;
     }
-    public void addCategories(String Cate) {
-        categories = Cate;
-    }
-    public void addTransaction(double amt) {
+
+    public Payments(String date, double amt, String cate, String note){
+        dates = date;
         transactionAmount = amt;
+        categories = cate;
+        paymentNotes = note;
     }
-    public void addNotes(String notes) {
-        paymentNotes = notes;
-    }
+
+    public void setDate(String d){dates = d;}
     public void setTransaction(double amt) {
         transactionAmount = amt;
     }
-    /*public void setUnPayed() {
-        payed = false;
-    }
-    public void setPayed() {
-        payed = true;
-    }*/
     public void setCategories(String cate) {
         categories = cate;
     }
@@ -58,10 +51,6 @@ public class Payments {
         return this.dates;
     }
 
-    /*public boolean getPayed() {
-        return this.payed;
-    }*/
-
     public void printOneLine() {
         System.out.println("Date of Transaction: " + getPaymentDate());
         System.out.println("Category of Transaction: " + getCategories());
@@ -76,16 +65,16 @@ public class Payments {
             percentAt = st.indexOf("%", currentIndex);
             if (percentAt > -1) {
                 if (counter == 0) {
-                    this.addDate(st.substring(currentIndex, percentAt));
+                    this.setDate(st.substring(currentIndex, percentAt));
                 }
                 else if (counter == 1) {
-                    this.addCategories(st.substring(currentIndex, percentAt));
+                    this.setCategories(st.substring(currentIndex, percentAt));
                 }
                 else if (counter == 2) {
-                    this.addTransaction(Double.parseDouble(st.substring(currentIndex, percentAt)));
+                    this.setTransaction(Double.parseDouble(st.substring(currentIndex, percentAt)));
                 }
                 else {
-                    this.addNotes(st.substring(currentIndex, percentAt));
+                    this.setNotes(st.substring(currentIndex, percentAt));
                 }
                 currentIndex = percentAt + 1;
                 counter++;
@@ -101,6 +90,15 @@ public class Payments {
         String formattedString = "";
         formattedString += dates + "%" + categories + "%" + transactionAmount + "%" + paymentNotes + "%";
         return formattedString;
+    }
+
+    public static boolean isEqual(Payments payments){
+        if(categories.equals(payments.getCategories()) && dates.equals(payments.getPaymentDate()) && transactionAmount==payments.getTransactionAmt() && paymentNotes.equals(payments.getNotes())){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 }

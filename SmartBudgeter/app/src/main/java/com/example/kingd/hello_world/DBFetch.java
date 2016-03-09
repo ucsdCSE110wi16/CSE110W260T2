@@ -105,20 +105,27 @@ public class DBFetch extends Activity {
 
     public static void addToHistory(String date, String cate, double amt, String notes ) {
         Payments hist = new Payments();
-        hist.addDate(date);
-        hist.addCategories(cate);
-        hist.addTransaction(amt);
-        hist.addNotes(notes);
+        hist.setDate(date);
+        hist.setCategories(cate);
+        hist.setTransaction(amt);
+        hist.setNotes(notes);
+        past.add(hist);
+    }
+
+    public static void addToHistory(Payments hist) {
         past.add(hist);
     }
 
     public static void addToUnpaid(String date, String cate, double amt, String notes) {
         Payments toPay = new Payments();
-        toPay.addDate(date);
-        toPay.addCategories(cate);
-        toPay.addTransaction(amt);
-        toPay.addNotes(notes);
-        //toPay.setUnPayed();
+        toPay.setDate(date);
+        toPay.setCategories(cate);
+        toPay.setTransaction(amt);
+        toPay.setNotes(notes);
+        future.add(toPay);
+    }
+
+    public static void addToUnpaid(Payments toPay) {
         future.add(toPay);
     }
 
@@ -332,7 +339,6 @@ public class DBFetch extends Activity {
     }
 
     public static Payments fromStringToPayments(String str){
-        Payments payments = new Payments();
         ArrayList<String> content = new ArrayList<String>();
         int indexOf = 0, currentIndex = 0;
         for(int i = 0; i < 4; i++){
@@ -340,7 +346,33 @@ public class DBFetch extends Activity {
             content.add(str.substring(currentIndex, indexOf));
             currentIndex = indexOf + 1;
         }
+        Payments payments = new Payments(content.get(0),Double.parseDouble(content.get(2)), content.get(1), content.get(3));
         return payments;
+    }
+
+    public static ArrayList<Integer> getDateItems(String str){
+        ArrayList<Integer> content = new ArrayList<Integer>();
+        content.add(Integer.parseInt(str.substring(0,4)));
+        content.add(Integer.parseInt(str.substring(5,7)));
+        content.add(Integer.parseInt(str.substring(8,10)));
+        return content;
+    }
+
+    public static void deleteEvent(Payments payments){
+        for(int i = 0; i < past.size(); i++){
+            if(past.get(i).isEqual(payments)){
+                past.remove(i);
+                System.out.println("I'm deleted");
+                break;
+            }
+        }
+        for(int i = 0; i < future.size(); i++){
+            if(future.get(i).isEqual(payments)){
+                future.remove(i);
+                System.out.println("I'm deleted");
+                break;
+            }
+        }
     }
 
 }
