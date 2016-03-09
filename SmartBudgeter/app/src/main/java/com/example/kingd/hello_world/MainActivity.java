@@ -51,6 +51,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         System.out.println("onCreate");
+        DBFetch.setCurrentDate();
+        dbFetch.readFromFile(getApplicationContext());
+        if (!dbFetch.isReadEmpty()){//!DBFetch.getName().equals("") && DBFetch.getBalance() != 0.00) { //!dbFetch.isReadEmpty()){
+            System.out.println("read not empty");
+            DBFetch.rePopulateFromRead();
+        }
+
+        else {
+            Intent intent = new Intent(this, PopupWindowActivity.class);
+            startActivity(intent);
+        }
 
         setContentView(R.layout.activity_main);
 

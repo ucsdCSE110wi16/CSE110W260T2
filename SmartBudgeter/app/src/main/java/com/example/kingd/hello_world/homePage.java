@@ -66,8 +66,8 @@ public class homePage extends Fragment {
     public void onResume() {
 
         System.err.println("onResume of LoginFragment");
-        MainActivity.dbFetch.readFromFile();
-        if (!DBFetch.getName().equals("") && DBFetch.getBalance() != 0.00) { //!dbFetch.isReadEmpty()){
+        MainActivity.dbFetch.readFromFile(getActivity());
+        if (!DBFetch.isReadEmpty()){//!DBFetch.getName().equals("") && DBFetch.getBalance() != 0.00) { //
             System.out.println("read not empty");
             DBFetch.rePopulateFromRead();
         }
@@ -162,7 +162,7 @@ public class homePage extends Fragment {
     public void onPause() {
         System.err.println("OnPause of loginFragment");
         try {
-            MainActivity.dbFetch.writeStoreUser();
+            MainActivity.dbFetch.writeStoreUser(getContext());
             System.out.println("writing successful");
         }
         catch(Exception ec){
