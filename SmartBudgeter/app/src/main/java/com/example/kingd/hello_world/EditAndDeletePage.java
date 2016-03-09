@@ -1,6 +1,7 @@
 package com.example.kingd.hello_world;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -114,7 +115,6 @@ public class EditAndDeletePage extends Fragment {
                 if(payment.getPaymentDate().compareTo(DBFetch.getCurrentDate()) <= 0){
                     DBFetch.addBalance(-payment.getTransactionAmt());
                 }
-                DBFetch.addBalance(-payment.getTransactionAmt());
                 payment.setDate(modified_date);
                 payment.setCategories(modified_cate);
                 payment.setTransaction(modified_amt);
@@ -127,18 +127,8 @@ public class EditAndDeletePage extends Fragment {
                     DBFetch.addToUnpaid(payment);
                 }
                 DBFetch.setChangeTrue();
-                android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
-                Fragment fragment = null;
-                Class homePageClass = homePage.class;
-                try {
-                    fragment = (Fragment) homePageClass.newInstance();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fragment_container, fragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                Intent intent = new Intent(getActivity(),MainActivity.class);
+                startActivity(intent);
             }
         });
         delete_button.setOnClickListener(new Button.OnClickListener(){
@@ -149,18 +139,8 @@ public class EditAndDeletePage extends Fragment {
                     DBFetch.addBalance(-payment.getTransactionAmt());
                 }
                 DBFetch.setChangeTrue();
-                android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
-                Fragment fragment = null;
-                Class homePageClass = homePage.class;
-                try {
-                    fragment = (Fragment) homePageClass.newInstance();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fragment_container, fragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                Intent intent = new Intent(getActivity(),MainActivity.class);
+                startActivity(intent);
             }
         });
 

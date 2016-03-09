@@ -8,9 +8,9 @@ import java.util.Date;
  * Created by James on 2/4/2016.
  */
 public class Payments {
-    private static double transactionAmount;
+    private double transactionAmount;
     //private boolean payed;
-    private static String paymentNotes, dates, categories; // TODO: implement cata
+    private String paymentNotes, dates, categories; // TODO: implement cata
 
     /*public void addCurrentDate() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd"); // HH:mm:ss");
@@ -92,7 +92,7 @@ public class Payments {
         return formattedString;
     }
 
-    public static boolean isEqual(Payments payments){
+    public boolean isEqual(Payments payments){
         if(categories.equals(payments.getCategories()) && dates.equals(payments.getPaymentDate()) && transactionAmount==payments.getTransactionAmt() && paymentNotes.equals(payments.getNotes())){
             return true;
         }

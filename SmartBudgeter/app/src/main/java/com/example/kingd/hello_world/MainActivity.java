@@ -51,22 +51,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         System.out.println("onCreate");
-        DBFetch.setCurrentDate();
-        dbFetch.readFromFile();
-        if (!DBFetch.getName().equals("") && DBFetch.getBalance() != 0.00) { //!dbFetch.isReadEmpty()){
-            System.out.println("read not empty");
-            DBFetch.rePopulateFromRead();
-        }
 
-        else {
-            Intent intent = new Intent(this, PopupWindowActivity.class);
-            startActivity(intent);
-        }
-
-        Collections.sort(DBFetch.getPast(),new pastDateComparator());
-        Collections.sort(DBFetch.getFuture(), new futureDateComparator());
-        DBFetch.checkAndMoveFuture();
-        DBFetch.printAccount();
         setContentView(R.layout.activity_main);
 
         // Set a Toolbar to replace the ActionBar.

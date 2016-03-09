@@ -66,20 +66,26 @@ public class homePage extends Fragment {
     public void onResume() {
 
         System.err.println("onResume of LoginFragment");
+        MainActivity.dbFetch.readFromFile();
+        if (!DBFetch.getName().equals("") && DBFetch.getBalance() != 0.00) { //!dbFetch.isReadEmpty()){
+            System.out.println("read not empty");
+            DBFetch.rePopulateFromRead();
+        }
 
-        if(DBFetch.getChange() == true){
-            MainActivity.dbFetch.readFromFile();
-            if(!DBFetch.isReadEmpty()) {
-                System.out.println("read not empty");
-                DBFetch.rePopulateFromRead();
-            }
+        else {
+            Intent intent = new Intent(getActivity(), PopupWindowActivity.class);
+            startActivity(intent);
+        }
+
+        if(DBFetch.getChange() == true) {
             Collections.sort(DBFetch.getPast(), new pastDateComparator());
             Collections.sort(DBFetch.getFuture(), new futureDateComparator());
-            DBFetch.printAccount();
+
             income = DBFetch.getIncome(DBFetch.getFuture());
             payment = DBFetch.getPayment(DBFetch.getFuture());
         }
 
+        DBFetch.printAccount();
         DBFetch.setCurrentDate();
         DBFetch.checkAndMoveFuture();
 

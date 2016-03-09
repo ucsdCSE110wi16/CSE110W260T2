@@ -1,5 +1,6 @@
 package com.example.kingd.hello_world;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.net.Uri;
@@ -105,17 +106,9 @@ public class AddEvent extends Fragment {
                     DBFetch.addToUnpaid(date, categories, amount, notes);
                     System.out.println("Added to the unpaid");
                 }
-                Class homepageFragment = homePage.class;
-                try {
-                    fragment = (Fragment) homepageFragment.newInstance();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
                 DBFetch.setChangeTrue();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fragment_container, fragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                Intent intent = new Intent(getActivity(),MainActivity.class);
+                startActivity(intent);
             }
         });
 

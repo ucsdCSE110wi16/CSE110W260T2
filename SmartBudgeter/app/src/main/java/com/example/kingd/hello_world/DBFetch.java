@@ -362,14 +362,12 @@ public class DBFetch extends Activity {
         for(int i = 0; i < past.size(); i++){
             if(past.get(i).isEqual(payments)){
                 past.remove(i);
-                System.out.println("I'm deleted");
                 break;
             }
         }
         for(int i = 0; i < future.size(); i++){
             if(future.get(i).isEqual(payments)){
                 future.remove(i);
-                System.out.println("I'm deleted");
                 break;
             }
         }
