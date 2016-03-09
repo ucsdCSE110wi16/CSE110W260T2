@@ -39,9 +39,6 @@ import java.util.Collections;
  */
 public class homePage extends Fragment {
 
-    public static ArrayList<Payments> income = new ArrayList<Payments>();
-    public static ArrayList<Payments> payment = new ArrayList<Payments>();
-
     public homePage() {
         // empty constructor
     }
@@ -66,23 +63,14 @@ public class homePage extends Fragment {
     public void onResume() {
 
         System.err.println("onResume of LoginFragment");
-        if(MainActivity.enter == true) {
-            MainActivity.dbFetch.readFromFile(getActivity());
-            if (!DBFetch.isReadEmpty()) {//!DBFetch.getName().equals("") && DBFetch.getBalance() != 0.00) { //
-                System.out.println("read not empty");
-                DBFetch.rePopulateFromRead();
-            } else {
-                Intent intent = new Intent(getActivity(), PopupWindowActivity.class);
-                startActivity(intent);
-            }
-            MainActivity.enter = false;
-        }
 
         if(DBFetch.getChange() == true) {
             Collections.sort(DBFetch.getPast(), new pastDateComparator());
             Collections.sort(DBFetch.getFuture(), new futureDateComparator());
-            income = DBFetch.getIncome(DBFetch.getFuture());
-            payment = DBFetch.getPayment(DBFetch.getFuture());
+            MainActivity.income = DBFetch.getIncome(DBFetch.getFuture());
+            MainActivity.payment = DBFetch.getPayment(DBFetch.getFuture());
+            System.out.println("I've been changed!");
+            DBFetch.setChangeFalse();
         }
 
         DBFetch.printAccount();
@@ -95,7 +83,7 @@ public class homePage extends Fragment {
         balanceField.setText(Double.toString(DBFetch.getBalance()));
 
         // Update Next Payment and Next Income fields
-        TextView dateField = (TextView) getActivity().findViewById(R.id.dateField);
+        TextView dateField = (TextView)getActivity().findViewById(R.id.dateField);
         TextView categoryField = (TextView) getActivity().findViewById(R.id.categoryField);
         TextView amountField = (TextView) getActivity().findViewById(R.id.amountField);
         TextView dateField2 = (TextView) getActivity().findViewById(R.id.dateField2);
@@ -105,11 +93,11 @@ public class homePage extends Fragment {
         TextView notesField = (TextView) getActivity().findViewById(R.id.notesField);
 
         //Next Payment Getter
-        if(payment.size() != 0) {
-            dateField.setText(payment.get(0).getPaymentDate()); // Replace with getters
-            categoryField.setText(payment.get(0).getCategories());
-            amountField.setText(Double.toString(payment.get(0).getTransactionAmt()));
-            notesField.setText(payment.get(0).getNotes());
+        if(MainActivity.payment.size() != 0) {
+            dateField.setText(MainActivity.payment.get(0).getPaymentDate()); // Replace with getters
+            categoryField.setText(MainActivity.payment.get(0).getCategories());
+            amountField.setText(Double.toString(MainActivity.payment.get(0).getTransactionAmt()));
+            notesField.setText(MainActivity.payment.get(0).getNotes());
         }
         else {
             dateField.setText("N/A");
@@ -118,11 +106,11 @@ public class homePage extends Fragment {
             notesField.setText("N/A");
         }
         //Next Income Getter
-        if(income.size() != 0) {
-            dateField2.setText(income.get(0).getPaymentDate());
-            categoryField2.setText(income.get(0).getCategories());
-            amountField2.setText(Double.toString(income.get(0).getTransactionAmt()));
-            notesField2.setText(income.get(0).getNotes());
+        if(MainActivity.income.size() != 0) {
+            dateField2.setText(MainActivity.income.get(0).getPaymentDate());
+            categoryField2.setText(MainActivity.income.get(0).getCategories());
+            amountField2.setText(Double.toString(MainActivity.income.get(0).getTransactionAmt()));
+            notesField2.setText(MainActivity.income.get(0).getNotes());
         }
         else {
             dateField2.setText("N/A");
@@ -134,7 +122,7 @@ public class homePage extends Fragment {
         // Show more payments button listener
         Button showMorePaymentsBtn = (Button) getActivity().findViewById(R.id.showMorePayments);
 
-        showMorePaymentsBtn.setOnClickListener(new OnClickListener() {
+        showMorePaymentsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), showMorePayments.class);
@@ -145,15 +133,13 @@ public class homePage extends Fragment {
         // Show more income button listener
         Button showMoreIncomeBtn = (Button)getActivity().findViewById(R.id.showMoreIncome);
 
-        showMoreIncomeBtn.setOnClickListener(new OnClickListener() {
+        showMoreIncomeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), showMoreIncome.class);
                 startActivity(intent);
             }
         });
-
-        DBFetch.setChangeFalse();
 
         super.onResume();
     }

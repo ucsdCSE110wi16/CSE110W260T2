@@ -29,6 +29,8 @@ import android.widget.TextView;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import java.util.ArrayList;
 import java.util.Collections;
 
 
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static DBFetch dbFetch = new DBFetch();
     public static boolean enter = true;
+    public static ArrayList<Payments> income = new ArrayList<Payments>();
+    public static ArrayList<Payments> payment = new ArrayList<Payments>();
 
     private DrawerLayout mDrawer;
     private NavigationView nvDrawer;
@@ -51,19 +55,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*System.out.println("onCreate");
-        DBFetch.setCurrentDate();
-        dbFetch.readFromFile(getApplicationContext());
-
-        if (!dbFetch.isReadEmpty()){
-            System.out.println("read not empty");
-            DBFetch.rePopulateFromRead();
+        if(enter == true) {
+            MainActivity.dbFetch.readFromFile(getApplicationContext());
+            if (!DBFetch.isReadEmpty()) {//!DBFetch.getName().equals("") && DBFetch.getBalance() != 0.00) { //
+                System.out.println("read not empty");
+                DBFetch.rePopulateFromRead();
+            } else {
+                Intent intent = new Intent(getApplication(), PopupWindowActivity.class);
+                startActivity(intent);
+            }
+            Collections.sort(DBFetch.getPast(), new pastDateComparator());
+            Collections.sort(DBFetch.getFuture(), new futureDateComparator());
+            income = DBFetch.getIncome(DBFetch.getFuture());
+            payment = DBFetch.getPayment(DBFetch.getFuture());
+            enter = false;
         }
-
-        else {
-            Intent intent = new Intent(this, PopupWindowActivity.class);
-            startActivity(intent);
-        }*/
 
         setContentView(R.layout.activity_main);
 
