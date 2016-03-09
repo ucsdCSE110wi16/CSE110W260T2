@@ -68,7 +68,7 @@ public class homePage extends Fragment {
         System.err.println("onResume of LoginFragment");
 
         if(DBFetch.getChange() == true){
-            MainActivity.dbFetch.readFromFile();
+            MainActivity.dbFetch.readFromFile(getContext());
             if(!DBFetch.isReadEmpty()) {
                 System.out.println("read not empty");
                 DBFetch.rePopulateFromRead();
@@ -156,7 +156,7 @@ public class homePage extends Fragment {
     public void onPause() {
         System.err.println("OnPause of loginFragment");
         try {
-            MainActivity.dbFetch.writeStoreUser();
+            MainActivity.dbFetch.writeStoreUser(getContext());
             System.out.println("writing successful");
         }
         catch(Exception ec){

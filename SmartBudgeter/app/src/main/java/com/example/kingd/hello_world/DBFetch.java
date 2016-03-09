@@ -33,7 +33,7 @@ import java.util.Properties;
  */
 public class DBFetch extends Activity {
 
-    private static final String FILENAME = "config.txt";
+    private static final String FILENAME = "/config.txt";
     private static String name, stored, read;
     private static double balance;
     private static ArrayList<Payments> future;
@@ -129,15 +129,15 @@ public class DBFetch extends Activity {
         future.add(toPay);
     }
 
-    public void writeStoreUser() throws IOException {
+    public void writeStoreUser(Context context) throws IOException {
         if (name.equals("") && balance == 0 && past.size() == 0 && future.size() == 0) {
             System.out.println("Attempting to write empty object to config file - Terminating method.");
             return;
         }
-
-        FileOutputStream outputStream;
+        File file = context.getFilesDir();
+        FileOutputStream outputStream; //= context.openFileOutput(FILENAME, context.MODE_WORLD_READABLE);
         try {
-            outputStream = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            outputStream = openFileOutput(file.toString() + FILENAME, Context.MODE_PRIVATE);
             outputStream.write(StoreToString().getBytes());
             outputStream.close();
         } catch (Exception e) {
@@ -160,12 +160,14 @@ public class DBFetch extends Activity {
         return stored;
     }
 
-    public void readFromFile() {
-        String ret = "";
-        File varTmpDir = new File(FILENAME);
+    public void readFromFile(Context context) {
+        String ret = "", myPath = "";
+        File varTmpDir = context.getFilesDir();
         if (varTmpDir.exists()) {
             try {
-                InputStream inputStream = openFileInput(FILENAME);
+                myPath = varTmpDir.getPath() + FILENAME;
+                FileInputStream inputStream = new FileInputStream(new File(myPath));
+
                 if (inputStream != null) {
                     InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                     BufferedReader bufferedReader = new BufferedReader(inputStreamReader);

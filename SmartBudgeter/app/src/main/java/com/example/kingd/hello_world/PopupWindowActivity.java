@@ -25,7 +25,7 @@ public class PopupWindowActivity extends Activity {
                 DBFetch.setName(editText.getText().toString());
                 DBFetch.setBalance(Double.parseDouble(editText2.getText().toString()));
                 try {
-                    MainActivity.dbFetch.writeStoreUser();
+                    MainActivity.dbFetch.writeStoreUser(getApplicationContext());
                 }catch(Exception e){
                     e.printStackTrace();
                     System.out.println("Writing failed");
