@@ -49,10 +49,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("the loop is in MainActivity's onCreate");
 
         System.out.println("onCreate");
         DBFetch.setCurrentDate();
         dbFetch.readFromFile(getApplicationContext());
+
         if (!dbFetch.isReadEmpty()){//!DBFetch.getName().equals("") && DBFetch.getBalance() != 0.00) { //!dbFetch.isReadEmpty()){
             System.out.println("read not empty");
             DBFetch.rePopulateFromRead();

@@ -137,7 +137,7 @@ public class DBFetch extends Activity {
         File file = context.getFilesDir();
         FileOutputStream outputStream; //= context.openFileOutput(FILENAME, context.MODE_WORLD_READABLE);
         try {
-            outputStream = openFileOutput(file.toString() + FILENAME, Context.MODE_PRIVATE);
+            outputStream = new FileOutputStream(new File(file.getPath() + FILENAME));
             outputStream.write(StoreToString().getBytes());
             outputStream.close();
         } catch (Exception e) {
@@ -148,16 +148,20 @@ public class DBFetch extends Activity {
 
     //the stored format: name|balance|past1^...past2^|future1^...future2^|
     public static String StoreToString() {
-        stored = name + "|" + balance + "|";
-        for(int i = 0; i < past.size(); i++){
-            stored += past.get(i).toString() + "^";
+        if (name == "" && balance == 0.0) {
+            stored = "";
+        }else {
+            stored = name + "|" + balance + "|";
+            for (int i = 0; i < past.size(); i++) {
+                stored += past.get(i).toString() + "^";
+            }
+            stored += "|";
+            for (int j = 0; j < future.size(); j++) {
+                stored += future.get(j).toString() + "^";
+            }
+            stored += "|";
+            System.out.println(past.size() + " " + future.size());
         }
-        stored += "|";
-        for(int j = 0; j < future.size(); j++){
-            stored += future.get(j).toString() + "^";
-        }
-        stored += "|";
-        System.out.println(past.size() + " " + future.size());
         return stored;
     }
 
@@ -205,45 +209,43 @@ public class DBFetch extends Activity {
         int currentIndex = 0, counter = 0, index = 0, carrotAt;
         int pipeAt = 0, percentAt = 0;
         Payments payments;
-        while (pipeAt != -1) {
+        while (counter < 4) {
             pipeAt = read.indexOf("|", currentIndex);
-            if (pipeAt > -1) {
-                if (counter == 0)
-                    setName(read.substring(currentIndex, pipeAt));
-                else if (counter == 1)
-                    setBalance(Double.parseDouble(read.substring(currentIndex, pipeAt)));
-                else if (counter == 2) {
-                    do {
-                        payments = new Payments();
-                        carrotAt = read.indexOf("^", currentIndex);
-                        percentAt = read.indexOf("%", currentIndex);
-                        if (carrotAt > percentAt) {
-                            payments = payments.rePopulateFromString(read.substring(currentIndex, carrotAt));
-                            past.add(payments);
-                            currentIndex = carrotAt + 1;
-                        }
-
-                    } while(carrotAt < pipeAt - 1);
+            if (counter == 0)
+                setName(read.substring(currentIndex, pipeAt));
+            else if (counter == 1)
+                setBalance(Double.parseDouble(read.substring(currentIndex, pipeAt)));
+            else if (counter == 2) {
+                while(true) {
+                    payments = new Payments();
+                    carrotAt = read.indexOf("^", currentIndex);
+                    if(carrotAt == -1 || carrotAt > pipeAt){
+                        break;
+                    }
+                    payments = payments.rePopulateFromString(read.substring(currentIndex, carrotAt));
+                    past.add(payments);
+                    currentIndex = carrotAt + 1;
+                    System.out.println("I'm reading the history...");
                 }
-                else {
-                    do {
-                        payments = new Payments();
-                        carrotAt = read.indexOf("^", currentIndex);
-                        percentAt = read.indexOf("%", currentIndex);
-                        if (carrotAt > percentAt) {
-                            payments = payments.rePopulateFromString(read.substring(currentIndex, carrotAt));
-                            future.add(payments);
-                            currentIndex = carrotAt + 1;
-                        }
-                    } while(carrotAt < pipeAt - 1);
-                }
-                currentIndex = pipeAt + 1;
-                counter++;
             }
             else {
+                while(true){
+                    payments = new Payments();
+                    carrotAt = read.indexOf("^", currentIndex);
+                    if(carrotAt == -1 || carrotAt > pipeAt){
+                        break;
+                    }
+                    if (carrotAt > percentAt) {
+                        payments = payments.rePopulateFromString(read.substring(currentIndex, carrotAt));
+                        future.add(payments);
+                        currentIndex = carrotAt + 1;
+                    }
+                    System.out.println("I'm reading the unpaid...");
+                }
                 System.out.println("File reading finished!");
-                break;
             }
+            currentIndex = pipeAt + 1;
+            counter++;
         }
     }
 

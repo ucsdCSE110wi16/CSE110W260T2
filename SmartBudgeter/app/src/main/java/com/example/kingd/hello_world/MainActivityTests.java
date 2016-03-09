@@ -1,4 +1,4 @@
-package com.example.kingd.hello_world;
+/*package com.example.kingd.hello_world;
 
 
         /*import android.support.test.espresso.matcher.ViewMatchers;
@@ -38,26 +38,46 @@ package com.example.kingd.hello_world;
 /*
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTests {
-
+*/
     /**
      * Launches {@link MainActivity} for every test
      */
+
     /*@Rule
     public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
+=======
+    //@Rule
+    //public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
+>>>>>>> 660d201cd181f1e6e344895d8ddd42fcf730c697
 
     /**
      * Test if showMorePayments button is clickable.
      */
+
     /*@Test
     public void testSMPIsClickable() {
         onView(withId(R.id.showMorePayments)).check(matches(isClickable()));
     }
+=======
+    //@Test
+    //public void testSMPIsClickable() {
+      //  onView(withId(R.id.showMorePayments)).check(matches(isClickable()));
+    //}
+>>>>>>> 660d201cd181f1e6e344895d8ddd42fcf730c697
 
     /**
      * Test showMoreIncome Button is clickable.
      */
+
     /*@Test
     public void testSMPIsClickable() {
         onView(withId(R.id.showMoreIncome)).check(matches(isClickable()));
     }
 }*/
+
+    //@Test
+    //public void testSMPIsClickable() {
+    //    onView(withId(R.id.showMoreIncome)).check(matches(isClickable()));
+  //  }
+//}
+
