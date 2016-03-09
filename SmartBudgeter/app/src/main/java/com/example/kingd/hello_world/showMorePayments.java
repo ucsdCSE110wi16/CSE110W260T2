@@ -48,18 +48,17 @@ public class showMorePayments extends AppCompatActivity {
     private void preparePaymentListData() {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<>();
-        ArrayList<Payments> Get = DBFetch.getPayment(DBFetch.getFuture());
-        int numberOfPaymentEvents = Get.size();
+        int numberOfPaymentEvents = homePage.payment.size();
 
         for (int index = 0; index < numPaymentsToShow; index++){
             List<String> payment = new ArrayList<String>();
 
             if(index < numberOfPaymentEvents){
                 listDataHeader.add("Next Payment " + (index + 1));   // Replace with getters
-                payment.add("Date: " + DBFetch.getFuture().get(index).getPaymentDate());
-                payment.add("Category: " + DBFetch.getFuture().get(index).getCategories());
-                payment.add("Amount: " + DBFetch.getFuture().get(index).getTransactionAmt());
-                payment.add("Notes: " + DBFetch.getFuture().get(index).getNotes());
+                payment.add("Date: " + homePage.payment.get(index).getPaymentDate());
+                payment.add("Category: " + homePage.payment.get(index).getCategories());
+                payment.add("Amount: " + homePage.payment.get(index).getTransactionAmt());
+                payment.add("Notes: " + homePage.payment.get(index).getNotes());
                 listDataChild.put(listDataHeader.get(index), payment);
             }
             else {

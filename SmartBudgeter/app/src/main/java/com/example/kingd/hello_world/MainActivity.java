@@ -35,6 +35,7 @@ import java.util.Collections;
 public class MainActivity extends AppCompatActivity {
 
     public static DBFetch dbFetch = new DBFetch();
+    public static boolean enter = true;
 
     private DrawerLayout mDrawer;
     private NavigationView nvDrawer;
@@ -49,13 +50,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        System.out.println("the loop is in MainActivity's onCreate");
 
-        System.out.println("onCreate");
+        /*System.out.println("onCreate");
         DBFetch.setCurrentDate();
         dbFetch.readFromFile(getApplicationContext());
 
-        if (!dbFetch.isReadEmpty()){//!DBFetch.getName().equals("") && DBFetch.getBalance() != 0.00) { //!dbFetch.isReadEmpty()){
+        if (!dbFetch.isReadEmpty()){
             System.out.println("read not empty");
             DBFetch.rePopulateFromRead();
         }
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         else {
             Intent intent = new Intent(this, PopupWindowActivity.class);
             startActivity(intent);
-        }
+        }*/
 
         setContentView(R.layout.activity_main);
 
@@ -223,5 +223,18 @@ public class MainActivity extends AppCompatActivity {
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
+    }
+
+    @Override
+    protected void onDestroy() {
+        System.err.println("OnDestroy of loginFragment");
+        try {
+            MainActivity.dbFetch.writeStoreUser(getApplicationContext());
+            System.out.println("writing successful");
+        }
+        catch(Exception ec){
+            ec.printStackTrace();
+        }
+        super.onDestroy();
     }
 }

@@ -63,25 +63,21 @@ public class Payments {
         int percentAt;
         while (counter <= 3) {
             percentAt = st.indexOf("%", currentIndex);
-            if (percentAt > -1) {
-                if (counter == 0) {
-                    this.setDate(st.substring(currentIndex, percentAt));
-                }
-                else if (counter == 1) {
-                    this.setCategories(st.substring(currentIndex, percentAt));
-                }
-                else if (counter == 2) {
-                    this.setTransaction(Double.parseDouble(st.substring(currentIndex, percentAt)));
-                }
-                else {
-                    this.setNotes(st.substring(currentIndex, percentAt));
-                }
-                currentIndex = percentAt + 1;
-                counter++;
+
+            if (counter == 0) {
+                this.setDate(st.substring(currentIndex, percentAt));
+            }
+            else if (counter == 1) {
+                this.setCategories(st.substring(currentIndex, percentAt));
+            }
+            else if (counter == 2) {
+                this.setTransaction(Double.parseDouble(st.substring(currentIndex, percentAt)));
             }
             else {
-                break;
+                this.setNotes(st.substring(currentIndex, percentAt));
             }
+            currentIndex = percentAt + 1;
+            counter++;
         }
         return this;
     }

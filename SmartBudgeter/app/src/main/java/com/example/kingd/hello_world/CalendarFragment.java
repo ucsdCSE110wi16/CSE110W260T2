@@ -65,13 +65,13 @@ public class CalendarFragment extends Fragment {
                  TextView calendarAmount = (TextView) getActivity().findViewById(R.id.AmountShow);
                  if(selectedDate.compareTo(DBFetch.getCurrentDate()) > 0) {
                      while (index < DBFetch.getFuture().size()) {
-                         //System.out.println(dbFetch.getFuture().get(index).getPaymentDate());
+                         System.out.println("The selected date is: " + selectedDate);
                          if(DBFetch.getFuture().get(index).getPaymentDate().equals(selectedDate)) {
                              calendarCategory.setText(DBFetch.getFuture().get(index).getCategories());
                              calendarAmount.setText(Double.toString(DBFetch.getFuture().get(index).getTransactionAmt()));
                              setIf = true;
                          }
-                         else if(DBFetch.getFuture().get(index).getPaymentDate().compareTo(selectedDate) < 0){
+                         else if(DBFetch.getFuture().get(index).getPaymentDate().compareTo(selectedDate) > 0){
                              break;
                          }
                          index++;

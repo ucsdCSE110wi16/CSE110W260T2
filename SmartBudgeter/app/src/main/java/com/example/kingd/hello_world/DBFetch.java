@@ -209,6 +209,7 @@ public class DBFetch extends Activity {
         int currentIndex = 0, counter = 0, index = 0, carrotAt;
         int pipeAt = 0, percentAt = 0;
         Payments payments;
+        System.out.println("The read is: " + read);
         while (counter < 4) {
             pipeAt = read.indexOf("|", currentIndex);
             if (counter == 0)
@@ -219,6 +220,7 @@ public class DBFetch extends Activity {
                 while(true) {
                     payments = new Payments();
                     carrotAt = read.indexOf("^", currentIndex);
+                    System.out.println("The carrot at is: " + carrotAt);
                     if(carrotAt == -1 || carrotAt > pipeAt){
                         break;
                     }

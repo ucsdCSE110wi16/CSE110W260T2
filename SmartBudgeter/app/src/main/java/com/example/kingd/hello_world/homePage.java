@@ -66,21 +66,21 @@ public class homePage extends Fragment {
     public void onResume() {
 
         System.err.println("onResume of LoginFragment");
-        MainActivity.dbFetch.readFromFile(getActivity());
-        if (!DBFetch.isReadEmpty()){//!DBFetch.getName().equals("") && DBFetch.getBalance() != 0.00) { //
-            System.out.println("read not empty");
-            DBFetch.rePopulateFromRead();
-        }
-
-        else {
-            Intent intent = new Intent(getActivity(), PopupWindowActivity.class);
-            startActivity(intent);
+        if(MainActivity.enter == true) {
+            MainActivity.dbFetch.readFromFile(getActivity());
+            if (!DBFetch.isReadEmpty()) {//!DBFetch.getName().equals("") && DBFetch.getBalance() != 0.00) { //
+                System.out.println("read not empty");
+                DBFetch.rePopulateFromRead();
+            } else {
+                Intent intent = new Intent(getActivity(), PopupWindowActivity.class);
+                startActivity(intent);
+            }
+            MainActivity.enter = false;
         }
 
         if(DBFetch.getChange() == true) {
             Collections.sort(DBFetch.getPast(), new pastDateComparator());
             Collections.sort(DBFetch.getFuture(), new futureDateComparator());
-
             income = DBFetch.getIncome(DBFetch.getFuture());
             payment = DBFetch.getPayment(DBFetch.getFuture());
         }
@@ -158,7 +158,7 @@ public class homePage extends Fragment {
         super.onResume();
     }
 
-    @Override
+    /*@Override
     public void onPause() {
         System.err.println("OnPause of loginFragment");
         try {
@@ -169,7 +169,7 @@ public class homePage extends Fragment {
             ec.printStackTrace();
         }
         super.onPause();
-    }
+    }*/
 
 
     /*

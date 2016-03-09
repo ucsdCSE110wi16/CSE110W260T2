@@ -29,19 +29,12 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class EditAndDeletePage extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     private static Payments payment;
     private static String modified_date;
     private static double modified_amt;
     private static String modified_cate;
     private static String modified_note;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
@@ -119,9 +112,12 @@ public class EditAndDeletePage extends Fragment {
                 payment.setCategories(modified_cate);
                 payment.setTransaction(modified_amt);
                 payment.setNotes(modified_note);
+                System.out.println("The modified date is: " + modified_date);
+                System.out.println("The current date is:　" + DBFetch.getCurrentDate());
                 if(modified_date.compareTo(DBFetch.getCurrentDate()) <= 0){
                     DBFetch.addToHistory(payment);
                     DBFetch.addBalance(modified_amt);
+                    System.out.println("modified the balance");
                 }
                 else {
                     DBFetch.addToUnpaid(payment);

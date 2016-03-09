@@ -57,17 +57,16 @@ public class showMoreIncome extends AppCompatActivity {
     private void prepareIncomeListData() {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<>();
-        ArrayList<Payments> Get = DBFetch.getPayment(DBFetch.getFuture());
-        int numberOfIncomeEvents = Get.size();
+        int numberOfIncomeEvents = homePage.income.size();
 
         for (int index = 0; index < numIncomesToShow; index++){
             List<String> income = new ArrayList<String>();
             if(index < numberOfIncomeEvents){
                 listDataHeader.add("Next Income " + (index + 1));   // Replace with getters
-                income.add("Date: " + DBFetch.getFuture().get(index).getPaymentDate());
-                income.add("Category: " + DBFetch.getFuture().get(index).getCategories());
-                income.add("Amount: " + DBFetch.getFuture().get(index).getTransactionAmt());
-                income.add("Notes: " + DBFetch.getFuture().get(index).getNotes());
+                income.add("Date: " + homePage.income.get(index).getPaymentDate());
+                income.add("Category: " + homePage.income.get(index).getCategories());
+                income.add("Amount: " + homePage.income.get(index).getTransactionAmt());
+                income.add("Notes: " + homePage.income.get(index).getNotes());
                 listDataChild.put(listDataHeader.get(index), income);
             }
             else {
