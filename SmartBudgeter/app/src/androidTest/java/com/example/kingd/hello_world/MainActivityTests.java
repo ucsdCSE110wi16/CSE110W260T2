@@ -53,7 +53,6 @@ package com.example.kingd.hello_world;
         import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
-@LargeTest
 public class MainActivityTests {
 
     //public MainActivityTests(){
@@ -71,19 +70,6 @@ public class MainActivityTests {
      * Test if showMorePayments button is clickable.
      */
 
-   /* @Test
-    public void testToolBarDisplayed(){
-        if( onView(withId(R.id.toolbar)).check(matches(isDisplayed())). )
-
-    }
-
-    @Test
-    public void testNavigationDrawerDisplayed(){
-        onView(withId(R.id.drawer_layout)).perform(click());
-        onView(withId(R.id.nvView)).check(matches(isEnabled()));
-    }
-
-*/
     @Test
     public void testSMPClickable() {
         onView(withId(R.id.showMorePayments)).check(matches(notNullValue()));
