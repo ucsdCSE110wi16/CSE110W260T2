@@ -64,8 +64,10 @@ public class MainActivityTests {
      * Launches {@link MainActivity} for every test
      */
 
+
+    // GIVEN: You are on the home page
     @Rule
-    public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(MainActivity.class);
 
     /**
      * Test if showMorePayments button is clickable.
@@ -84,11 +86,15 @@ public class MainActivityTests {
     }
 
 */
+
+    // WHEN: you click the show more payments button
     @Test
     public void testSMPClickable() {
         onView(withId(R.id.showMorePayments)).check(matches(notNullValue()));
         onView(withId(R.id.showMorePayments)).check(matches(isClickable()));
         onView(withId(R.id.showMorePayments)).perform(click());
+
+        // THEN, the show more payments page is displayed
         intended(hasComponent(showMorePayments.class.getName()));
         System.out.println("The showmorepayments button is clickable! Test passed!");
     }
@@ -96,55 +102,54 @@ public class MainActivityTests {
     /**
      * Test showMoreIncome Button is clickable.
      */
-
+    // WHEN: You click the Show more income button
     @Test
     public void testSMIClickable() {
         onView(withId(R.id.showMoreIncome)).check(matches(isClickable()));
+        // THEN, the showMoreIncome page pops up
+        onView(withId(R.id.showMoreIncome)).perform(click());
+        intended(hasComponent(showMoreIncome.class.getName()));
         System.out.println("The showmoreincome button is clickable! Test passed!");
 
 
     }
 
+    // WHEN the Add Button option is chosen
     @Test
     public void testAddButtonClickable() {
         onView(withId(R.id.AddButton)).check(matches(isClickable()));
+        // Then the AddEvent page is displayed
+        onView(withId(R.id.AddButton)).perform(click());
+        intended(hasComponent(AddEvent.class.getName()));
         System.out.println("The add button is clickable! Test passed!");
 
     }
 
+    // When the editCategeoryNext Button is clicked
     @Test
     public void testEditCatergoryNextButtonClickable() {
 
+        // Then: no errors are thrown (it is clickable)
         onView(withId(R.id.button)).check(matches(isClickable()));
         System.out.println("The next button is clickable! Test passed!");
     }
 
+    // When the edit dates list view is clicked
     @Test
     public void testEditDatesListViewClickable() {
+        // Then: no errors are thrown (it is clickable)
         onView(withId(R.id.chooseEventList)).check(matches(isClickable()));
         System.out.println("The Edit Dates List View is clickable! Test passed!");
     }
 
+    // when the editdeletepage is displayed and the buttons are pressed
     @Test
     public void testEditDeletePageClickable() {
 
+        // Then: no errors are thrown (all buttons are clickable)
         onView(withId(R.id.editDatePicker)).check(matches(isClickable()));
         onView(withId(R.id.EditButton)).check(matches(isClickable()));
         onView(withId(R.id.DeleteButton)).check(matches(isClickable()));
     }
-
-
-    @Test
-    public void clickonSMPTest(){
-        onView(withId(R.id.showMorePayments)).perform(click());
-        intended(hasComponent(showMorePayments.class.getName()));
-    }
-
-    @Test
-    public void clickonSMITest(){
-        onView(withId(R.id.showMoreIncome)).perform(click());
-        intended(hasComponent(showMoreIncome.class.getName()));
-    }
-
 }
 
