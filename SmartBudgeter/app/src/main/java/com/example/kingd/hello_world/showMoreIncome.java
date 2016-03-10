@@ -1,7 +1,10 @@
 package com.example.kingd.hello_world;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -23,10 +26,6 @@ public class showMoreIncome extends AppCompatActivity {
 
     // Determine how many incomes to show
     private int numIncomesToShow = 7;
-
-    public showMoreIncome() {
-        // empty constructor
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

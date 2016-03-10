@@ -57,6 +57,7 @@ public class PopupWindowActivityTests extends ActivityUnitTestCase<PopupWindowAc
      * Launches {@link MainActivity} for every test
      */
 
+    // Given that the user has never used the app, and the pop-up window pops up
     @Rule
     public ActivityTestRule<PopupWindowActivity> activityRule = new ActivityTestRule<>(PopupWindowActivity.class);
 
@@ -64,14 +65,13 @@ public class PopupWindowActivityTests extends ActivityUnitTestCase<PopupWindowAc
      * Test if showMorePayments button is clickable.
      */
 
+    // When the next button on the popup window is clicked
     @Test
     public void testNextButtonClickable() {
-        try{
+        // then, no errors are thrown because the next button is clickable
             onView(withId(R.id.button2)).check(matches(isClickable()));
             System.out.println("The Popup Window Activity button is clickable! Test passed!");
-        }catch(Exception e) {
-            System.out.println("The Popup Window Activity button isn't clickable!");
-        }
+
     }
 
 }
