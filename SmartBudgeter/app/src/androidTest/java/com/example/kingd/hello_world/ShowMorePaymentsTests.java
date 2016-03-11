@@ -62,7 +62,7 @@ public class ShowMorePaymentsTests extends ActivityUnitTestCase<showMorePayments
     public ActivityTestRule<showMorePayments> activityRule = new ActivityTestRule<>(showMorePayments.class);
 
     /**
-     * Test if showMorePayments button is clickable.
+     * Test if more payments is expandable
      */
 
     @Test

@@ -63,7 +63,7 @@ public class ShowMoreIncomeTests extends ActivityUnitTestCase<showMoreIncome>{
     public ActivityTestRule<showMoreIncome> activityRule = new ActivityTestRule<>(showMoreIncome.class);
 
     /**
-     * Test if showMorePayments button is clickable.
+     * Test if more income is expandable
      */
 
     @Test

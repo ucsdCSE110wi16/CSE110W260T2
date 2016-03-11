@@ -54,7 +54,7 @@ package com.example.kingd.hello_world;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class MainActivityTests {
+public class MainActivityTests  {
 
     //public MainActivityTests(){
         //super(MainActivity.class);
