@@ -12,31 +12,27 @@
     tools:context=".ShowMoreIncome"
     tools:showIn="@layout/activity_show_more_income">
 
-
-
-    <ExpandableListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/expandableListView2"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-
-
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="#f4f4f4"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:id="@+id/linearLayout">
 
         <ExpandableListView
             android:id="@+id/lvExp"
-            android:layout_height="449dp"
-            android:layout_width="fill_parent"
-            android:layout_weight="1.63" />
+            android:layout_height="430dp"
+            android:layout_width="fill_parent" />
 
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back to Home Page"
+        android:id="@+id/button3"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

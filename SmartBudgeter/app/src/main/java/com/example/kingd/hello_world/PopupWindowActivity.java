@@ -23,7 +23,12 @@ public class PopupWindowActivity extends Activity {
             @Override
             public void onClick(View v) {
                 DBFetch.setName(editText.getText().toString());
-                DBFetch.setBalance(Double.parseDouble(editText2.getText().toString()));
+                if(editText2.getText().toString().equals("")) {
+                    DBFetch.setBalance(0.0);
+                }
+                else {
+                    DBFetch.setBalance(Double.parseDouble(editText2.getText().toString()));
+                }
                 try {
                     MainActivity.dbFetch.writeStoreUser(getApplicationContext());
                 }catch(Exception e){

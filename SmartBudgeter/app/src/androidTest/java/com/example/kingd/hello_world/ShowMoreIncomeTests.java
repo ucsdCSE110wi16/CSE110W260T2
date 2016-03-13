@@ -1,6 +1,7 @@
 package com.example.kingd.hello_world;
 
 
+import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -32,6 +33,8 @@ import static android.support.test.espresso.action.ViewActions.swipeDown;
 import static android.support.test.espresso.action.ViewActions.swipeUp;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.intent.Intents.intended;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.hasContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
@@ -59,21 +62,22 @@ public class ShowMoreIncomeTests extends ActivityUnitTestCase<showMoreIncome>{
      * Launches {@link MainActivity} for every test
      */
 
+    // Given the user has been in the showmoreincome page
     @Rule
-    public ActivityTestRule<showMoreIncome> activityRule = new ActivityTestRule<>(showMoreIncome.class);
+    public IntentsTestRule<showMoreIncome> activityRule = new IntentsTestRule<>(showMoreIncome.class);
 
     /**
-     * Test if showMorePayments button is clickable.
+     * Test if more income is expandable
      */
 
+    // When the user clicks the backtohomepage button
     @Test
     public void testExpandedListViewClickable() {
-        try{
-            onView(withId(R.id.lvExp)).check(matches(isClickable()));
-            System.out.println("The Expanded List View is clickable! Test passed!");
-        }catch(Exception e) {
-            System.out.println("The Expanded List View isn't clickable!");
-        }
+        // Then no errors shall be thrown because the button is clickable
+        onView(withId(R.id.button3)).check(matches(isClickable()));
+        // Then the used shall be navigated back to homepage
+        onView(withId(R.id.button3)).perform(click());
+        intended(hasComponent(MainActivity.class.getName()));
     }
 
 }

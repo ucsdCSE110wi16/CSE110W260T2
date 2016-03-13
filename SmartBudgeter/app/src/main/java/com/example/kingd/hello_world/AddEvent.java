@@ -86,6 +86,7 @@ public class AddEvent extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 categories = categoriesSpinner.getItemAtPosition(position).toString();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 categories = categoriesSpinner.getItemAtPosition(0).toString();
@@ -95,7 +96,11 @@ public class AddEvent extends Fragment {
             @Override
             public void onClick(View v) {
                 Fragment fragment = null;
-                amount = Double.parseDouble(amountAdd.getText().toString());
+                if (amountAdd.getText().toString().equals("")) {
+                    amount = 0.0;
+                } else {
+                    amount = Double.parseDouble(amountAdd.getText().toString());
+                }
                 notes = notedAdd.getText().toString();
                 String curDate = DBFetch.getCurrentDate();
                 if (curDate.compareTo(date) >= 0) {
@@ -107,7 +112,7 @@ public class AddEvent extends Fragment {
                     System.out.println("Added to the unpaid");
                 }
                 DBFetch.setChangeTrue();
-                Intent intent = new Intent(getActivity(),MainActivity.class);
+                Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
             }
         });

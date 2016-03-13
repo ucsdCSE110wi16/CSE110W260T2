@@ -1,6 +1,7 @@
 package com.example.kingd.hello_world;
 
 
+import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -30,6 +31,8 @@ import static android.support.test.espresso.action.ViewActions.swipeDown;
 import static android.support.test.espresso.action.ViewActions.swipeUp;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.intent.Intents.intended;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.hasContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
@@ -59,7 +62,7 @@ public class PopupWindowActivityTests extends ActivityUnitTestCase<PopupWindowAc
 
     // Given that the user has never used the app, and the pop-up window pops up
     @Rule
-    public ActivityTestRule<PopupWindowActivity> activityRule = new ActivityTestRule<>(PopupWindowActivity.class);
+    public IntentsTestRule<PopupWindowActivity> activityRule = new IntentsTestRule<>(PopupWindowActivity.class);
 
     /**
      * Test if showMorePayments button is clickable.
@@ -69,9 +72,10 @@ public class PopupWindowActivityTests extends ActivityUnitTestCase<PopupWindowAc
     @Test
     public void testNextButtonClickable() {
         // then, no errors are thrown because the next button is clickable
-            onView(withId(R.id.button2)).check(matches(isClickable()));
-            System.out.println("The Popup Window Activity button is clickable! Test passed!");
-
+        onView(withId(R.id.button2)).check(matches(isClickable()));
+        // then, no errors are thrown because clicking the button leads to the mainactivity
+        onView(withId(R.id.button2)).perform(click());
+        intended(hasComponent(MainActivity.class.getName()));
     }
 
 }

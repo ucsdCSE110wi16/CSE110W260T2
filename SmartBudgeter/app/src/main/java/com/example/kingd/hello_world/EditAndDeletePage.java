@@ -102,7 +102,12 @@ public class EditAndDeletePage extends Fragment {
         edit_button.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v) {
-                modified_amt = Double.parseDouble(amountAdd.getText().toString());
+                if(amountAdd.getText().toString().equals("")){
+                    modified_amt = 0.0;
+                }
+                else {
+                    modified_amt = Double.parseDouble(amountAdd.getText().toString());
+                }
                 modified_note = noteAdd.getText().toString();
                 DBFetch.deleteEvent(payment);
                 if(payment.getPaymentDate().compareTo(DBFetch.getCurrentDate()) <= 0){

@@ -55,15 +55,8 @@ package com.example.kingd.hello_world;
         import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTests extends IntentsTestRule<MainActivity> {
-
-    public MainActivityTests(){
-        super(MainActivity.class);
-    }
-
-    /**
-     * Launches {@link MainActivity} for every test
-     */
+@LargeTest
+public class MainActivityTests  {
 
 
     // GIVEN: You are on the home page
@@ -74,23 +67,21 @@ public class MainActivityTests extends IntentsTestRule<MainActivity> {
      * Test if showMorePayments button is clickable.
      */
 
-    // WHEN: you click the show more payments button
-    /*@Test
+    //WHEN: you click the show more payments button
+    @Test
     public void testSMPClickable() {
-        onView(withId(R.id.showMorePayments)).check(matches(notNullValue()));
         onView(withId(R.id.showMorePayments)).check(matches(isClickable()));
         onView(withId(R.id.showMorePayments)).perform(click());
 
         // THEN, the show more payments page is displayed
 //        intended(hasComponent(showMorePayments.class.getName()));
-        System.out.println("The showmorepayments button is clickable! Test passed!");
-    }*/
+    }
 
     /**
      * Test showMoreIncome Button is clickable.
      */
     // WHEN: You click the Show more income button
-    /*@Test
+    @Test
     public void testSMIClickable() {
         onView(withId(R.id.showMoreIncome)).check(matches(isClickable()));
         // THEN, the showMoreIncome page pops up
@@ -99,7 +90,7 @@ public class MainActivityTests extends IntentsTestRule<MainActivity> {
         System.out.println("The showmoreincome button is clickable! Test passed!");
 
 
-    }*/
+    }
 
     // WHEN the Add Button option is chosen
     /*@Test
